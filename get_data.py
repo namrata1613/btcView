@@ -17,7 +17,7 @@ candlestick_writer = csv.writer(csvfile, delimiter=',')
 #     candlestick_writer.writerow(candle)
 
 
-candlesticks = client.get_historical_klines("BTCUSDT", Client.KLINE_INTERVAL_5MINUTE, "1 Jan, 2023", "3 Aug, 2023")
+candlesticks = client.get_historical_klines("BTCUSDT", Client.KLINE_INTERVAL_5MINUTE, "1 Jan, 2023", "9 Aug, 2023")
 for candlestick in candlesticks :
     candlestick_writer.writerow(candlestick)
 
