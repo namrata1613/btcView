@@ -1,14 +1,2206 @@
-| Ckpt | Vector Count | Batch Size | Merge Event | Merge Time (ms) | RSS (KB) | QPS     | Mean Lat | P50     | P90     | P95     | P99     | P99.9   | Recall@10 | Disk IOs | Insert Time (ms) | Delete Time (ms) | Insert P99 (µs) | Insert P99.9 (µs) | Search Time (s) | Notes        |
-| ---- | ------------ | ---------- | ----------- | --------------- | -------- | ------- | -------- | ------- | ------- | ------- | ------- | ------- | --------- | -------- | ---------------- | ---------------- | --------------- | ----------------- | --------------- | ------------ |
-| 0    | 0            | 10000      | No          |                 | 849928   | 1433.39 | 19.234   | 18.8811 | 24.5910 | 27.2585 | 38.9515 | 57.3261 | 99.430    | 61.4968  | 8499             | 8006             | 1617            | 6665              | 29              | Initial      |
-| 1    | 10000        | 10000      | No          |                 | 849808   | 1419.89 | 19.4532  | 19.1880 | 24.0675 | 26.6519 | 38.9771 | 48.5356 | 98.319    | 61.9386  |                  | 8005             | 2857            | 26524             | 29              |              |
-| 2    | 20000        | 10000      | Yes         | 106307          | 849808   | 1419.89 | 19.4532  | 19.1880 | 24.0675 | 26.6519 | 38.9771 | 48.5356 | 98.319    | 61.9386  | 8775             | 8005             | 2857            | 26524             | 29              | Merge starts |
-| 3    | 30000        | 10000      | No          |                 | 849928   | ~1400   | ~19.5    |         |         |         | 39.06   |         | 98.301    |          |                  |                  |                 |                   |                 |              |
-| 4    | 40000        | 10000      | Yes         | 111318          | 848936   | 1409.51 | 19.6493  | 19.4266 | 24.7804 | 27.1523 | 40.0998 | 60.7985 | 98.502    | 62.6881  | 8374             | 8004             | 2264            | 8637              | 30              |              |
-| 5    | 50000        | 10000      | No          |                 | 852960   | 1219.50 | 22.7868  | 22.1817 | 30.2450 | 33.7793 | 39.6573 | 48.4068 | 98.549    | 62.6881  | 8668             | 8004             | 3667            | 16482             | 53              |              |
-| 6    | 60000        | 10000      | Yes         |                 | 848856   | 1366.77 | 20.2599  | 19.7982 | 25.9259 | 28.8267 | 40.8337 | 67.0455 | 98.282    | 62.3855  | 8616             | 8003             | 2525            | 14950             | 29              |              |
-| 7    | 70000        | 10000      | No          |                 | 853128   | 1374.70 | 19.8731  | 19.7650 | 25.6090 | 27.7035 | 34.3894 | 56.0366 | 98.361    | 62.3855  | 8604             | 8003             | 3276            | 11691             | 52              |              |
-| 8    | 80000        | 10000      | No          |                 | 849452   | 1394.32 | 19.8931  | 19.4502 | 24.7804 | 27.1523 | 40.0998 | 60.7985 | 98.139    | 62.4037  | 8992             | 8003             | 3620            | 9830              | 29              |              |
-| 9    | 90000        | 10000      | No          |                 | 853004   | 1374.64 | 20.0008  | 19.7269 | 25.6783 | 28.2565 | 36.9589 | 51.8762 | N/A       | 62.4037  | 9437             | 8005             | 5883            | 16725             | 52              | GT missing   |
-| 10   | 100000       | 10000      | No          |                 | 849568   | 1357.14 | 20.2601  | 19.7287 | 26.6746 | 30.0501 | 40.0320 | 56.9341 | N/A       | 62.2097  | 9458             | 8003             | 4399            | 30557             | 32              | GT missing   |
-| 11   | 110000       | 10000      | No          |                 | 853352   | 1295.99 | 21.1216  | 20.5339 | 28.2684 | 31.9388 | 40.9658 | 60.3220 | N/A       | 62.2097  | 8683             | 8003             | 3062            | 11162             | 55              | GT missing   |
+===== CKPT 0 =====
+Merge size: 20000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 1, need swap: 0
+Active del 1: 0, _active_index: 0
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 9, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 68272128 PQ Pivots offset: 68272128 PQ Vectors offset: 0
+After single file index check, Tags offset: 68272128 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:394:INFO] index npts: 100000 vecs per step: 10000 ckpt_i: 0 merge ratio: 0.2 res: 0
+[overall_performance.cpp:397:INFO] Merge size is set to 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_0.bin
+memory current time: 0 RSS : 799200 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_0.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_0.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_0.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 7
+  50     1462.25            19.162     18.9314     22.5631     25.5326     35.2024     47.6436      99.278     61.4968
+Batch: 0 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8006 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 7 microsec
+memory current time: 15 RSS : 845808 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_0.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.4988s
+Mem index insertion time : 8499 ms
+10th percentile insertion time : 164 microsec
+50th percentile insertion time : 310 microsec
+90th percentile insertion time : 497 microsec
+99th percentile insertion time : 1617 microsec
+99.9th percentile insertion time : 6665 microsec
+search current time: 22
+  50     1454.38           18.9702     18.8197     24.0352     26.1776     34.4447     47.6254           0     61.4968
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 0
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_10000.bin
+memory current time: 22 RSS : 849928 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_10000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_10000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_10000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 29
+  50     1433.39            19.234     18.8811      24.591     27.2585     38.9515     57.3261       99.43     61.4968
+Batch: 1 Total Batch : 100
+Begin Delete
+Begin Insert
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 1 microsec
+memory current time: 37 RSS : 852592 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_10000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.85819s
+Mem index insertion time : 8858 ms
+10th percentile insertion time : 292 microsec
+50th percentile insertion time : 455 microsec
+90th percentile insertion time : 729 microsec
+99th percentile insertion time : 5570 microsec
+99.9th percentile insertion time : 25586 microsec
+search current time: 44
+  50     1337.42           20.3999     19.8574     27.8446     32.0684     43.7374     59.0864           0     61.4968
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 10000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_20000.bin
+memory current time: 44 RSS : 853328 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_20000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_20000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 51
+  50     1415.32           19.2395      19.184     25.4429     28.0358     35.3004     51.0473      99.484     61.4968
+Begin Merge
+Inside final_merge().
+20000  0
+Inside save_del_set()
+Cleared _deletion_set_1 - ready to accept new points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Initialised new index for _mem_index_1
+Saving mem index 0 to merge it into disk index
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0 does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.data) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.data) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.data does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags
+bin: #pts = 20001, #dims = 1, size = 80012B
+Finished writing bin.
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.del does not exist
+Time taken for save: 0.0259803s.
+Saved mem index
+StreamingMerger created with R=0 L=100 BW=4 MaxC=384 alpha=1.2 ndims: 128
+Created index merger object
+Working folder : /home/nams/research/work/sift100k_idx/sift100k
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index , /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed  ,  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Created PQFlashIndex inside index_merger
+Loading PQFlashIndex from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1 into object: 796cbb8cbfc0
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 9, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 68272128 PQ Pivots offset: 68272128 PQ Vectors offset: 0
+After single file index check, Tags offset: 68272128 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 24
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+Setting range to: 32
+GraphDelta: Allocating 100000 deltas
+Index Path: /home/nams/research/work/sift100k_idx/sift100k_mem_0
+Data Path: /home/nams/research/work/sift100k_idx/sift100k_mem_0.data
+Detected # pts = 20001, # dims = 128
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_0.data at offset 0...Metadata: #pts = 20001, #dims = 128, aligned_dim = 128... Allocated 10240512bytes and copied data
+GraphDelta: Allocating 20000 deltas
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.del does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags ...
+Metadata: #pts = 20001, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 20000 tags to delete from SSD-DiskANN
+Found 0 tags to delete from mem-DiskANN #1
+ALLOC: 13762560000KiB aligned buffer for deletes.
+Writing delete consolidated graph to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Consolidating deletes
+Sending Merge
+memory current time: 66 RSS : 1.06397e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 80
+  50     732.949           35.9651     35.7404     48.9275     53.8768     65.5028     84.0403           0     61.4968
+memory current time: 90 RSS : 1.06469e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 103
+  50     736.196           35.5492      35.348     48.3864     53.8186     63.6023     90.6768           0     61.4968
+100000 / 100000 nodes processed.
+Processed Deletes in 52.9047 s.
+Writing header.
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Computing rename-map.
+RENAME: Need 20000, free: 20000
+RENAME: Assigning IDs.
+Processing Mem-DiskANN #1
+RENAME: Storing mappings for 20000 points.
+RELOAD: Creating new PQ coords file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Writing new tags to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+bin: #pts = 100000, #dims = 1, size = 400008B
+Finished writing bin.
+Tags written to  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags in 5415 microsec
+RELOAD: Loading compressed vectors from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed ...
+Metadata: #pts = 100000, #dims = 100...
+RELOAD: Loading graph from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Medoid-ID: 34776
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags ...
+Metadata: #pts = 100000, #dims = 1...
+RELOAD: Clearing cache.
+RELOAD: Caching 0 nodes.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+AFTER RELOAD: PQ_NChunks: 100 Disk points: 100000 Frozen point id: 34776
+Processing inserts from mem-DiskANN #1
+memory current time: 113 RSS : 999432 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 127
+  50      768.15           37.2659      36.315     45.6612     50.7235     63.0637     104.631           0     61.4968
+memory current time: 137 RSS : 1.00297e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Finished inserting all points
+TIMER:: Insert time per point = 39469.8, Delta = 39558.3
+ E2E insert time: 33.0136 sec
+Processing pq of inserts from mem-DiskANN #1
+Finished deflating all points
+TIMER:: PQ time per point = 39469.8, Delta = 39558.3
+ E2E pq time: 1.51321 sec
+Dumping full compressed PQ vectors from memory.
+Renaming edges for easier access during merge.
+Renamed 640000 edges.
+Renamed 640000 edges.
+Merging inserts into SSD-DiskANN.
+search current time: 149
+  50     784.708           33.6266     33.8204     49.6124     55.8536      70.678     98.8296           0     61.4968
+100000 / 100000 nodes processed.
+Delta statistics:
+Max: 1252, Avg: 8.00024
+Old -> new edges: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Time to merge the inserts to disk: 17.5504s.
+COPY :: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin --> /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin
+bin: #pts = 100000, #dims = 100, size = 10000008B
+Finished writing bin.
+COPY :: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags --> /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Thread Data size: 24
+Destroyed PQ Flash Index
+Merge done
+Switching to latest merged disk index
+Thread Data size: 256
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 106307 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+0  0
+memory current time: 158 RSS : 974232 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 165
+  50     1387.96           20.2852     18.9214     23.3175     29.0221     74.4883     140.434           0     61.9386
+memory current time: 165 RSS : 961468 KB
+Merge finished for checkpoint 0===== CKPT 1 =====
+Merge size: 20000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:394:INFO] index npts: 100000 vecs per step: 10000 ckpt_i: 2 merge ratio: 0.2 res: 20000
+[overall_performance.cpp:397:INFO] Merge size is set to 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_20000.bin
+memory current time: 0 RSS : 799060 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_20000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_20000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 7
+  50     1473.43           18.9621      18.735     21.8687      25.011     36.8086     53.7446      98.246     61.9386
+Batch: 2 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8005 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 7 microsec
+memory current time: 15 RSS : 846488 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_20000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.77489s
+Mem index insertion time : 8775 ms
+10th percentile insertion time : 169 microsec
+50th percentile insertion time : 324 microsec
+90th percentile insertion time : 523 microsec
+99th percentile insertion time : 2857 microsec
+99.9th percentile insertion time : 26524 microsec
+search current time: 22
+  50     1405.74           19.5453     19.2146     25.3336     27.8385     35.8655     47.6778           0     61.9386
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_30000.bin
+memory current time: 22 RSS : 849808 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_30000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_30000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_30000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 29
+  50     1419.89           19.4532      19.188     24.0675     26.6519     38.9771     48.5356      98.319     61.9386
+Batch: 3 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 1 microsec
+memory current time: 37 RSS : 852396 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_30000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.58269s
+Mem index insertion time : 8583 ms
+10th percentile insertion time : 295 microsec
+50th percentile insertion time : 464 microsec
+90th percentile insertion time : 686 microsec
+99th percentile insertion time : 2562 microsec
+99.9th percentile insertion time : 12071 microsec
+search current time: 44
+  50     1379.93           19.8101     19.5274     25.6217     28.1817     37.9082     49.1969           0     61.9386
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 30000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_40000.bin
+memory current time: 44 RSS : 852908 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_40000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_40000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 52
+  50     1381.92           19.8602     19.5309      25.059     27.9108     39.0637     72.0273      98.301     61.9386
+Begin Merge
+Inside final_merge().
+0  20000
+Inside save_del_set()
+Cleared _deletion_set_0 - ready to accept new points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Initialised new index for _mem_index_0
+Saving mem index 1 to merge it into disk index
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1 does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.data) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.data) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.data does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags
+bin: #pts = 20001, #dims = 1, size = 80012B
+Finished writing bin.
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.del does not exist
+Time taken for save: 0.017041s.
+Saved mem index
+StreamingMerger created with R=0 L=100 BW=4 MaxC=384 alpha=1.2 ndims: 128
+Created index merger object
+Working folder : /home/nams/research/work/sift100k_idx/sift100k
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index , /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed  ,  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Created PQFlashIndex inside index_merger
+Loading PQFlashIndex from file: /home/nams/research/work/sift100k_idx/sift100k_merge into object: 7b5e908cc4c0
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 24
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+Setting range to: 32
+GraphDelta: Allocating 100000 deltas
+Index Path: /home/nams/research/work/sift100k_idx/sift100k_mem_1
+Data Path: /home/nams/research/work/sift100k_idx/sift100k_mem_1.data
+Detected # pts = 20001, # dims = 128
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_1.data at offset 0...Metadata: #pts = 20001, #dims = 128, aligned_dim = 128... Allocated 10240512bytes and copied data
+GraphDelta: Allocating 20000 deltas
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.del does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags ...
+Metadata: #pts = 20001, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 20000 tags to delete from SSD-DiskANN
+Found 0 tags to delete from mem-DiskANN #1
+ALLOC: 13762560000KiB aligned buffer for deletes.
+Writing delete consolidated graph to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Consolidating deletes
+Sending Merge
+memory current time: 67 RSS : 1.06438e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 81
+  50     714.541           36.3658     36.2691     49.6746     54.2069     65.6547      95.073           0     61.9386
+memory current time: 91 RSS : 1.06446e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 105
+  50     705.248           37.5841     37.4435     50.1342     54.6055     65.1013     90.7792           0     61.9386
+100000 / 100000 nodes processed.
+Processed Deletes in 54.6259 s.
+Writing header.
+Medoid deleted. Choosing another start node.
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Computing rename-map.
+RENAME: Need 20000, free: 20000
+RENAME: Assigning IDs.
+Processing Mem-DiskANN #1
+RENAME: Storing mappings for 20000 points.
+RELOAD: Creating new PQ coords file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Writing new tags to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+bin: #pts = 100000, #dims = 1, size = 400008B
+Finished writing bin.
+Tags written to  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags in 4096 microsec
+RELOAD: Loading compressed vectors from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed ...
+Metadata: #pts = 100000, #dims = 100...
+RELOAD: Loading graph from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Medoid-ID: 2317
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags ...
+Metadata: #pts = 100000, #dims = 1...
+RELOAD: Clearing cache.
+RELOAD: Caching 0 nodes.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+AFTER RELOAD: PQ_NChunks: 100 Disk points: 100000 Frozen point id: 2317
+Processing inserts from mem-DiskANN #1
+memory current time: 115 RSS : 999068 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 128
+  50     768.272           36.9277     36.0531     46.2444      50.404     59.5465     78.6735           0     61.9386
+memory current time: 138 RSS : 1.00238e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Finished inserting all points
+TIMER:: Insert time per point = 38301.8, Delta = 38394.2
+ E2E insert time: 32.0332 sec
+Processing pq of inserts from mem-DiskANN #1
+Finished deflating all points
+TIMER:: PQ time per point = 38301.8, Delta = 38394.2
+ E2E pq time: 1.35126 sec
+Dumping full compressed PQ vectors from memory.
+Renaming edges for easier access during merge.
+Renamed 640000 edges.
+Renamed 640000 edges.
+Merging inserts into SSD-DiskANN.
+search current time: 150
+  50     791.665           32.1022     32.2275     47.1457     52.3607     64.0523     75.5882           0     61.9386
+100000 / 100000 nodes processed.
+Delta statistics:
+Max: 1293, Avg: 8.00004
+Old -> new edges: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Time to merge the inserts to disk: 19.4817s.
+COPY :: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin --> /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin
+bin: #pts = 100000, #dims = 100, size = 10000008B
+Finished writing bin.
+COPY :: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags --> /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Thread Data size: 24
+Destroyed PQ Flash Index
+Merge done
+Switching to latest merged disk index
+Thread Data size: 256
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+memory current time: 160 RSS : 626400 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 111318 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+0  0
+search current time: 170
+  50     1097.51           26.2979     19.2265     23.8161     27.4292     38.3038     2164.19           0     62.6881
+memory current time: 170 RSS : 950968 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 176
+  50     1460.96           19.1558     19.1104     22.1252      24.493     34.1934     45.5391           0     62.6881
+memory current time: 176 RSS : 947236 KB
+Merge finished for checkpoint 1===== CKPT 2 =====
+Merge size: 20000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 0
+Active del 1: 0, _active_index: 0
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:394:INFO] index npts: 100000 vecs per step: 10000 ckpt_i: 4 merge ratio: 0.2 res: 40000
+[overall_performance.cpp:397:INFO] Merge size is set to 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_40000.bin
+memory current time: 0 RSS : 799080 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_40000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_40000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 7
+  50     1452.72           19.2709     19.0204     22.4971     25.6583     37.5978     53.5198       98.38     62.6881
+Batch: 4 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8004 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 6 microsec
+memory current time: 15 RSS : 845668 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_40000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.37331s
+Mem index insertion time : 8374 ms
+10th percentile insertion time : 176 microsec
+50th percentile insertion time : 326 microsec
+90th percentile insertion time : 531 microsec
+99th percentile insertion time : 2264 microsec
+99.9th percentile insertion time : 8637 microsec
+search current time: 22
+  50     1403.32           19.6768       19.47     25.1713     27.5328     32.9589     41.2528           0     62.6881
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 40000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_50000.bin
+memory current time: 22 RSS : 848936 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_50000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_50000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_50000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 30
+  50     1409.51           19.6493     19.4266     24.3521     26.5775     35.2976     52.5302      98.502     62.6881
+Batch: 5 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8004 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 1 microsec
+memory current time: 38 RSS : 853184 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_50000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.6683s
+Mem index insertion time : 8668 ms
+10th percentile insertion time : 306 microsec
+50th percentile insertion time : 482 microsec
+90th percentile insertion time : 718 microsec
+99th percentile insertion time : 3667 microsec
+99.9th percentile insertion time : 16482 microsec
+search current time: 45
+  50     1357.68           20.2582     20.0377     26.2615      28.798     36.3804     55.0828           0     62.6881
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 50000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_60000.bin
+memory current time: 45 RSS : 852960 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_60000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_60000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 53
+  50      1219.5           22.7868     22.1817      30.245     33.7793     39.6573     48.4068      98.549     62.6881
+Begin Merge
+Inside final_merge().
+20000  0
+Inside save_del_set()
+Cleared _deletion_set_1 - ready to accept new points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Initialised new index for _mem_index_1
+Saving mem index 0 to merge it into disk index
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0 does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.data) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.data) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.data does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags
+bin: #pts = 20001, #dims = 1, size = 80012B
+Finished writing bin.
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.del does not exist
+Time taken for save: 0.0178365s.
+Saved mem index
+StreamingMerger created with R=0 L=100 BW=4 MaxC=384 alpha=1.2 ndims: 128
+Created index merger object
+Working folder : /home/nams/research/work/sift100k_idx/sift100k
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index , /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed  ,  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Created PQFlashIndex inside index_merger
+Loading PQFlashIndex from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1 into object: 7a6caf4cc4c0
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 24
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+Setting range to: 32
+GraphDelta: Allocating 100000 deltas
+Index Path: /home/nams/research/work/sift100k_idx/sift100k_mem_0
+Data Path: /home/nams/research/work/sift100k_idx/sift100k_mem_0.data
+Detected # pts = 20001, # dims = 128
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_0.data at offset 0...Metadata: #pts = 20001, #dims = 128, aligned_dim = 128... Allocated 10240512bytes and copied data
+GraphDelta: Allocating 20000 deltas
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.del does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags ...
+Metadata: #pts = 20001, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 20000 tags to delete from SSD-DiskANN
+Found 0 tags to delete from mem-DiskANN #1
+ALLOC: 13762560000KiB aligned buffer for deletes.
+Writing delete consolidated graph to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Consolidating deletes
+Sending Merge
+memory current time: 68 RSS : 1.05957e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 82
+  50     710.036           36.7205     36.6526      50.041      54.845     65.8899     94.0132           0     62.6881
+memory current time: 92 RSS : 1.06344e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+100000 / 100000 nodes processed.
+Processed Deletes in 44.0225 s.
+Writing header.
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Computing rename-map.
+RENAME: Need 20000, free: 20000
+RENAME: Assigning IDs.
+Processing Mem-DiskANN #1
+RENAME: Storing mappings for 20000 points.
+RELOAD: Creating new PQ coords file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Writing new tags to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+bin: #pts = 100000, #dims = 1, size = 400008B
+Finished writing bin.
+Tags written to  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags in 9287 microsec
+RELOAD: Loading compressed vectors from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed ...
+Metadata: #pts = 100000, #dims = 100...
+RELOAD: Loading graph from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Medoid-ID: 2317
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags ...
+Metadata: #pts = 100000, #dims = 1...
+RELOAD: Clearing cache.
+RELOAD: Caching 0 nodes.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+AFTER RELOAD: PQ_NChunks: 100 Disk points: 100000 Frozen point id: 2317
+Processing inserts from mem-DiskANN #1
+search current time: 105
+  50     757.023           36.3377     36.1011     47.8161      52.873     72.1771     110.644           0     62.6881
+memory current time: 115 RSS : 998360 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 129
+  50     758.186            37.385     36.4651     46.7393     51.9037     63.3298     91.0254           0     62.6881
+Finished inserting all points
+TIMER:: Insert time per point = 42590.8, Delta = 42682.7
+ E2E insert time: 35.5847 sec
+Processing pq of inserts from mem-DiskANN #1
+Finished deflating all points
+TIMER:: PQ time per point = 42590.8, Delta = 42682.7
+ E2E pq time: 0.721919 sec
+Dumping full compressed PQ vectors from memory.
+Renaming edges for easier access during merge.
+Renamed 640000 edges.
+Renamed 640000 edges.
+Merging inserts into SSD-DiskANN.
+memory current time: 139 RSS : 1.26541e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 153
+  50     702.666           35.0696     34.7296     50.1446     54.9379      65.968     89.2215           0     62.6881
+100000 / 100000 nodes processed.
+Delta statistics:
+Max: 650, Avg: 8.00004
+Old -> new edges: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Time to merge the inserts to disk: 20.8684s.
+COPY :: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin --> /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin
+bin: #pts = 100000, #dims = 100, size = 10000008B
+Finished writing bin.
+COPY :: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags --> /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Thread Data size: 24
+Destroyed PQ Flash Index
+Merge done
+Switching to latest merged disk index
+Thread Data size: 256
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 102291 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+0  0
+memory current time: 156 RSS : 984816 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 163
+  50     1430.16           19.5851     19.0402     23.4029     26.4834     39.0312     91.2063           0     62.3855
+memory current time: 163 RSS : 978152 KB
+Merge finished for checkpoint 2===== CKPT 3 =====
+Merge size: 20000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:394:INFO] index npts: 100000 vecs per step: 10000 ckpt_i: 6 merge ratio: 0.2 res: 60000
+[overall_performance.cpp:397:INFO] Merge size is set to 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_60000.bin
+memory current time: 0 RSS : 799100 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_60000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_60000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 7
+  50     1462.72           19.0627     18.8442     22.4793      25.873     36.5051      51.717      98.285     62.3855
+Batch: 6 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 4 microsec
+memory current time: 15 RSS : 845532 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_60000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.61583s
+Mem index insertion time : 8616 ms
+10th percentile insertion time : 178 microsec
+50th percentile insertion time : 333 microsec
+90th percentile insertion time : 548 microsec
+99th percentile insertion time : 2525 microsec
+99.9th percentile insertion time : 14950 microsec
+search current time: 22
+  50     1395.11             19.76     19.3914     25.4318     27.8144     37.1783      50.428           0     62.3855
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 60000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_70000.bin
+memory current time: 22 RSS : 848856 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_70000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_70000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_70000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 29
+  50     1366.77           20.2599     19.7982     25.9259     28.8267     40.8337     67.0455      98.282     62.3855
+Batch: 7 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 12 microsec
+memory current time: 37 RSS : 852096 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_70000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.59837s
+Mem index insertion time : 8604 ms
+10th percentile insertion time : 338 microsec
+50th percentile insertion time : 514 microsec
+90th percentile insertion time : 772 microsec
+99th percentile insertion time : 3276 microsec
+99.9th percentile insertion time : 11691 microsec
+search current time: 45
+  50     1369.89           19.9235     19.8133     25.7222     28.2988     36.8276     50.3145           0     62.3855
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 70000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_80000.bin
+memory current time: 45 RSS : 853128 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_80000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_80000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 52
+  50      1374.7           19.8731      19.765      25.609     27.7035     34.3894     56.0366      98.361     62.3855
+Begin Merge
+Inside final_merge().
+0  20000
+Inside save_del_set()
+Cleared _deletion_set_0 - ready to accept new points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Initialised new index for _mem_index_0
+Saving mem index 1 to merge it into disk index
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1 does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.data) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.data) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.data does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags
+bin: #pts = 20001, #dims = 1, size = 80012B
+Finished writing bin.
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.del does not exist
+Time taken for save: 0.0169808s.
+Saved mem index
+StreamingMerger created with R=0 L=100 BW=4 MaxC=384 alpha=1.2 ndims: 128
+Created index merger object
+Working folder : /home/nams/research/work/sift100k_idx/sift100k
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index , /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed  ,  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Created PQFlashIndex inside index_merger
+Loading PQFlashIndex from file: /home/nams/research/work/sift100k_idx/sift100k_merge into object: 7edb706cbfc0
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 24
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+Setting range to: 32
+GraphDelta: Allocating 100000 deltas
+Index Path: /home/nams/research/work/sift100k_idx/sift100k_mem_1
+Data Path: /home/nams/research/work/sift100k_idx/sift100k_mem_1.data
+Detected # pts = 20001, # dims = 128
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_1.data at offset 0...Metadata: #pts = 20001, #dims = 128, aligned_dim = 128... Allocated 10240512bytes and copied data
+GraphDelta: Allocating 20000 deltas
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.del does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags ...
+Metadata: #pts = 20001, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 20000 tags to delete from SSD-DiskANN
+Found 0 tags to delete from mem-DiskANN #1
+ALLOC: 13762560000KiB aligned buffer for deletes.
+Writing delete consolidated graph to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Consolidating deletes
+Sending Merge
+memory current time: 67 RSS : 1.061e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 81
+  50     704.478           36.8105     36.9808     49.7752     54.1112     64.6403     81.5274           0     62.3855
+memory current time: 91 RSS : 1.06379e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 105
+  50     704.839           37.2786     37.0554     49.0745     54.2559     65.7914     96.5399           0     62.3855
+memory current time: 115 RSS : 1.06395e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+100000 / 100000 nodes processed.
+Processed Deletes in 64.142 s.
+Writing header.
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Computing rename-map.
+RENAME: Need 20000, free: 20000
+RENAME: Assigning IDs.
+Processing Mem-DiskANN #1
+RENAME: Storing mappings for 20000 points.
+RELOAD: Creating new PQ coords file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Writing new tags to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+bin: #pts = 100000, #dims = 1, size = 400008B
+Finished writing bin.
+Tags written to  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags in 18042 microsec
+RELOAD: Loading compressed vectors from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed ...
+Metadata: #pts = 100000, #dims = 100...
+RELOAD: Loading graph from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Medoid-ID: 2317
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags ...
+Metadata: #pts = 100000, #dims = 1...
+RELOAD: Clearing cache.
+RELOAD: Caching 0 nodes.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+AFTER RELOAD: PQ_NChunks: 100 Disk points: 100000 Frozen point id: 2317
+Processing inserts from mem-DiskANN #1
+search current time: 128
+  50     776.143            36.314      35.962     47.7784     52.9818     72.7726     103.675           0     62.3855
+memory current time: 138 RSS : 998504 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 152
+  50     750.511           37.1106     36.2062     47.4399     52.5408      62.076     94.5192           0     62.3855
+Finished inserting all points
+TIMER:: Insert time per point = 45121.9, Delta = 45224.2
+ E2E insert time: 37.7003 sec
+Processing pq of inserts from mem-DiskANN #1
+Finished deflating all points
+TIMER:: PQ time per point = 45121.9, Delta = 45224.2
+ E2E pq time: 0.680027 sec
+Dumping full compressed PQ vectors from memory.
+Renaming edges for easier access during merge.
+Renamed 640000 edges.
+Renamed 640000 edges.
+Merging inserts into SSD-DiskANN.
+memory current time: 162 RSS : 1.26706e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 176
+  50     691.511           37.0575      37.341     50.6366     54.9289     62.4879     78.9402           0     62.3855
+100000 / 100000 nodes processed.
+Delta statistics:
+Max: 672, Avg: 8.00024
+Old -> new edges: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Time to merge the inserts to disk: 21.3305s.
+COPY :: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin --> /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin
+bin: #pts = 100000, #dims = 100, size = 10000008B
+Finished writing bin.
+COPY :: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags --> /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Thread Data size: 24
+Destroyed PQ Flash Index
+Merge done
+Switching to latest merged disk index
+Thread Data size: 256
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 124874 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+0  0
+memory current time: 177 RSS : 980140 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 184
+  50     1368.44           20.5778     19.3552     25.1315     29.9356     47.7927     168.667           0     62.4037
+memory current time: 184 RSS : 957876 KB
+Merge finished for checkpoint 3===== CKPT 4 =====
+Merge size: 20000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 0
+Active del 1: 0, _active_index: 0
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:394:INFO] index npts: 100000 vecs per step: 10000 ckpt_i: 8 merge ratio: 0.2 res: 80000
+[overall_performance.cpp:397:INFO] Merge size is set to 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_80000.bin
+memory current time: 0 RSS : 799016 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_80000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_80000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 7
+  50     1467.95           19.0357     18.8327     21.9416     23.9963     36.7658     64.3744      98.027     62.4037
+Batch: 8 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 12 microsec
+memory current time: 15 RSS : 846128 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.98625s
+Mem index insertion time : 8992 ms
+10th percentile insertion time : 178 microsec
+50th percentile insertion time : 327 microsec
+90th percentile insertion time : 534 microsec
+99th percentile insertion time : 3620 microsec
+99.9th percentile insertion time : 9830 microsec
+search current time: 22
+  50     1396.52           19.7669     19.6243     25.4718     27.6611     34.0947     43.0579           0     62.4037
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 80000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_90000.bin
+memory current time: 22 RSS : 849452 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_90000.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt/gt_90000.bin
+Reading truthset file /home/nams/research/work/sift100k_gt/gt_90000.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 29
+  50     1394.32           19.8931     19.4502     24.7804     27.1523     40.0998     60.7985      98.139     62.4037
+Batch: 9 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8005 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 2 microsec
+memory current time: 37 RSS : 851740 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_90000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 9.43137s
+Mem index insertion time : 9437 ms
+10th percentile insertion time : 304 microsec
+50th percentile insertion time : 485 microsec
+90th percentile insertion time : 737 microsec
+99th percentile insertion time : 5883 microsec
+99.9th percentile insertion time : 16725 microsec
+search current time: 45
+  50      1354.8           20.2946     20.0682      26.647     29.3092     35.7901     49.3621           0     62.4037
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 90000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_100000.bin
+memory current time: 45 RSS : 853004 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 52
+  50     1374.64           20.0008     19.7269     25.6783     28.2565     36.9589     51.8762           0     62.4037
+Begin Merge
+Inside final_merge().
+20000  0
+Inside save_del_set()
+Cleared _deletion_set_1 - ready to accept new points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Initialised new index for _mem_index_1
+Saving mem index 0 to merge it into disk index
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0 does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.data) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.data) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.data does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags
+bin: #pts = 20001, #dims = 1, size = 80012B
+Finished writing bin.
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.del does not exist
+Time taken for save: 0.0187094s.
+Saved mem index
+StreamingMerger created with R=0 L=100 BW=4 MaxC=384 alpha=1.2 ndims: 128
+Created index merger object
+Working folder : /home/nams/research/work/sift100k_idx/sift100k
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index , /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed  ,  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Created PQFlashIndex inside index_merger
+Loading PQFlashIndex from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1 into object: 7178bb6cbfc0
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 24
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+Setting range to: 32
+GraphDelta: Allocating 100000 deltas
+Index Path: /home/nams/research/work/sift100k_idx/sift100k_mem_0
+Data Path: /home/nams/research/work/sift100k_idx/sift100k_mem_0.data
+Detected # pts = 20001, # dims = 128
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_0.data at offset 0...Metadata: #pts = 20001, #dims = 128, aligned_dim = 128... Allocated 10240512bytes and copied data
+GraphDelta: Allocating 20000 deltas
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_0.del does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_0.tags) returned: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_0.tags ...
+Metadata: #pts = 20001, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 20000 tags to delete from SSD-DiskANN
+Found 0 tags to delete from mem-DiskANN #1
+ALLOC: 13762560000KiB aligned buffer for deletes.
+Writing delete consolidated graph to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Consolidating deletes
+Sending Merge
+memory current time: 67 RSS : 1.06092e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 81
+  50     699.538           38.1825      37.558     51.5267     57.8318     68.4889     87.8907           0     62.4037
+memory current time: 91 RSS : 1.06388e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 105
+  50     701.286           37.8914     37.6811     50.5911     55.6064     68.2456     101.803           0     62.4037
+100000 / 100000 nodes processed.
+Processed Deletes in 61.9354 s.
+Writing header.
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Computing rename-map.
+RENAME: Need 20000, free: 20000
+RENAME: Assigning IDs.
+Processing Mem-DiskANN #1
+RENAME: Storing mappings for 20000 points.
+RELOAD: Creating new PQ coords file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Writing new tags to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+bin: #pts = 100000, #dims = 1, size = 400008B
+Finished writing bin.
+Tags written to  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags in 3743 microsec
+RELOAD: Loading compressed vectors from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed ...
+Metadata: #pts = 100000, #dims = 100...
+RELOAD: Loading graph from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Medoid-ID: 2317
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags ...
+Metadata: #pts = 100000, #dims = 1...
+RELOAD: Clearing cache.
+RELOAD: Caching 0 nodes.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+AFTER RELOAD: PQ_NChunks: 100 Disk points: 100000 Frozen point id: 2317
+Processing inserts from mem-DiskANN #1
+memory current time: 115 RSS : 1.0001e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 129
+  50     721.521           38.9302     37.3107     50.3712     56.5584     77.0104     109.008           0     62.4037
+memory current time: 139 RSS : 998992 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 158
+  50     539.133           51.5742     45.1422      80.231     97.6586      132.15     223.028           0     62.4037
+Finished inserting all points
+TIMER:: Insert time per point = 54216.5, Delta = 54354.1
+ E2E insert time: 45.3098 sec
+Processing pq of inserts from mem-DiskANN #1
+Finished deflating all points
+TIMER:: PQ time per point = 54216.5, Delta = 54354.1
+ E2E pq time: 0.818364 sec
+Dumping full compressed PQ vectors from memory.
+Renaming edges for easier access during merge.
+Renamed 640000 edges.
+Renamed 640000 edges.
+Merging inserts into SSD-DiskANN.
+memory current time: 168 RSS : 1.26689e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 184
+  50     627.044           42.3523      41.569     57.9858     65.8315       86.35     122.287           0     62.4037
+100000 / 100000 nodes processed.
+Delta statistics:
+Max: 595, Avg: 7.99977
+Old -> new edges: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Time to merge the inserts to disk: 23.6473s.
+COPY :: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin --> /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin
+bin: #pts = 100000, #dims = 100, size = 10000008B
+Finished writing bin.
+COPY :: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags --> /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Thread Data size: 24
+Destroyed PQ Flash Index
+Merge done
+Switching to latest merged disk index
+Thread Data size: 256
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 132756 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+0  0
+memory current time: 185 RSS : 982508 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 192
+  50     1388.71           20.1994     19.6928     24.8728     28.5506     41.4913     108.454           0     62.2097
+memory current time: 192 RSS : 958968 KB
+Merge finished for checkpoint 4===== CKPT 5 =====
+Merge size: 20000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:394:INFO] index npts: 100000 vecs per step: 10000 ckpt_i: 10 merge ratio: 0.2 res: 100000
+[overall_performance.cpp:397:INFO] Merge size is set to 20000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_100000.bin
+memory current time: 0 RSS : 799124 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 8
+  50     1297.93            21.788     21.1245     26.8117     31.5608     45.9716     69.7799           0     62.2097
+Batch: 10 Total Batch : 100
+Begin Insert
+Begin Delete
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 3 microsec
+memory current time: 16 RSS : 845444 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_100000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_100000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 9.4164s
+Mem index insertion time : 9458 ms
+10th percentile insertion time : 133 microsec
+50th percentile insertion time : 314 microsec
+90th percentile insertion time : 562 microsec
+99th percentile insertion time : 4399 microsec
+99.9th percentile insertion time : 30557 microsec
+search current time: 24
+  50     1201.46           22.7633     21.7984     31.9673     37.2728     48.7514     74.3915           0     62.2097
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 100000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_110000.bin
+memory current time: 24 RSS : 849568 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_110000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_110000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 32
+  50     1357.14           20.2601     19.7287     26.6746     30.0501      40.032     56.9341           0     62.2097
+Batch: 11 Total Batch : 100
+Begin InsertBegin Delete
+
+Mem index deletion time : 8003 ms
+10th percentile deletion time : 0 microsec
+50th percentile deletion time : 0 microsec
+90th percentile deletion time : 0 microsec
+99th percentile deletion time : 0 microsec
+99.9th percentile deletion time : 2 microsec
+memory current time: 40 RSS : 852024 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_110000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_110000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Inserted 10000 points in 8.67997s
+Mem index insertion time : 8683 ms
+10th percentile insertion time : 271 microsec
+50th percentile insertion time : 439 microsec
+90th percentile insertion time : 652 microsec
+99th percentile insertion time : 3062 microsec
+99.9th percentile insertion time : 11162 microsec
+search current time: 47
+  50     1375.43           19.9458      19.687     25.7707     28.3143     35.5152     66.5959           0     62.2097
+Queries processed: 10000
+Deletions complete!
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 110000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt/gt_120000.bin
+memory current time: 47 RSS : 853352 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 55
+  50     1295.99           21.1216     20.5339     28.2684     31.9388     40.9658      60.322           0     62.2097
+Begin Merge
+Inside final_merge().
+0  20000
+Inside save_del_set()
+Cleared _deletion_set_0 - ready to accept new points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Initialised new index for _mem_index_0
+Saving mem index 1 to merge it into disk index
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1 does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.data) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.data) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.data does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags
+bin: #pts = 20001, #dims = 1, size = 80012B
+Finished writing bin.
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.del does not exist
+Time taken for save: 0.0217678s.
+Saved mem index
+StreamingMerger created with R=0 L=100 BW=4 MaxC=384 alpha=1.2 ndims: 128
+Created index merger object
+Working folder : /home/nams/research/work/sift100k_idx/sift100k
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index , /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed  ,  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Created PQFlashIndex inside index_merger
+Loading PQFlashIndex from file: /home/nams/research/work/sift100k_idx/sift100k_merge into object: 788d8a8cc4c0
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 24
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+Setting range to: 32
+GraphDelta: Allocating 100000 deltas
+Index Path: /home/nams/research/work/sift100k_idx/sift100k_mem_1
+Data Path: /home/nams/research/work/sift100k_idx/sift100k_mem_1.data
+Detected # pts = 20001, # dims = 128
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_1.data at offset 0...Metadata: #pts = 20001, #dims = 128, aligned_dim = 128... Allocated 10240512bytes and copied data
+GraphDelta: Allocating 20000 deltas
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.del) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_mem_1.del does not exist
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_mem_1.tags) returned: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_mem_1.tags ...
+Metadata: #pts = 20001, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 20000 tags to delete from SSD-DiskANN
+Found 0 tags to delete from mem-DiskANN #1
+ALLOC: 13762560000KiB aligned buffer for deletes.
+Writing delete consolidated graph to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Consolidating deletes
+Sending Merge
+memory current time: 70 RSS : 1.06471e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 85
+  50     632.295             42.43      42.464     56.7149     61.6905     75.9595     112.049           0     62.2097
+memory current time: 95 RSS : 1.06336e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 112
+  50     587.152             44.67     42.5927     64.4829     74.0722     95.4145     127.647           0     62.2097
+memory current time: 122 RSS : 1.0641e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 138
+  50     644.853           42.0744     40.9895     57.6977     64.8064     80.9382     111.357           0     62.2097
+100000 / 100000 nodes processed.
+Processed Deletes in 85.7706 s.
+Writing header.
+Medoid deleted. Choosing another start node.
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Computing rename-map.
+RENAME: Need 20000, free: 20000
+RENAME: Assigning IDs.
+Processing Mem-DiskANN #1
+RENAME: Storing mappings for 20000 points.
+RELOAD: Creating new PQ coords file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Writing new tags to /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags does not exist
+Writing bin: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+bin: #pts = 100000, #dims = 1, size = 400008B
+Finished writing bin.
+Tags written to  /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags in 5875 microsec
+RELOAD: Loading compressed vectors from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_pq_compressed ...
+Metadata: #pts = 100000, #dims = 100...
+RELOAD: Loading graph from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_disk_index
+Medoid-ID: 26362
+ Stat(/home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags ...
+Metadata: #pts = 100000, #dims = 1...
+RELOAD: Clearing cache.
+RELOAD: Caching 0 nodes.
+Caching 0...
+Level: 1. #nodes: 0, #nodes thus far: 0
+..done.
+AFTER RELOAD: PQ_NChunks: 100 Disk points: 100000 Frozen point id: 26362
+Processing inserts from mem-DiskANN #1
+memory current time: 148 RSS : 999436 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 161
+  50     758.829           37.2289     36.2333     46.6771     51.3305     60.0208     84.6915           0     62.2097
+memory current time: 171 RSS : 1.00073e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+Finished inserting all points
+TIMER:: Insert time per point = 42831.9, Delta = 42935.1
+ E2E insert time: 35.8687 sec
+Processing pq of inserts from mem-DiskANN #1
+Finished deflating all points
+TIMER:: PQ time per point = 42831.9, Delta = 42935.1
+ E2E pq time: 1.54195 sec
+Dumping full compressed PQ vectors from memory.
+Renaming edges for easier access during merge.
+Renamed 640000 edges.
+Renamed 640000 edges.
+Merging inserts into SSD-DiskANN.
+search current time: 185
+  50      709.92           37.1561     35.7985     57.0204     65.2017     88.2317     122.267           0     62.2097
+memory current time: 195 RSS : 1.26294e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+100000 / 100000 nodes processed.
+Delta statistics:
+Max: 694, Avg: 7.9999
+Old -> new edges: 0
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index
+bin: #pts = 8, #dims = 1, size = 72B
+Finished writing bin.
+Time to merge the inserts to disk: 24.2876s.
+COPY :: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin --> /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin) returned: 0
+Writing bin: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin
+bin: #pts = 100000, #dims = 100, size = 10000008B
+Finished writing bin.
+COPY :: /home/nams/research/work/sift100k_idx/sift100ktemp0_temp_tags --> /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Thread Data size: 24
+Destroyed PQ Flash Index
+Merge done
+Switching to latest merged disk index
+Thread Data size: 256
+search current time: 207
+  50     835.061           32.2214     29.6806     50.0383     59.6643     86.5475     151.237           0     62.2097
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 153170 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+0  0
+memory current time: 208 RSS : 987648 KB
+ Stat(/home/nams/research/work/sift100k_gt/gt_120000.bin) returned: -1
+File /home/nams/research/work/sift100k_gt/gt_120000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 215
+  50     1305.05           21.5748      20.296     28.4904     32.6457     50.8776     87.0506           0     61.9183
+memory current time: 215 RSS : 961452 KB
+Merge finished for checkpoint 5
