@@ -1,3 +1,64 @@
+rebuild rocksDB-  
+[1] Replica Count Dist: 0, 0
+[1] Replica Count Dist: 1, 15132
+[1] Replica Count Dist: 2, 1221
+[1] Replica Count Dist: 3, 3916
+[1] Replica Count Dist: 4, 7792
+[1] Replica Count Dist: 5, 11048
+[1] Replica Count Dist: 6, 12510
+[1] Replica Count Dist: 7, 12119
+[1] Replica Count Dist: 8, 36262
+[1] After Posting Cut:
+[1] Replica Count Dist: 0, 4347
+[1] Replica Count Dist: 1, 24494
+[1] Replica Count Dist: 2, 12868
+[1] Replica Count Dist: 3, 13835
+[1] Replica Count Dist: 4, 13262
+[1] Replica Count Dist: 5, 11606
+[1] Replica Count Dist: 6, 9162
+[1] Replica Count Dist: 7, 6487
+[1] Replica Count Dist: 8, 3939
+[1] Time to perform posting cut:0.01 sec.
+[1] Load Vector(100000,128)
+[1] SPFresh: initialize versionMap
+[1] SPFresh: Writing values to DB
+[1] SPFresh: Writing SSD Info
+[1] Save PostingSizeRecord To
+[1] SPFresh: save versionMap
+[1] Save versionLabelID To DeletedIDs.bin
+[1] Save versionLabelID (100000,1) Finish!
+[1] Total used time: 0.20 minutes (about 0.00 hours).
+[1] DataBlockSize: 1048576, Capacity: 2147483647
+[1] Load versionLabelID From DeletedIDs.bin
+[1] Load versionLabelID (100000,1) Finish!
+[1] Load PostingSizeRecord From
+[1] Current vector num: 100000.
+[1] Current posting num: 15006.
+[1] select head time: 4.00s build head time: 46.00s build ssd time: 12.00s
+SP Fresh run - 
+ Load Vector (15006,128) Finish!
+[1] Load BKT (1,15008) Finish!
+[1] Load RNG (15006,32) Finish!
+[1] Load DeleteID (15006,1) Finish!
+[1] Setting NumberOfThreads with value 4
+[1] Setting MaxCheck with value 4096
+[1] Setting HashTableExponent with value 4
+[1] SPFresh: New Rocksdb: /home/nams/research/work/spfresh/store_sift100k/rocksdb
+[1] Posting size limit: 23, search limit: 100.000000, merge threshold: 10
+[1] DataBlockSize: 1048576, Capacity: 2147483647
+[1] Load versionLabelID From DeletedIDs.bin
+[1] Load versionLabelID (100000,1) Finish!
+[1] Load PostingSizeRecord From
+[1] Current vector num: 100000.
+[1] Current posting num: 0.
+[1] SPFresh: initialize thread pools, append: 2, reassign 2
+[1] SPFresh: finish initialization
+[1] Load versionLabelID From DeletedIDs.bin
+[1] Load versionLabelID (100000,1) Finish!
+[1] Reduce memory usage
+[1] Start loading QuerySet...
+[1] Load Vector(10000,128)
+[1] Start Compaction
 [1] Finish Compaction
 [1] DB statistics not set!
 [1] remain splitJobs: 0, reassignJobs: 0, running split: 0, running reassign: 0
