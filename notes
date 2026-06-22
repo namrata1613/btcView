@@ -1,2 +1,5 @@
- SPFresh: New Rocksdb: $HOME/research/work/spfresh/store_sift100k/rocksdb
-[4] Rocksdb Open Error: While mkdir if missing: $HOME/research/work/spfresh/store_sift100k/rocksdb: No such file or directory
+[1] Finish Compaction
+[1] DB statistics not set!
+[1] remain splitJobs: 0, reassignJobs: 0, running split: 0, running reassign: 0
+[1] Current Vector Num: 100000, Deleted: 0 .
+[1] Searching: numThread: 2, numQueries: 10000, searchTimes: 1.
