@@ -1,48 +1,16 @@
-LABEL 3 - count 23214
-
-Loading vamana graph /home/nams/research/work/fdiskann/sift100k_R32_filtered...done. Index has 100000 nodes and 3199985 out-edges, _start is set to 34776
-Identified 51 distinct label(s)
-Num frozen points:0 _nd: 100000 _start: 34776 size(_location_to_tag): 0 size(_tag_to_location):0 Max points: 100000
+ tag 3: 90620 (selectivity 9.06 %)
+From graph header, expected_file_size: 131741012, _max_observed_degree: 32, _start: 289461, file_frozen_pts: 0
+Loading vamana graph /home/nams/research/work/yfcc/yfcc1M_R32_filtered...done. Index has 1000000 nodes and 31935247 out-edges, _start is set to 289461
+Identified 183387 distinct label(s)
+Num frozen points:0 _nd: 1000000 _start: 289461 size(_location_to_tag): 0 size(_tag_to_location):0 Max points: 1000000
 Index loaded
 Using 2 threads to search
   Ls         QPS     Avg dist cmps  Mean Latency (mus)   99.9 Latency   Recall@10
 =================================================================================
-  10    55267.46            108.44               35.97         195.00       46.94
-  20    36553.76            157.52               54.52         222.70       61.47
-  30    26312.88            199.50               75.78         337.80       69.39
-  40    21444.92            237.95               93.01         543.70       74.59
-  50    19189.80            274.65              103.96         342.60       78.38
- 100     9804.76            441.20              203.60         881.60       87.78
+  10    26174.41             72.73               75.79         713.90       10.59
+  20    16684.13            111.37              119.49         499.40       17.46
+  30    11764.14            143.57              169.57        1027.00       22.61
+  40     8942.59            172.05              223.14        1122.60       26.92
+  50     7380.06            198.81              270.45        1186.00       30.27
+ 100     3944.08            319.59              506.38        2429.30       42.23
 
-LABEL 8 with count=8605
-
-From graph header, expected_file_size: 13199964, _max_observed_degree: 32, _start: 34776, file_frozen_pts: 0
-Loading vamana graph /home/nams/research/work/fdiskann/sift100k_R32_filtered...done. Index has 100000 nodes and 3199985 out-edges, _start is set to 34776
-Identified 51 distinct label(s)
-Num frozen points:0 _nd: 100000 _start: 34776 size(_location_to_tag): 0 size(_tag_to_location):0 Max points: 100000
-Index loaded
-Using 2 threads to search
-  Ls         QPS     Avg dist cmps  Mean Latency (mus)   99.9 Latency   Recall@10
-=================================================================================
-  10    76425.08             51.31               25.99         127.30        8.33
-  20    38032.85             89.89               52.37         259.70       13.21
-  30    20138.60            120.44               98.88         439.60       17.09
-  40    16261.99            147.15              122.53         523.60       20.07
-  50    14301.77            171.58              139.38         989.50       22.47
- 100    11701.57            277.64              170.55         596.00       30.23
-
-label 23 with count=3043
-
-Loading vamana graph /home/nams/research/work/fdiskann/sift100k_R32_filtered...done. Index has 100000 nodes and 3199985 out-edges, _start is set to 34776
-Identified 51 distinct label(s)
-Num frozen points:0 _nd: 100000 _start: 34776 size(_location_to_tag): 0 size(_tag_to_location):0 Max points: 100000
-Index loaded
-Using 2 threads to search
-  Ls         QPS     Avg dist cmps  Mean Latency (mus)   99.9 Latency   Recall@10
-=================================================================================
-  10   206604.30             13.22                9.52          81.00        0.68
-  20   113131.25             23.21               17.56          61.20        0.74
-  30    92632.56             26.00               21.46          82.10        0.74
-  40    92723.60             26.00               21.44          91.80        0.74
-  50    94920.51             26.00               20.94          64.90        0.74
- 100    90677.53             26.00               21.92         100.90        0.74
