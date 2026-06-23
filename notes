@@ -1,42 +1,23 @@
-Found fewer than K elements for query
-Found fewer than K elements for query
-Found fewer than K elements for query
-
- 100   170156.91              0.00               11.63        1747.90        0.01
+Saving truthset in one file (npts, dim, npts*dim id-matrix, npts*dim dist-matrix) with npts = 10000, dim = 100, size = 8000008B
+Finished writing truthset
+Reading (with alignment) bin file /home/nams/research/data/sift1m/sift_query.bin ...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... allocating aligned memory of 5120000 bytes... done. Copying data to mem_aligned buffer... done.
+Opened: /home/nams/research/work/fdiskann/gt_filter1_k100.bin, size: 8000008, cache_size: 8000008
+Reading truthset file /home/nams/research/work/fdiskann/gt_filter1_k100.bin ...
+Metadata: #pts = 10000, #dims = 100...
+L2: Using AVX2 distance computation DistanceL2Float
+Resizing took: 0.0029336s
+From graph header, expected_file_size: 13199964, _max_observed_degree: 32, _start: 34776, file_frozen_pts: 0
+Loading vamana graph /home/nams/research/work/fdiskann/sift100k_R32_filtered...done. Index has 100000 nodes and 3199985 out-edges, _start is set to 34776
+Identified 51 distinct label(s)
+Num frozen points:0 _nd: 100000 _start: 34776 size(_location_to_tag): 0 size(_tag_to_location):0 Max points: 100000
+Index loaded
+Using 2 threads to search
+  Ls         QPS     Avg dist cmps  Mean Latency (mus)   99.9 Latency   Recall@10
+=================================================================================
+  10    36966.18            308.32               53.80         443.50       44.28
+  20    23630.61            442.75               84.37         438.00       56.59
+  30    18295.63            562.26              109.02         621.40       64.02
+  40    14249.35            673.34              140.01         628.20       69.57
+  50    10633.63            779.88              187.60        2428.30       73.90
+ 100     6876.89           1243.64              290.39        3088.80       85.91
 Done searching. Now saving results
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_10_idx_uint32.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_10_dists_float.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_20_idx_uint32.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_20_dists_float.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_30_idx_uint32.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_30_dists_float.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_40_idx_uint32.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_40_dists_float.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_50_idx_uint32.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_50_dists_float.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_100_idx_uint32.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
-Writing bin: /home/nams/research/work/fdiskann/filtered_search_100_dists_float.bin
-bin: #pts = 10000, #dims = 10, size = 400008B
-Finished writing bin.
