@@ -1,16 +1,15 @@
+ tag 23: 339244 (selectivity 33.92 %)
+ tag 29: 192699 (selectivity 19.27 %)
+ tag 9: 143646 (selectivity 14.36 %)
+ tag 8: 142274 (selectivity 14.23 %)
+ tag 7: 129253 (selectivity 12.93 %)
+ tag 6: 123994 (selectivity 12.40 %)
+ tag 5: 121178 (selectivity 12.12 %)
+ tag 4: 110727 (selectivity 11.07 %)
+ tag 17: 96924 (selectivity 9.69 %)
+ tag 18: 92757 (selectivity 9.28 %)
  tag 3: 90620 (selectivity 9.06 %)
-From graph header, expected_file_size: 131741012, _max_observed_degree: 32, _start: 289461, file_frozen_pts: 0
-Loading vamana graph /home/nams/research/work/yfcc/yfcc1M_R32_filtered...done. Index has 1000000 nodes and 31935247 out-edges, _start is set to 289461
-Identified 183387 distinct label(s)
-Num frozen points:0 _nd: 1000000 _start: 289461 size(_location_to_tag): 0 size(_tag_to_location):0 Max points: 1000000
-Index loaded
-Using 2 threads to search
-  Ls         QPS     Avg dist cmps  Mean Latency (mus)   99.9 Latency   Recall@10
-=================================================================================
-  10    26174.41             72.73               75.79         713.90       10.59
-  20    16684.13            111.37              119.49         499.40       17.46
-  30    11764.14            143.57              169.57        1027.00       22.61
-  40     8942.59            172.05              223.14        1122.60       26.92
-  50     7380.06            198.81              270.45        1186.00       30.27
- 100     3944.08            319.59              506.38        2429.30       42.23
-
+ tag 15: 90600 (selectivity 9.06 %)
+ tag 16: 90212 (selectivity 9.02 %)
+ tag 19: 86586 (selectivity 8.66 %)
+ tag 14: 85991 (selectivity 8.60 %)
