@@ -1,20 +1,42 @@
-ls -la ~/research/work/spfresh/store_sift100k/rocksdb/
-total 169828
-drwxr-xr-x 2 nams nams     4096 Jun 23 13:39 .
-drwxr-xr-x 5 nams nams     4096 Jun 23 13:39 ..
--rw-r--r-- 1 nams nams 31553051 Jun 23 13:39 000015.blob
--rw-r--r-- 1 nams nams 31873997 Jun 23 13:39 000019.blob
--rw-r--r-- 1 nams nams 15739967 Jun 23 13:39 000022.log
--rw-r--r-- 1 nams nams    67327 Jun 23 13:39 000023.sst
--rw-r--r-- 1 nams nams 31390817 Jun 23 13:39 000024.blob
--rw-r--r-- 1 nams nams 31351957 Jun 23 13:39 000025.blob
--rw-r--r-- 1 nams nams   205379 Jun 23 13:39 000026.sst
--rw-r--r-- 1 nams nams 15666900 Jun 23 13:39 000027.log
--rw-r--r-- 1 nams nams 15690433 Jun 23 13:39 000028.log
--rw-r--r-- 1 nams nams   257231 Jun 23 13:39 000031.log
--rw-r--r-- 1 nams nams       16 Jun 23 13:38 CURRENT
--rw-r--r-- 1 nams nams       36 Jun 23 13:38 IDENTITY
--rw-r--r-- 1 nams nams        0 Jun 23 13:38 LOCK
--rw-r--r-- 1 nams nams    58526 Jun 23 13:39 LOG
--rw-r--r-- 1 nams nams      889 Jun 23 13:39 MANIFEST-000005
--rw-r--r-- 1 nams nams     6914 Jun 23 13:38 OPTIONS-000007
+Found fewer than K elements for query
+Found fewer than K elements for query
+Found fewer than K elements for query
+
+ 100   170156.91              0.00               11.63        1747.90        0.01
+Done searching. Now saving results
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_10_idx_uint32.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_10_dists_float.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_20_idx_uint32.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_20_dists_float.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_30_idx_uint32.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_30_dists_float.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_40_idx_uint32.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_40_dists_float.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_50_idx_uint32.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_50_dists_float.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_100_idx_uint32.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
+Writing bin: /home/nams/research/work/fdiskann/filtered_search_100_dists_float.bin
+bin: #pts = 10000, #dims = 10, size = 400008B
+Finished writing bin.
