@@ -1,61 +1,65 @@
-rebuild rocksDB-  
-[1] Replica Count Dist: 0, 4347
-[1] Replica Count Dist: 1, 24494
-[1] Replica Count Dist: 2, 12868
-[1] Replica Count Dist: 3, 13835
-[1] Replica Count Dist: 4, 13262
-[1] Replica Count Dist: 5, 11606
-[1] Replica Count Dist: 6, 9162
-[1] Replica Count Dist: 7, 6487
-[1] Replica Count Dist: 8, 3939
-[1] Time to perform posting cut:0.00 sec.
-[1] Load Vector(100000,128)
-[1] SPFresh: initialize versionMap
-[1] SPFresh: Writing values to DB
-[1] SPFresh: Writing SSD Info
-[1] Save PostingSizeRecord To
-[1] SPFresh: save versionMap
-[1] Save versionLabelID To DeletedIDs.bin
-[1] Save versionLabelID (100000,1) Finish!
-[1] Total used time: 0.22 minutes (about 0.00 hours).
-[1] DataBlockSize: 1048576, Capacity: 2147483647
-[1] Load versionLabelID From DeletedIDs.bin
-[1] Load versionLabelID (100000,1) Finish!
-[1] Load PostingSizeRecord From
-[1] Current vector num: 100000.
-[1] Current posting num: 15006.
-[1] select head time: 4.00s build head time: 45.00s build ssd time: 13.00s
-
-
-SP Fresh run - 
-Setting UseSPDK with value false
-[1] Load Vector (15006,128) Finish!
-[1] Load BKT (1,15008) Finish!
-[1] Load RNG (15006,32) Finish!
-[1] Load DeleteID (15006,1) Finish!
-[1] Setting NumberOfThreads with value 4
-[1] Setting MaxCheck with value 4096
-[1] Setting HashTableExponent with value 4
-[1] SPFresh: New Rocksdb: /home/nams/research/work/spfresh/store_sift100k/rocksdb
-[1] Posting size limit: 23, search limit: 100.000000, merge threshold: 10
-[1] DataBlockSize: 1048576, Capacity: 2147483647
-[1] Load versionLabelID From DeletedIDs.bin
-[1] Load versionLabelID (100000,1) Finish!
-[1] Load PostingSizeRecord From /home/nams/research/work/spfresh/store_sift100k/ssdinfo.bin
-[1] Current vector num: 100000.
-[1] Current posting num: 0.
-[1] SPFresh: initialize thread pools, append: 2, reassign 2
-[1] SPFresh: finish initialization
-[1] Load versionLabelID From DeletedIDs.bin
-[1] Load versionLabelID (100000,1) Finish!
-[1] Reduce memory usage
-[1] Start loading QuerySet...
-[1] Load Vector(10000,128)
-[1] Start Compaction
-[1] Finish Compaction
+[4] Error in MultiGet: (null), key: 12793
+[4] Error in MultiGet: (null), key: 9707
+[4] Error in MultiGet: (null), key: 819
+[4] Error in MultiGet: (null), key: 4877
+[4] Error in MultiGet: (null), key: 5275
+[4] Error in MultiGet: (null), key: 14943
+[4] Error in MultiGet: (null), key: 6017
+[4] Error in MultiGet: (null), key: 10987
+[4] Error in MultiGet: (null), key: 8399
+[4] Error in MultiGet: (null), key: 6197
+[4] Error in MultiGet: (null), key: 11240
+[1] Current time: 0, Searching Times: 1, AvgQPS: 4199.92.
+[1]
+Ex Elements Count:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.000       0.000   0.000   0.000   0.000   0.000   0.000
+[1]
+Head Latency Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.395       0.313   0.608   0.879   1.462   3.333   13.802
+[1]
+Setup Latency Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.010       0.009   0.011   0.013   0.033   0.075   0.134
+[1]
+Comp Latency Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.000       0.000   0.000   0.000   0.000   0.000   0.000
+[1]
+SPDK Latency Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.054       0.041   0.087   0.114   0.219   1.865   4.131
+[1]
+Ex Latency Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.082       0.066   0.119   0.153   0.294   1.888   4.167
+[1]
+Total Latency Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.476       0.383   0.738   1.038   1.774   4.188   14.037
+[1]
+Total Disk Page Access Distribution(KB):
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.000          0       0       0       0       0       0
+[1]
+Total Disk IO Distribution:
+[1] Avg 50tiles 90tiles 95tiles 99tiles 99.9tiles       Max
+[1] 0.000          0       0       0       0       0       0
+[1]
+[1] Current time: 2. RSS : 77 MB, Vector Set Size : 0 MB, True Size: 77 MB
 [1] DB statistics not set!
 [1] remain splitJobs: 0, reassignJobs: 0, running split: 0, running reassign: 0
 [1] Current Vector Num: 100000, Deleted: 0 .
-[1] Searching: numThread: 2, numQueries: 10000, searchTimes: 1.
-[1] Current Vector Num: 100000, Deleted: 0 .
-[1] Searching: numThread: 2, numQueries: 10000, searchTimes: 1.
+[1] Updating: numThread: 4, total days: 10.
+[1] Start updating...
+[1] Loading /home/nams/research/work/spfresh/sift100k_trace/sift100k_update_trace0
+[1] Loading Size
+[1] Loading deleteSet
+[1] Loading insertSet
+[1] Load Update Vectors
+[1] Load Vector(10000,128)
+[1] Updating day: 0: numThread: 4, updateSize: 10000,total days: 10.
+[1] Delete: Sent 0.00%...
+[1] Insert: Sent 0.00%...
+[1] Delete: Finish sending in 0.002 seconds, sending throughput is 5000000.00 , deletion count 10000.
