@@ -1,15 +1,28 @@
- tag 23: 339244 (selectivity 33.92 %)
- tag 29: 192699 (selectivity 19.27 %)
- tag 9: 143646 (selectivity 14.36 %)
- tag 8: 142274 (selectivity 14.23 %)
- tag 7: 129253 (selectivity 12.93 %)
- tag 6: 123994 (selectivity 12.40 %)
- tag 5: 121178 (selectivity 12.12 %)
- tag 4: 110727 (selectivity 11.07 %)
- tag 17: 96924 (selectivity 9.69 %)
- tag 18: 92757 (selectivity 9.28 %)
- tag 3: 90620 (selectivity 9.06 %)
- tag 15: 90600 (selectivity 9.06 %)
- tag 16: 90212 (selectivity 9.02 %)
- tag 19: 86586 (selectivity 8.66 %)
- tag 14: 85991 (selectivity 8.60 %)
+ls -la ~/research/work/pipeann/sift1m*
+-rw-r--r-- 1 nams nams 12000008 Jun 26 04:05 /home/nams/research/work/pipeann/sift1m_gt.bin
+
+ ls ~/research/work/pipeann
+sift1m_gt.bin
+
+sudo dmesg | tail -20
+[sudo] password for nams:
+[11177.223693] Code: df 4c 89 95 70 fd ff ff 4c 89 95 00 fe ff ff e8 fa 65 fe ff 83 7d 18 02 0f 84 30 05 00 00 e8 7b fe fb ff 48 89 85 40 fd ff ff <49> 8b 04 24 4c 8b 40 58 4c 3b 05 65 3c 14 00 0f 85 9f 06 00 00 e8
+[11177.223702] build_disk_index: build_disk_inde: potentially unexpected fatal signal 11.
+[11177.223845] CPU: 0 UID: 1000 PID: 16081 Comm: build_disk_inde Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
+[11177.223923] RIP: 0033:0x55928f0201bc
+[11177.224265] Code: df 4c 89 95 70 fd ff ff 4c 89 95 00 fe ff ff e8 fa 65 fe ff 83 7d 18 02 0f 84 30 05 00 00 e8 7b fe fb ff 48 89 85 40 fd ff ff <49> 8b 04 24 4c 8b 40 58 4c 3b 05 65 3c 14 00 0f 85 9f 06 00 00 e8
+[11177.224268] RSP: 002b:00007ffecb668f70 EFLAGS: 00010202
+[11177.224301] RAX: 18bc73d644f42fd0 RBX: 00007ffecb669040 RCX: 000000006a3dad24
+[11177.224340] RDX: 0000000000000000 RSI: 00007ffecb668f40 RDI: 00007e494c931000
+[11177.224342] RBP: 00007ffecb669240 R08: 002658f817b24ad9 R09: 00fcd6b46b9735a1
+[11177.224344] R10: 00007e494c931000 R11: 00000000004e3dd6 R12: 0000000000000000
+[11177.224346] R13: 00007ffecb669080 R14: 000055928f143ff0 R15: 0000000000000002
+[11177.224348] FS:  00007e494c86b080 GS:  0000000000000000
+[11177.252882] WSL (16084 - CaptureCrash): Capturing crash for pid: 15904, executable: !home!nams!research!work!PipeANN!build!tests!build_disk_index, signal: 11, port: 50005
+[11208.709059] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
+[11268.772403] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
+[11328.835839] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
+[11388.892873] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
+[11448.952843] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
+[11509.012787] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
+[11569.072705] WSL (10996 - Relay) ERROR: UtilAcceptVsock:246: Waiting for abnormally long accept(11)
