@@ -1,29 +1,15 @@
-gdb -batch -ex run -ex bt --args ./tests/build_disk_index float   ~/research/work/pipeann/sift_100k.bin   ~/research/work/pipeann/sift100k   64 100 32 2 4 l2 pg   2>&1 | tee ~/research/work/logs/pipeann_gdb.log
-[Thread debugging using libthread_db enabled]
-Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
-[index_build_utils.cpp:355:INFO] Starting Vamana index build: R=64 R_dense=0 L=100 Build RAM budget: 2GB T: 4 bytes per neighbor: 32
+ IndexBuildParameters with L: 96 R: 64 C: 384 alpha: 1.2 num_threads: auto beam_width: 8 saturate_graph: 1 max_nthreads: 16
+[pq_nbr.h:85:INFO] PQ Pivots offset: 0 PQ Vectors offset: 0
 
-Program received signal SIGSEGV, Segmentation fault.
-0x000055555559d1bc in pipeann::build_disk_index<float, unsigned int> (dataPath=<optimized out>, indexFilePath=<optimized out>, R=<optimized out>, L_or_L1=L_or_L1@entry=100, M=M@entry=2, num_threads=num_threads@entry=4, bytes_per_nbr=32, _compareMetric=pipeann::L2, tag_file=0x0, nbr_handler=0x0, attr_writer=0x0, R_dense=0, L2=0, train_query_path="", R_ood=0, L_ood=1500) at /home/nams/research/work/PipeANN/src/utils/index_build_utils.cpp:369
-369         nbr_handler->build(index_prefix_path, normalized_file_path, bytes_per_nbr);
-#0  0x000055555559d1bc in pipeann::build_disk_index<float, unsigned int> (dataPath=<optimized out>, indexFilePath=<optimized out>, R=<optimized out>, L_or_L1=L_or_L1@entry=100, M=M@entry=2, num_threads=num_threads@entry=4, bytes_per_nbr=32, _compareMetric=pipeann::L2, tag_file=0x0, nbr_handler=0x0, attr_writer=0x0, R_dense=0, L2=0, train_query_path="", R_ood=0, L_ood=1500) at /home/nams/research/work/PipeANN/src/utils/index_build_utils.cpp:369
-#1  0x000055555555f5e7 in main (argc=<optimized out>, argv=<optimized out>) at /home/nams/research/work/PipeANN/tests/build_disk_index.cpp:32
+ Loaded PQ Pivots: #centroids: 256, #dims: 128, #chunks: 32
 
-./tests/build_memory_index float \
-  ~/research/work/pipeann/sift_100k.bin \
-  /dev/null \
-  ~/research/work/pipeann/sift100k_mem.index \
-  32 64 1.2 4 l2
-Building in-memory index with parameters: data_file: /home/nams/research/work/pipeann/sift_100k.bin tags file: /dev/null R: 32 L: 64 alpha: 1.2 index_path: /home/nams/research/work/pipeann/sift100k_mem.index #threads: 4 train_query:  R_ood: 0 L_ood: 1500, using distance metric: l2 [index.cpp:40:INFO] Getting distance function for metric: l2
-Opening bin file /dev/null...
-[index.cpp:398:INFO] Building index with normalize_cosine: 1
-[index.cpp:422:INFO] Loading only first 16 from file..
-[index.cpp:426:ERROR] ERROR: Driver requests loading 16 points from file,but tags vector is of size 0.
-Illegal instruction (core dumped)
-
-./tests/build_disk_index float \
-  ~/research/work/pipeann/sift_100k.bin \
-  ~/research/work/pipeann/sift100k_pq64 \
-  64 100 64 4 1 l2 pa
-[index_build_utils.cpp:355:INFO] Starting Vamana index build: R=64 R_dense=0 L=100 Build RAM budget: 4GB T: 1 bytes per neighbor: 64
-Segmentation fault (core dumped)
+         L   I/O Width         QPS  AvgLat(us)     P99 Lat   Mean Hops    Mean IOs   Recall@10
+=========================================================================================
+        10          32      879.30     1120.95     3121.00        0.00       28.24       78.79
+        20          32      786.10     1253.59     3492.00        0.00       35.94       94.46
+        30          32      707.47     1390.88     3786.00        0.00       44.61       98.07
+        40          32      628.90     1562.25     4250.00        0.00       53.85       99.14
+        50          32      563.55     1743.49     4996.00        0.00       63.30       99.57
+       100          32      380.56     2583.14     6124.00        0.00      111.29       99.94
+[ssd_index.cpp:79:INFO] Lock table size: 0
+[ssd_index.cpp:80:INFO] Page cache size: 0
