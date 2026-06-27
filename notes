@@ -1,15 +1,50 @@
- IndexBuildParameters with L: 96 R: 64 C: 384 alpha: 1.2 num_threads: auto beam_width: 8 saturate_graph: 1 max_nthreads: 16
-[pq_nbr.h:85:INFO] PQ Pivots offset: 0 PQ Vectors offset: 0
-
- Loaded PQ Pivots: #centroids: 256, #dims: 128, #chunks: 32
-
-         L   I/O Width         QPS  AvgLat(us)     P99 Lat   Mean Hops    Mean IOs   Recall@10
-=========================================================================================
-        10          32      879.30     1120.95     3121.00        0.00       28.24       78.79
-        20          32      786.10     1253.59     3492.00        0.00       35.94       94.46
-        30          32      707.47     1390.88     3786.00        0.00       44.61       98.07
-        40          32      628.90     1562.25     4250.00        0.00       53.85       99.14
-        50          32      563.55     1743.49     4996.00        0.00       63.30       99.57
-       100          32      380.56     2583.14     6124.00        0.00      111.29       99.94
-[ssd_index.cpp:79:INFO] Lock table size: 0
-[ssd_index.cpp:80:INFO] Page cache size: 0
+Merge size: 5000
+Lsearch: 50
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 1, need swap: 0
+Active del 1: 0, _active_index: 0
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 9, dim: 1 disk_nnodes: 100000 disk_ndims: 128
+Tags offset: 68272128 PQ Pivots offset: 68272128 PQ Vectors offset: 0
+After single file index check, Tags offset: 68272128 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 100000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
+Metadata: #pts = 100000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 5000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:399:INFO] index npts: 100000 vecs per step: 1000 ckpt_i: 0 merge ratio: 0.05 res: 0
+[overall_performance.cpp:402:INFO] Merge size is set to 5000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin
+memory current time: 0 RSS : 765828 KB
+ Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin) returned: -1
