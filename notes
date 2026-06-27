@@ -1,50 +1,22 @@
-Merge size: 5000
-Lsearch: 50
-Loading queries
-Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
-Searching before inserts:
-Need copy: 1, need swap: 0
-Active del 1: 0, _active_index: 0
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 9, dim: 1 disk_nnodes: 100000 disk_ndims: 128
-Tags offset: 68272128 PQ Pivots offset: 68272128 PQ Vectors offset: 0
-After single file index check, Tags offset: 68272128 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin ...
-Metadata: #pts = 100000, #dims = 100...
-Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_compressed.bin offset: 0 num points: 100000 n_chunks: 100
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
-Metadata: #pts = 5, #dims = 1...
-Offsets: 4096 135176 135696 136216 136628
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
-Metadata: #pts = 256, #dims = 128...
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
-Metadata: #pts = 128, #dims = 1...
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
-Metadata: #pts = 128, #dims = 1...
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_pq_pivots.bin ...
-Metadata: #pts = 101, #dims = 1...
-Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
-Finished optimizing for PQ-PQ distance compuation
-Loaded PQ centroids and in-memory compressed vectors. #points: 100000 #dim: 128 #aligned_dim: 128 #chunks: 100
-Setting up thread-specific contexts for nthreads: 256
- Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin) returned: -1
-File /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index_medoids.bin does not exist
-Loading centroid data from medoids vector data of 1 medoid(s)
-Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
- Stat(/home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags) returned: 0
-Loading tags from /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags
-Reading bin file /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index.tags ...
-Metadata: #pts = 100000, #dims = 1...
-PQFlashIndex loaded successfully.
-TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
-Init mem index with 5000 points
-Getting distance function for metric: l2
-L2: Using AVX2 distance computation
-Getting distance function for metric: l2
-L2: Using AVX2 distance computation
-[overall_performance.cpp:399:INFO] index npts: 100000 vecs per step: 1000 ckpt_i: 0 merge ratio: 0.05 res: 0
-[overall_performance.cpp:402:INFO] Merge size is set to 5000
-[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin
-memory current time: 0 RSS : 765828 KB
- Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin) returned: -1
+ls -lt  ~/research/work/logs/sweep_ms_5000_inserts_only/ | head -5
+total 484
+-rw-r--r-- 1 nams nams  3095 Jun 28 01:13 ckpt_20.log
+-rw-r--r-- 1 nams nams 22773 Jun 28 01:13 ckpt_19.log
+-rw-r--r-- 1 nams nams 22781 Jun 28 01:11 ckpt_18.log
+-rw-r--r-- 1 nams nams 22766 Jun 28 01:10 ckpt_17.log
+
+grep "vecs per step" ~/research/work/logs/sweep_ms_5000_inserts_only/ckpt_1.log
+[overall_performance.cpp:399:INFO] index npts: 100000 vecs per step: 1000 ckpt_i: 5 merge ratio: 0.05 res: 5000
+
+ cat -n ~/research/work/sweep_ms.sh | grep -A2 -B2 'overall_performance'
+    35
+    36          INSERTS_ONLY=1 OMP_PROC_BIND=close \
+    37          ./build/tests/overall_performance \
+    38              float \
+    39              "$DATA" \
+
+which sweep_ms.sh
+NO OUTPUT
+
+type sweep_ms.sh
+-bash: type: sweep_ms.sh: not found
