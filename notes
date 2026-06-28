@@ -1,22 +1,9 @@
-ls -lt  ~/research/work/logs/sweep_ms_5000_inserts_only/ | head -5
-total 484
--rw-r--r-- 1 nams nams  3095 Jun 28 01:13 ckpt_20.log
--rw-r--r-- 1 nams nams 22773 Jun 28 01:13 ckpt_19.log
--rw-r--r-- 1 nams nams 22781 Jun 28 01:11 ckpt_18.log
--rw-r--r-- 1 nams nams 22766 Jun 28 01:10 ckpt_17.log
+the merge ended with -Merge finished for checkpoint 0Sweep complete. Logs in ~/research/work/logs/sweep_ms_*
 
-grep "vecs per step" ~/research/work/logs/sweep_ms_5000_inserts_only/ckpt_1.log
-[overall_performance.cpp:399:INFO] index npts: 100000 vecs per step: 1000 ckpt_i: 5 merge ratio: 0.05 res: 5000
-
- cat -n ~/research/work/sweep_ms.sh | grep -A2 -B2 'overall_performance'
-    35
-    36          INSERTS_ONLY=1 OMP_PROC_BIND=close \
-    37          ./build/tests/overall_performance \
-    38              float \
-    39              "$DATA" \
-
-which sweep_ms.sh
-NO OUTPUT
-
-type sweep_ms.sh
--bash: type: sweep_ms.sh: not found
+CSV outputs : 
+merge_size  merges_fired  initial_recall  final_recall  min_recall  L_worst_pct         L_cumulative_pct      mean_p99_ms         max_p99_ms  mean_merge_ms  total_merge_s
+10000       8             99.306          98.332        98.139      1.8610000000000042  0.9740000000000038    34.99010470588234   59.0575     35041.625      280.333
+20000       4             99.306          98.366        98.0        2.0                 0.9399999999999977    35.26568024691359   73.4964     57574.75       230.299
+40000       2             99.306          98.11         97.244      2.7560000000000002  1.195999999999998     35.408644303797466  46.3168     101728.0       203.456
+5000        16            99.306          98.516        98.153      1.8469999999999942  0.789999999999992     37.488830107526894  221.949     24697.625      395.162
+80000       1             99.306          99.707        99.306      0.6940000000000026  -0.40099999999999625  36.25841923076924   64.3559     176831.0       176.831
