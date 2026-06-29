@@ -1,3 +1,7 @@
+ask4_scratch_reference.sh: line 30: 118495 Segmentation fault      (core dumped) ./build/tests/search_disk_index float "$IDX/sift${N}" 0 0 10000 4 0 "$QUERY" "$GT" 10 "$IDX/results" 12 50 75 100 2>&1
+     118496 Done                    | tee "$IDX/search.log"
+
+
 Results - 
   cumulative_inserts    γ (slope)    ±95% CI     R²    n    p-value
 ------------------------------------------------------------------------------
