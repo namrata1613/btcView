@@ -1,5 +1,9 @@
-ask4_scratch_reference.sh: line 30: 118495 Segmentation fault      (core dumped) ./build/tests/search_disk_index float "$IDX/sift${N}" 0 0 10000 4 0 "$QUERY" "$GT" 10 "$IDX/results" 12 50 75 100 2>&1
-     118496 Done                    | tee "$IDX/search.log"
+grep -n "load_truthset\|gt_file\|truthset\|groundtruth" \
+~/research/FreshDiskANN-baseline/tests/search_disk_index.cpp | head -10
+69:  std::string truthset_bin(argv[index++]);
+107:  if (file_exists(truthset_bin)) {
+108:    diskann::load_truthset(truthset_bin, gt_ids, gt_dists, gt_num, gt_dim,
+347:           " <query_file.bin>  <truthset.bin (use \"null\" for none)> "
 
 
 Results - 
