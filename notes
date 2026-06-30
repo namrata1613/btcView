@@ -1,31 +1,55 @@
-TMP_FOLDER inside MergeInsert : /home/nams/research/work/sm_iso/trial_c5000/sift100k
-Init mem index with 5000 points
-Getting distance function for metric: l2
-L2: Using AVX2 distance computation
-Getting distance function for metric: l2
-L2: Using AVX2 distance computation
-[overall_performance.cpp:399:INFO] index npts: 100000 vecs per step: 1000 ckpt_i: 0 merge ratio: 0.05 res: 0
-[overall_performance.cpp:402:INFO] Merge size is set to 5000
-[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin
-memory current time: 0 RSS : 765872 KB
- Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin) returned: 0
-current truthfile: /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin
-Reading truthset file /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin...
-Metadata: #pts = 10000, #dims = 10...
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-==============================================================================
-/home/nams/research/work/check_freshdiskann.sh: line 45: 15050 Segmentation fault      (core dumped) INSERTS_ONLY=1 "$DRV" "$TYPE" "$BASEDATA" "$LDISK" "$RDISK" "$ALPHA" 0 0 "$SP" "$QUERY" "$GTDIR" 10 "$BEAM" 100 0 "$c" $LSEARCH 2>&1
+cat ~/research/work/sweep_ms_repeated.sh 2>/dev/null || cat ~/research/work/sweep_ms*.sh 2>/dev/null
+#!/bin/bash
+set -euo pipefail
 
+REPO=$HOME/research/FreshDiskANN-baseline
+DATA=$HOME/research/data/sift1m/sift_base.bin
+QUERY=$HOME/research/data/sift1m/sift_query.bin
+IDX=$HOME/research/work/sift100k_idx/sift100k
+GT=$HOME/research/work/sift100k_gt_inserts_only
 
-nl -ba check_freshdiskann.sh | sed -n '35,55p'
-    35          0 \
-    36          0 \
-    37          "$SP" \
-    38          "$QUERY" \
-    39          "$GTDIR" \
-    40          10 \
-    41          "$BEAM" \
-    42          100 \
-    43          0 \
-    44          "$c" \
-    45          $LSEARCH 2>&1 | tail -50
+MERGE_SIZES=(5000 10000 20000 40000)
+TOTAL=80000
+STEP=100
+L=50
+REPS=3
+
+cd "$REPO"
+
+for rep in $(seq 1 $REPS); do
+    echo "================ rep $rep / $REPS ================"
+
+    for MS in "${MERGE_SIZES[@]}"; do
+        CKPTS=$((TOTAL / MS))
+        LOG=$HOME/research/work/logs/sweep_ms_${MS}_inserts_only_rep${rep}
+
+        mkdir -p "$LOG"
+
+        rm -f "$IDX"_shadow* "$IDX"_merge* 2>/dev/null || true
+
+        echo "--- rep $rep, MS=$MS, ckpts=0..$((CKPTS-1)) ---"
+
+        for i in $(seq 0 $((CKPTS - 1))); do
+            INSERTS_ONLY=1 OMP_PROC_BIND=close \
+            ./build/tests/overall_performance \
+                float "$DATA" 100 64 1.2 0 10000 \
+                "$IDX" "$QUERY" "$GT" \
+                10 4 $STEP $i $MS $L \
+                2>&1 | tee "$LOG/ckpt_${i}.log" > /dev/null
+        done
+    done
+done
+
+echo "All $REPS reps complete."
+
+grep -rn "shadow\|_merge\|cp \|rsync\|init_mem\|ckpt" ~/research/work/*.sh 2>/dev/null | head -40
+/home/nams/research/work/check_freshdiskann.sh:16:cp -v "$SM/gt_tmp/gt_0.bin" "$GTDIR/gt_0.bin"
+/home/nams/research/work/check_freshdiskann.sh:24:cp "$SM/pristine/${BASEPFX}"* "$TR"/
+/home/nams/research/work/sweep_ms.sh:26:    # clean shadow/merge files from any previous sweep so each MS starts fresh
+/home/nams/research/work/sweep_ms.sh:27:    rm -f "${IDX_PREFIX}"_shadow* "${IDX_PREFIX}"_merge* 2>/dev/null || true
+/home/nams/research/work/sweep_ms.sh:29:    echo "=== Merge size=$MS, ckpts=0..$((CKPTS - 1)) ==="
+/home/nams/research/work/sweep_ms.sh:34:        echo "ckpt $i"
+/home/nams/research/work/sweep_ms.sh:51:            2>&1 | tee "$LOG_DIR/ckpt_${i}.log"
+/home/nams/research/work/sweep_ms_repeated.sh:27:        rm -f "$IDX"_shadow* "$IDX"_merge* 2>/dev/null || true
+/home/nams/research/work/sweep_ms_repeated.sh:29:        echo "--- rep $rep, MS=$MS, ckpts=0..$((CKPTS-1)) ---"
+/home/nams/research/work/sweep_ms_repeated.sh:37:                2>&1 | tee "$LOG/ckpt_${i}.log" > /dev/null
