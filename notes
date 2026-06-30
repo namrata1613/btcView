@@ -1,1 +1,31 @@
-/home/nams/research/work/check_freshdiskann.sh: line 26: 11237 Segmentation fault      (core dumped) INSERTS_ONLY=1 "$DRV" "$TYPE" "$BASEDATA" "$LDISK" "$RDISK" "$ALPHA" 0 0 "$SP" "$QUERY" "$GTDIR" 10 "$BEAM" 100 0 "$c" $LSEARCH > "$SM/merge_c${c}_ckpt0.log" 2>&1
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sm_iso/trial_c5000/sift100k
+Init mem index with 5000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[overall_performance.cpp:399:INFO] index npts: 100000 vecs per step: 1000 ckpt_i: 0 merge ratio: 0.05 res: 0
+[overall_performance.cpp:402:INFO] Merge size is set to 5000
+[overall_performance.cpp:67:INFO] Truth file name: /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin
+memory current time: 0 RSS : 765872 KB
+ Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin) returned: 0
+current truthfile: /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin
+Reading truthset file /home/nams/research/work/sift100k_gt_inserts_only/gt_0.bin...
+Metadata: #pts = 10000, #dims = 10...
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+/home/nams/research/work/check_freshdiskann.sh: line 45: 15050 Segmentation fault      (core dumped) INSERTS_ONLY=1 "$DRV" "$TYPE" "$BASEDATA" "$LDISK" "$RDISK" "$ALPHA" 0 0 "$SP" "$QUERY" "$GTDIR" 10 "$BEAM" 100 0 "$c" $LSEARCH 2>&1
+
+
+nl -ba check_freshdiskann.sh | sed -n '35,55p'
+    35          0 \
+    36          0 \
+    37          "$SP" \
+    38          "$QUERY" \
+    39          "$GTDIR" \
+    40          10 \
+    41          "$BEAM" \
+    42          100 \
+    43          0 \
+    44          "$c" \
+    45          $LSEARCH 2>&1 | tail -50
