@@ -1,8 +1,1 @@
-gt_1000   YES hdr=      10000         10 bytes=400008
-gt_2000   YES hdr=      10000         10 bytes=400008
-gt_5000   YES hdr=      10000         10 bytes=400008
-gt_10000  YES hdr=      10000         10 bytes=400008
-gt_20000  YES hdr=      10000         10 bytes=400008
-gt_40000  YES hdr=      10000         10 bytes=400008
-gt_80000  YES hdr=      10000         10 bytes=400008
-=== Phase 1a DONE
+/home/nams/research/work/check_freshdiskann.sh: line 26: 11237 Segmentation fault      (core dumped) INSERTS_ONLY=1 "$DRV" "$TYPE" "$BASEDATA" "$LDISK" "$RDISK" "$ALPHA" 0 0 "$SP" "$QUERY" "$GTDIR" 10 "$BEAM" 100 0 "$c" $LSEARCH > "$SM/merge_c${c}_ckpt0.log" 2>&1
