@@ -1,38 +1,3 @@
- [3/3] Searching scratch index...
-Attach  debugger and press a key
-Search parameters: #threads: 4,  beamwidth: 4
-Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
- Stat(/home/nams/research/data/sift1m/sift_40000_groundtruth.bin) returned: 0
-Reading truthset file /home/nams/research/data/sift1m/sift_40000_groundtruth.bin...
-Metadata: #pts = 10000, #dims = 100...
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611545288283079607, npts: 902832128, dim: 1225256231 disk_nnodes: 0 disk_ndims: 140730144308296
-Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file /home/nams/research/work/sift40000_scratch_idx/sift40000_pq_compressed.bin ...
-Metadata: #pts = 902766784, #dims = 24933...
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-
-
- [3/3] Searching scratch index...
-Attach  debugger and press a key
-Search parameters: #threads: 4,  beamwidth: 4
-Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
- Stat(/home/nams/research/data/sift1m/sift_60000_groundtruth.bin) returned: 0
-Reading truthset file /home/nams/research/data/sift1m/sift_60000_groundtruth.bin...
-Metadata: #pts = 10000, #dims = 100...
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611545283781873591, npts: 4017766400, dim: 614984999 disk_nnodes: 0 disk_ndims: 140734645514312
-Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file /home/nams/research/work/sift60000_scratch_idx/sift60000_pq_compressed.bin ...
-Metadata: #pts = 4017701056, #dims = 24135...
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-
 
 Results - 
   cumulative_inserts    γ (slope)    ±95% CI     R²    n    p-value
@@ -174,11 +139,28 @@ cumulative_inserts,gamma,ci95,r2,p_value,n_samples
 60000,1.203,0.05,0.998,1.37e-10,9
 
 Track B - Ask 4 - 
+
 Thread Data size: 4
 
---- N=20000 recall summary (paste this back) ---
-    50           4          960.50         4149.19        21455.00           46.51          178.53           99.81
-    75           4          666.73         5984.68        15597.00           69.19          250.40           99.95
-   100           4          496.76         8036.03        23721.00           92.04          338.07           99.98
+--- N=20000 recall summary  ---
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+==========================================================================================================
+    50           4         1126.88         3536.13        14071.00           46.52          172.08           99.81
+    75           4          804.65         4957.64        11894.00           69.18          240.75           99.94
+   100           4          604.81         6598.48        21540.00           92.02          313.16           99.99
+
+N=40000 recall summary  -----
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+==========================================================================================================
+    50           4         1092.51         3648.21        14794.00           47.46          181.82           99.65
+    75           4          769.63         5183.85        16846.00           70.18          258.90           99.89
+   100           4          593.19         6728.93        23888.00           93.10          342.92           99.96
+
+--- N=60000 recall summary ---------
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+==========================================================================================================
+    50           4         1084.47         3673.54        19407.00           47.17          209.02           99.52
+    75           4          776.90         5134.94        13070.00           69.71          276.63           99.82
+   100           4          592.58         6735.70        19926.00           92.42          359.83           99.93
 
 
