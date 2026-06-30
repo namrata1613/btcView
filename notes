@@ -1,39 +1,37 @@
-sed -n '55,90p' ~/research/FreshDiskANN-baseline/tests/search_disk_index.cpp
-  float*            gt_dists = nullptr;
-  uint32_t*         tags = nullptr;
-  size_t            query_num, query_dim, query_aligned_dim, gt_num, gt_dim;
-  std::vector<_u64> Lvec;
+ [3/3] Searching scratch index...
+Attach  debugger and press a key
+Search parameters: #threads: 4,  beamwidth: 4
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+ Stat(/home/nams/research/data/sift1m/sift_40000_groundtruth.bin) returned: 0
+Reading truthset file /home/nams/research/data/sift1m/sift_40000_groundtruth.bin...
+Metadata: #pts = 10000, #dims = 100...
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611545288283079607, npts: 902832128, dim: 1225256231 disk_nnodes: 0 disk_ndims: 140730144308296
+Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift40000_scratch_idx/sift40000_pq_compressed.bin ...
+Metadata: #pts = 902766784, #dims = 24933...
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
 
-  int         index = 2;
-  std::string index_prefix_path(argv[index++]);
-  std::string warmup_query_file = index_prefix_path + "_sample_data.bin";
-  bool        single_file_index = std::atoi(argv[index++]) != 0;
-  bool        tags_flag = std::atoi(argv[index++]) != 0;
-  _u64        num_nodes_to_cache = std::atoi(argv[index++]);
-  _u32        num_threads = std::atoi(argv[index++]);
-  _u32        beamwidth = std::atoi(argv[index++]);
-  std::string query_bin(argv[index++]);
-  std::string truthset_bin(argv[index++]);
-  _u64        recall_at = std::atoi(argv[index++]);
-  std::string result_output_prefix(argv[index++]);
-  std::string dist_metric(argv[index++]);
 
-  diskann::Metric m =
-      dist_metric == "cosine" ? diskann::Metric::COSINE : diskann::Metric::L2;
-  if (dist_metric != "l2" && m == diskann::Metric::L2) {
-    diskann::cout << "Unknown distance metric: " << dist_metric
-                  << ". Using default(L2) instead." << std::endl;
-  }
-
-  std::string disk_index_tag_file = index_prefix_path + "_disk.index.tags";
-
-  bool calc_recall_flag = false;
-
-  for (int ctr = index; ctr < argc; ctr++) {
-    _u64 curL = std::atoi(argv[ctr]);
-    if (curL >= recall_at)
-      Lvec.push_back(curL);
-  }
+ [3/3] Searching scratch index...
+Attach  debugger and press a key
+Search parameters: #threads: 4,  beamwidth: 4
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+ Stat(/home/nams/research/data/sift1m/sift_60000_groundtruth.bin) returned: 0
+Reading truthset file /home/nams/research/data/sift1m/sift_60000_groundtruth.bin...
+Metadata: #pts = 10000, #dims = 100...
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611545283781873591, npts: 4017766400, dim: 614984999 disk_nnodes: 0 disk_ndims: 140734645514312
+Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift60000_scratch_idx/sift60000_pq_compressed.bin ...
+Metadata: #pts = 4017701056, #dims = 24135...
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
 
 
 Results - 
@@ -174,3 +172,13 @@ cumulative_inserts,gamma,ci95,r2,p_value,n_samples
 20000,1.36,0.051,0.998,6.60e-11,9
 40000,1.463,0.141,0.982,5.08e-10,12
 60000,1.203,0.05,0.998,1.37e-10,9
+
+Track B - Ask 4 - 
+Thread Data size: 4
+
+--- N=20000 recall summary (paste this back) ---
+    50           4          960.50         4149.19        21455.00           46.51          178.53           99.81
+    75           4          666.73         5984.68        15597.00           69.19          250.40           99.95
+   100           4          496.76         8036.03        23721.00           92.04          338.07           99.98
+
+
