@@ -1,102 +1,43 @@
-#!/usr/bin/env bash
-
-set -e
-REPO=~/research/FreshDiskANN-baseline
-WORK=~/research/work
-DATA=~/research/data/sift1m
-SM=$WORK/sm_iso
-GTDIR=$WORK/sift100k_gt_inserts_only
-BASEPFX=sift100k
-
-set -euo pipefail
-
-# Load configuration
-source ~/research/work/sm_iso/config.env
-
-# Path to executable
-DRV="$REPO/build/tests/overall_performance"
-
-# Verify executable exists
-if [ ! -x "$DRV" ]; then
-    echo "ERROR: Executable not found or not executable:"
-    echo "  $DRV"
-    exit 1
-fi
-
-for c in $GRID; do
-    echo "===== MERGE TRIAL C=$c ====="
-
-    TR="$SM/trial_c$c"
-    rm -rf "$TR"
-    mkdir -p "$TR"
-
-    cp "$SM/pristine/${BASEPFX}"* "$TR"/
-
-    SP="$TR/$BASEPFX"
-
-    ########################################
-    # Checkpoint 0
-    ########################################
-    INSERTS_ONLY=1 \
-        "$DRV" \
-        "$TYPE" \
-        "$BASEDATA" \
-        "$LDISK" \
-        "$RDISK" \
-        "$ALPHA" \
-        0 \
-        0 \
-        "$SP" \
-        "$QUERY" \
-        "$GTDIR" \
-        10 \
-        "$BEAM" \
-        100 \
-        0 \
-        "$c" \
-        $LSEARCH \
-        > "$SM/merge_c${c}_ckpt0.log" 2>&1
-
-    ########################################
-    # Checkpoint 1
-    ########################################
-    setsid bash -c "
-    INSERTS_ONLY=1 \
-    \"$DRV\" \
-        \"$TYPE\" \
-        \"$BASEDATA\" \
-        \"$LDISK\" \
-        \"$RDISK\" \
-        \"$ALPHA\" \
-        0 \
-        0 \
-        \"$SP\" \
-        \"$QUERY\" \
-        \"$GTDIR\" \
-        10 \
-        \"$BEAM\" \
-        100 \
-        1 \
-        "$c" \
-        $LSEARCH" \
-        > "$SM/merge_c${c}_ckpt1.log" 2>&1 &
-
-    PID=$!
-
-    for t in $(seq 1 900); do
-        if grep -q "^Batch: " "$SM/merge_c${c}_ckpt1.log"; then
-            break
-        fi
-        sleep 1
-    done
-
-    kill -- -"$PID" 2>/dev/null || true
-    sleep 2
-
-    echo "c=$c ckpt1 recall rows:"
-    grep -E "^[[:space:]]*(50|75|100)[[:space:]]" \
-        "$SM/merge_c${c}_ckpt1.log" | head -3
-
-done
-
-echo "=== Phase 1b DONE ==="
+===== MERGE TRIAL c=1000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=1000 R_merge rows:
+  50     1561.18           17.7523     17.5275     21.0167     24.1005     34.1869     66.7371      99.274     61.5087
+  75     1125.32           25.7107     25.4426     30.3079     33.1634     41.3649     51.7124      99.722     85.8349
+ 100     872.128           33.9673     33.5477     37.6008      43.101      52.586      61.021      99.864     110.405
+===== MERGE TRIAL c=2000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=2000 R_merge rows:
+  50     1556.91           17.8099     17.6395     21.7766      24.196     31.3778     65.8824      99.232     61.4908
+  75     1135.36           25.4805      25.303      29.026     32.4154     39.6153     50.3507      99.711     85.8209
+ 100     879.556           33.6428     33.2687     37.5109     42.6785     53.0251     70.3918      99.857     110.393
+===== MERGE TRIAL c=5000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=5000 R_merge rows:
+  50     1546.69           17.9533     17.5933     20.8876     24.6379       36.64     80.9095      99.088     61.5705
+  75     1119.96           25.8632     25.5874     29.9938     32.7467      41.582     50.9687      99.633     85.9066
+ 100     879.666           33.6591     33.2571      37.583     42.2222     53.3234      68.081      99.804     110.476
+===== MERGE TRIAL c=10000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=10000 R_merge rows:
+  50     1547.18           17.9341     17.6516     21.1173     25.3643     36.1046     41.2075      98.931     61.6846
+  75     1136.56           25.4518     25.3137     28.6569     31.8866     40.6969     48.4541      99.534     86.0134
+ 100     881.645           33.5632     33.1269     37.8416     42.7332     52.7263     60.5152      99.768     110.573
+===== MERGE TRIAL c=20000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=20000 R_merge rows:
+  50     1483.84             18.81     17.9113     25.0933     30.3271     38.9405     60.9953      98.542     62.0217
+  75     1137.18           25.4201     25.2201     28.8377     32.7722     41.8033     52.0346       99.34     86.3292
+ 100     880.951            33.599     33.0984     37.5969     41.9163     57.6004     71.9791      99.641     110.886
+===== MERGE TRIAL c=40000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=40000 R_merge rows:
+  50     1535.82            18.083      17.746     21.3077     25.2251     37.0578     69.8082      97.244     62.2226
+  75     1135.12           25.4859     25.3858      28.561     32.0982     39.2317     51.2551        98.5     86.5089
+ 100     877.986           33.7278     33.2701     38.2988     43.0273     52.5604     69.6296      99.047     111.065
+===== MERGE TRIAL c=80000 =====
+ckpt0 last line: Merge finished for checkpoint 0
+c=80000 R_merge rows:
+  50     1540.37           18.0337      17.858     21.0536     24.3096     35.7068     51.5985      94.378     62.9535
+  75     1130.89           25.5834     25.3614     28.6266     31.8844     43.8224     65.1191      96.494     87.1929
+ 100     876.125           33.7915     33.3343     38.4246     43.0917     53.7679     62.6406      97.575     111.767
+=== Phase 1b DONE ===
