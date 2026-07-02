@@ -1,15 +1,7 @@
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_101000.bin 101000 128
-c=1000 scratch recall rows:
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_102000.bin 102000 128
-c=2000 scratch recall rows:
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_105000.bin 105000 128
-c=5000 scratch recall rows:
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_110000.bin 110000 128
-c=10000 scratch recall rows:
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_120000.bin 120000 128
-c=20000 scratch recall rows:
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_140000.bin 140000 128
-c=40000 scratch recall rows:
-sliced /home/nams/research/work/sm_iso/scratch/sift_base_180000.bin 180000 128
-c=80000 scratch recall rows:
-=== Phase 1c DONE ===
+     c    L   R_scr   R_mrg    g_pp     g_fr      cap  <=cap
+
+-- P2 local log-log slope of g_frac vs c (expect falling 2->1) --
+L=50:
+L=75:
+L=100:
+=== Phase 1d DONE ===
