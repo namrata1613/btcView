@@ -1,8 +1,12 @@
-===== N0=10K, c=5000, N=15000 =====
-npts=15000, ndims=128, mnl=644, npps=6
-npts=15000, ndims=128, mnl=644, npps=6
-c=5000: |common|=15000 npts_m=15000 npts_s=15000
-  Delta sym-diff: total=322394 batch=171752 v0=150642 (per-node 21.49)
-  M1 missing intra-batch edges: 72612/72612 (frac 1.000) | c^2/N=2500 miss/(c^2/N)=29.0448
-  out-deg mean: merge=32.00(cap32) (1.000) scratch=32.00(1.000)
-  alpha-RNG viol(sampled): merge=0.2227 scratch=0.2382
+ ~/research/work/check_freshdiskann.sh
+       c     miss@10K    miss@100K    ratio b (N-exponent)
+--------------------------------------------------------------------
+    5000        72612        23873    3.042          0.483
+   10000       192070        54789    3.506          0.545
+   20000       453867       152683    2.973          0.473
+
+Mean b across c values: 0.500
+Prediction from c²/N ansatz: b = 1.0
+If observed b ≈ 1.0 → ansatz confirmed on N side
+If observed b < 1.0 → N-scaling weaker (R-cap or saturation)
+If observed b ≈ 0 → miss essentially N-independent at fixed c
