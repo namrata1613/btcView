@@ -1,51 +1,8 @@
-Converted this - 
-npts=int(m[0])
-ndims=int(m[1])
-npps=int(m[3])
-mnl=int(m[4])
-
-TO - 
-npts = int(m[0])
-ndims = int(m[1])
-
-# FreshDiskANN header layout
-mnl  = int(m[3])      # max node length
-npps = int(m[4])      # nodes per sector
-
-npts=105000, ndims=128, mnl=644, npps=6
-npts=105000, ndims=128, mnl=644, npps=6
-c=5000: |common|=105000 npts_m=105000 npts_s=105000
-  Delta sym-diff: total=697302 batch=99620 v0=597682 (per-node 6.64)
-  M1 missing intra-batch edges: 23873/23873 (frac 1.000) | c^2/N=250 miss/(c^2/N)=95.4920
+===== N0=10K, c=5000, N=15000 =====
+npts=15000, ndims=128, mnl=644, npps=6
+npts=15000, ndims=128, mnl=644, npps=6
+c=5000: |common|=15000 npts_m=15000 npts_s=15000
+  Delta sym-diff: total=322394 batch=171752 v0=150642 (per-node 21.49)
+  M1 missing intra-batch edges: 72612/72612 (frac 1.000) | c^2/N=2500 miss/(c^2/N)=29.0448
   out-deg mean: merge=32.00(cap32) (1.000) scratch=32.00(1.000)
-  alpha-RNG viol(sampled): merge=0.1724 scratch=0.1782
-npts=110000, ndims=128, mnl=644, npps=6
-npts=110000, ndims=128, mnl=644, npps=6
-c=10000: |common|=110000 npts_m=110000 npts_s=110000
-  Delta sym-diff: total=1132468 batch=215646 v0=916822 (per-node 10.30)
-  M1 missing intra-batch edges: 54789/54789 (frac 1.000) | c^2/N=1000 miss/(c^2/N)=54.7890
-  out-deg mean: merge=32.00(cap32) (1.000) scratch=32.00(1.000)
-  alpha-RNG viol(sampled): merge=0.1727 scratch=0.1693
-npts=120000, ndims=128, mnl=644, npps=6
-npts=120000, ndims=128, mnl=644, npps=6
-c=20000: |common|=120000 npts_m=120000 npts_s=120000
-  Delta sym-diff: total=1663186 batch=486374 v0=1176812 (per-node 13.86)
-  M1 missing intra-batch edges: 152683/152683 (frac 1.000) | c^2/N=4000 miss/(c^2/N)=38.1707
-  out-deg mean: merge=32.00(cap32) (1.000) scratch=32.00(1.000)
-  alpha-RNG viol(sampled): merge=0.1727 scratch=0.1597
-npts=140000, ndims=128, mnl=644, npps=6
-npts=140000, ndims=128, mnl=644, npps=6
-c=40000: |common|=140000 npts_m=140000 npts_s=140000
-  Delta sym-diff: total=2722086 batch=1202332 v0=1519754 (per-node 19.44)
-  M1 missing intra-batch edges: 455484/455484 (frac 1.000) | c^2/N=16000 miss/(c^2/N)=28.4677
-  out-deg mean: merge=32.00(cap32) (1.000) scratch=32.00(1.000)
-  alpha-RNG viol(sampled): merge=0.1626 scratch=0.1581
-npts=180000, ndims=128, mnl=644, npps=6
-npts=180000, ndims=128, mnl=644, npps=6
-c=80000: |common|=180000 npts_m=180000 npts_s=180000
-  Delta sym-diff: total=4857626 batch=2981202 v0=1876424 (per-node 26.99)
-  M1 missing intra-batch edges: 1289996/1289996 (frac 1.000) | c^2/N=64000 miss/(c^2/N)=20.1562
-  out-deg mean: merge=32.00(cap32) (1.000) scratch=32.00(1.000)
-  alpha-RNG viol(sampled): merge=0.1579 scratch=0.1403
-=== ASKB B2 DONE ===
-Output - 
+  alpha-RNG viol(sampled): merge=0.2227 scratch=0.2382
