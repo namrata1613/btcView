@@ -161,3 +161,250 @@ include/v2/merge_insert.h:77:    DISKANN_DLLEXPORT int trigger_merge();
 114:    _paras_mem.Set<unsigned>("R", parameters.Get<unsigned>("R_mem"));
 121:    _paras_disk.Set<unsigned>("R", parameters.Get<unsigned>("R_disk"));
 161:    _paras_disk.Set<unsigned>("R", _disk_index->max_degree);
+
+
+ sed -n '110,135p' include/v2/merge_insert.h
+    _u32     _num_nodes_to_cache;
+    _u32     _num_search_threads;
+    uint64_t _beamwidth;
+
+    std::unordered_map<unsigned, TagT> curr_location_to_tag;
+
+    std::shared_ptr<Index<T, TagT>>    _mem_index_0 = nullptr;
+    std::shared_ptr<Index<T, TagT>>    _mem_index_1 = nullptr;
+    std::shared_ptr<AlignedFileReader> reader = nullptr;
+    PQFlashIndex<T, TagT>*             _disk_index = nullptr;
+    StreamingMerger<T, TagT>*          _merger = nullptr;
+    std::string                        TMP_FOLDER;
+
+    diskann::Metric _dist_metric;
+    Distance<T>*    _dist_comp;
+
+    diskann::Parameters _paras_mem;
+    diskann::Parameters _paras_disk;
+
+    tsl::robin_set<TagT> _deletion_set_0;
+    tsl::robin_set<TagT> _deletion_set_1;
+
+    std::vector<const std::vector<TagT>*> _deleted_tags_vector;
+
+    int              _active_index = 0;  // reflects value of writable index
+    int              _active_delete_set = 0;  // reflects active _deletion_set
+
+sed -n '195,360p' src/v2/merge_insert.cpp
+  void MergeInsert<T, TagT>::destruct_index_merger() {
+    delete (_merger);
+    _merger = nullptr;
+  }
+
+  template<typename T, typename TagT>
+  int MergeInsert<T, TagT>::insert(const T* point, const TagT& tag) {
+    while (_check_switch_index.load()) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    std::shared_lock<std::shared_timed_mutex> lock(_index_lock);
+    if ((_active_index == 0) && (_active_0.load() == false)) {
+      diskann::cout << "Active index indicated as _mem_index_0 but it cannot "
+                       "accept insertions"
+                    << std::endl;
+      return -1;
+    }
+    if ((_active_index == 1) && (_active_1.load() == false)) {
+      diskann::cout << "Active index indicated as _mem_index_1 but it cannot "
+                       "accept insertions"
+                    << std::endl;
+      return -1;
+    }
+
+    if (_active_index == 0) {
+      if (_mem_index_0->get_num_points() < _mem_index_0->return_max_points()) {
+        if (_mem_index_0->insert_point(point, _paras_mem, tag) != 0) {
+          diskann::cout << "Could not insert point with tag " << tag
+                        << std::endl;
+          return -3;
+        }
+        {
+          std::unique_lock<std::shared_timed_mutex> lock(_change_lock);
+          _mem_points++;
+        }
+        return 0;
+      } else {
+        diskann::cout << "Capacity exceeded" << std::endl;
+      }
+    } else {
+      if (_mem_index_1->get_num_points() < _mem_index_1->return_max_points()) {
+        if (_mem_index_1->insert_point(point, _paras_mem, tag) != 0) {
+          diskann::cout << "Could not insert point with tag " << tag
+                        << std::endl;
+          return -3;
+        }
+        {
+          std::unique_lock<std::shared_timed_mutex> lock(_change_lock);
+          _mem_points++;
+        }
+        return 0;
+      } else {
+        diskann::cout << "Capacity exceeded in mem_index 1" << std::endl;
+      }
+    }
+
+    return -2;
+  }
+
+  template<typename T, typename TagT>
+  void MergeInsert<T, TagT>::lazy_delete(const TagT& tag) {
+    std::unique_lock<std::shared_timed_mutex> lock(_delete_lock);
+    if ((_active_delete_set == 0) && (_active_del_0.load() == false)) {
+      diskann::cout << "Active deletion set indicated as _deletion_set_0 but "
+                       "it cannot accept deletions"
+                    << std::endl;
+    }
+    if ((_active_delete_set == 1) && (_active_del_1.load() == false)) {
+      diskann::cout << "Active deletion set indicated as _deletion_set_1 but "
+                       "it cannot accept deletions" << " " << _active_del_1.load()
+                    << std::endl;
+    }
+
+    if (_active_delete_set == 0) {
+      _deletion_set_0.insert(tag);
+      _mem_index_0->lazy_delete(tag);
+    } else {
+      _deletion_set_1.insert(tag);
+      _mem_index_1->lazy_delete(tag);
+    }
+  }
+
+  template<typename T, typename TagT>
+  void MergeInsert<T, TagT>::search_sync(const T* query, const uint64_t K,
+                                         const uint64_t search_L, TagT* tags,
+                                         float* distances, QueryStats* stats) {
+    std::set<Neighbor_Tag<TagT>> best;
+    // search disk index and get top K tags
+    {
+      std::shared_lock<std::shared_timed_mutex> lock(_disk_lock);
+      assert(_switching_disk_prefixes == false);
+      std::vector<uint64_t> disk_result_ids_64(search_L);
+      std::vector<float>    disk_result_dists(search_L);
+      std::vector<TagT>     disk_result_tags(search_L);
+      _disk_index->cached_beam_search(
+          query, search_L, search_L, disk_result_tags.data(),
+          disk_result_dists.data(), _beamwidth, stats);
+      for (unsigned i = 0; i < disk_result_tags.size(); i++) {
+        Neighbor_Tag<TagT> n;
+        n = Neighbor_Tag<TagT>(disk_result_tags[i], disk_result_dists[i]);
+        //                    best.insert(Neighbor_Tag<TagT>(disk_result_tags[i],
+        //                    disk_result_dists[i]));
+        best.insert(n);
+      }
+    }
+    // check each memory index - if non empty and not being currently cleared -
+    // search and get top K active tags
+    {
+      if (_clearing_index_0.load() == false) {
+        std::shared_lock<std::shared_timed_mutex> lock(_clear_lock_0);
+        if (_mem_index_0->get_num_points() > 0) {
+          std::vector<Neighbor_Tag<TagT>> best_mem_index_0;
+          _mem_index_0->search(query, (uint32_t) search_L, (uint32_t) search_L,
+                               best_mem_index_0);
+          for (auto iter : best_mem_index_0)
+            best.insert(iter);
+        }
+      }
+
+      if (_clearing_index_1.load() == false) {
+        std::shared_lock<std::shared_timed_mutex> lock(_clear_lock_1);
+        if (_mem_index_1->get_num_points() > 0) {
+          std::vector<Neighbor_Tag<TagT>> best_mem_index_1;
+          _mem_index_1->search(query, (uint32_t) search_L, (uint32_t) search_L,
+                               best_mem_index_1);
+          for (auto iter : best_mem_index_1)
+            best.insert(iter);
+        }
+      }
+    }
+    std::vector<Neighbor_Tag<TagT>> best_vec;
+    for (auto iter : best)
+      best_vec.emplace_back(iter);
+    //        std::sort(best_vec.begin(), best_vec.end());
+    if (best_vec.size() > K)
+    //          best_vec.erase(best_vec.begin() + K, best_vec.end());
+    // aggregate results, sort and pick top K candidates
+    {
+      std::shared_lock<std::shared_timed_mutex> lock(_delete_lock);
+      size_t                                    pos = 0;
+      for (auto iter : best_vec) {
+        if ((_deletion_set_0.find(iter.tag) == _deletion_set_0.end()) &&
+            (_deletion_set_1.find(iter.tag) == _deletion_set_1.end())) {
+          tags[pos] = iter.tag;
+          distances[pos] = iter.dist;
+          pos++;
+        }
+        if (pos == K)
+          break;
+      }
+    }
+  }
+
+  template<typename T, typename TagT>
+  int MergeInsert<T, TagT>::trigger_merge() {
+    if (_mem_points >= _merge_th) {
+      save_del_set();
+      switch_index();
+      return 1;
+    }
+    return 0;
+  }
+
+  template<typename T, typename TagT>
+  void MergeInsert<T, TagT>::final_merge() {
+    diskann::cout << "Inside final_merge()." << std::endl;
+
+
+ sed -n '180,200p' tests/overall_performance.cpp
+                ofs.write((char*)&kk, 4);
+
+                ofs.write(
+                    (char*) query_result_tags,
+                    (size_t) query_num *
+                    (size_t) recall_at *
+                    sizeof(TagT));
+
+                ofs.close();
+
+                std::cout << "P3 dump written: "
+                          << fn << std::endl;
+            }
+        }
+
+    delete[] gt_ids;
+    gt_ids = nullptr;
+  }
+
+  std::cout << "search current time: " << current_time << std::endl;
+
+sed -n '470,495p' tests/overall_performance.cpp
+    do {
+      insert_status = insert_future.wait_for(std::chrono::seconds(5));
+      delete_status = delete_future.wait_for(std::chrono::seconds(5));
+      if (insert_status == std::future_status::deferred ||
+          delete_status == std::future_status::deferred) {
+        std::cout << "deferred\n";
+      } else if (insert_status == std::future_status::timeout ||
+                 delete_status == std::future_status::timeout) {
+        ShowMemoryStatus();
+        sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
+                           Lsearch[0], sync_index, currentFileName, false,
+                           false);
+        total_queries += query_num;
+        std::cout << "Queries processed: " << total_queries << std::endl;
+      }
+      if (insert_status == std::future_status::ready) {
+        std::cout << "Insertions complete!\n";
+      }
+      if (delete_status == std::future_status::ready) {
+        std::cout << "Deletions complete!\n";
+      }
+    } while (insert_status != std::future_status::ready ||
+             delete_status != std::future_status::ready);
+
+    inMemorySize += insert_vec.size();
