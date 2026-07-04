@@ -1,12 +1,163 @@
- ~/research/work/check_freshdiskann.sh
-       c     miss@10K    miss@100K    ratio b (N-exponent)
---------------------------------------------------------------------
-    5000        72612        23873    3.042          0.483
-   10000       192070        54789    3.506          0.545
-   20000       453867       152683    2.973          0.473
+Linux DESKTOP-4790O9T 6.18.33.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jun  5 01:12:21 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+cmake version 3.22.1
 
-Mean b across c values: 0.500
-Prediction from c²/N ansatz: b = 1.0
-If observed b ≈ 1.0 → ansatz confirmed on N side
-If observed b < 1.0 → N-scaling weaker (R-cap or saturation)
-If observed b ≈ 0 → miss essentially N-independent at fixed c
+               total        used        free      shared  buff/cache   available
+Mem:           2.8Gi       411Mi       1.4Gi       3.0Mi       1.0Gi       2.4Gi
+Swap:          2.0Gi          0B       2.0Gi
+
+j used: 2 (linker OOMs at  -j$(nproc) on 3GB WSL)
+
+===== GROUP A: Cache Sites =====
+--- merge_insert.h: mem indexes ---
+49:      if (_mem_index_0 != nullptr) {
+55:        _mem_index_0 = std::make_shared<diskann::Index<T, TagT>>(
+57:        _mem_index_1 = std::make_shared<diskann::Index<T, TagT>>(
+116:    std::shared_ptr<Index<T, TagT>>    _mem_index_0 = nullptr;
+117:    std::shared_ptr<Index<T, TagT>>    _mem_index_1 = nullptr;
+
+--- merge_insert.h: deletion sets ---
+129:    tsl::robin_set<TagT> _deletion_set_0;
+130:    tsl::robin_set<TagT> _deletion_set_1;
+
+--- merge_insert.cpp: insert / lazy_delete / search_sync signatures ---
+
+===== GROUP B: Scheduler Sites =====
+--- driver merge trigger ---
+35:uint32_t Merge_Size = 0;
+418:  double   merge_ratio = ((double) Merge_Size / index_npts);
+422:    res += Merge_Size;
+423:    ckpt_i += Merge_Size / vecs_per_step;
+424:    tmp_npts += Merge_Size;
+425:    // Merge_Size =
+429:  sync_index.init_mem_index(Merge_Size);
+433:  LOG(INFO) << "Merge size is set to " << Merge_Size;
+437:    std::cerr << "ckpt_i is 0, please check ckpt and Merge_Size" << std::endl;
+511:    } else if (inMemorySize >= Merge_Size) {
+560:  Merge_Size = (unsigned) std::atoi(argv[arg_no++]);
+561:  std::cerr << "Merge size: " << Merge_Size << std::endl;
+
+--- driver exit(0) restarts ---
+434:  // exit(0);
+510:      exit(0);
+528:      exit(0);  // wait for reboot.
+
+--- trigger_merge definition + all callers ---
+src/v2/merge_insert.cpp:349:  int MergeInsert<T, TagT>::trigger_merge() {
+include/v2/merge_insert.h:77:    DISKANN_DLLEXPORT int trigger_merge();
+
+===== GROUP C: Telemetry Sources =====
+--- _mem_points uses + switch_index ---
+83:        _check_switch_index(false), _check_switch_delete(false) {
+202:    while (_check_switch_index.load()) {
+228:          _mem_points++;
+243:          _mem_points++;
+350:    if (_mem_points >= _merge_th) {
+352:      switch_index();
+363:    if (_mem_points > 0) {
+365:      switch_index();
+417:  void MergeInsert<T, TagT>::switch_index() {
+426:      _check_switch_index.compare_exchange_strong(expected_value, true);
+454:      _mem_points = 0;
+456:      _check_switch_index.compare_exchange_strong(expected_value, false);
+511:    // only switch_index will call this function
+
+--- deletion set size reads ---
+258:      diskann::cout << "Active deletion set indicated as _deletion_set_0 but "
+263:      diskann::cout << "Active deletion set indicated as _deletion_set_1 but "
+269:      _deletion_set_0.insert(tag);
+272:      _deletion_set_1.insert(tag);
+336:        if ((_deletion_set_0.find(iter.tag) == _deletion_set_0.end()) &&
+337:            (_deletion_set_1.find(iter.tag) == _deletion_set_1.end())) {
+546:        _deletion_set_1.clear();
+550:              << "Cleared _deletion_set_1 - ready to accept new points"
+553:          diskann::cout << "Failed to clear _deletion_set_1" << std::endl;
+556:        _deletion_set_0.clear();
+560:              << "Cleared _deletion_set_0 - ready to accept new points"
+563:          diskann::cout << "Failed to clear _deletion_set_0" << std::endl;
+578:          new std::vector<TagT>(_deletion_set_1.size());
+581:      for (auto iter : _deletion_set_1) {
+594:          new std::vector<TagT>(_deletion_set_0.size());
+597:      for (auto iter : _deletion_set_0) {
+
+--- recall@10 print in driver ---
+102:                        const int recall_at, _u64 L,
+105:                        bool calRecall) {
+111:    calRecall = false;
+114:  if (calRecall) {
+119:  float* query_result_dists = new float[recall_at * query_num];
+120:  TagT*  query_result_tags = new TagT[recall_at * query_num];
+123:    for (_u32 r = 0; r < (_u32) recall_at; r++) {
+124:      query_result_tags[q * recall_at + r] = std::numeric_limits<TagT>::max();
+125:      query_result_dists[q * recall_at + r] = std::numeric_limits<float>::max();
+131:  std::string         recall_string = "Recall@" + std::to_string(recall_at);
+136:            << recall_string << std::setw(12) << "Disk IOs" << std::endl;
+145:    sync_index.search_sync(query + i * query_aligned_dim, recall_at, L,
+146:                           query_result_tags + i * recall_at,
+147:                           query_result_dists + i * recall_at, stats + i);
+158:  float                         recall = 0;
+161:  if (calRecall) {
+162:    // for (int i = 0; i < recall_at; ++i) {
+165:    recall = diskann::calculate_recall(query_num, gt_ids, gt_dists, gt_dim,
+166:                                       query_result_tags, recall_at, recall_at);
+177:                uint32_t kk = (uint32_t) recall_at;
+185:                    (size_t) recall_at *
+220:            << std::setw(12) << recall << std::setw(12) << mean_ios
+368:            std::string& truthset_file, const int recall_at,
+445:    sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
+479:        sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
+504:      sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
+522:        sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
+539:        << " <indice_path> <query_file> <truthset_prefix> <recall@>"
+556:  int         recall_at = (int) std::atoi(argv[arg_no++]);
+575:                             truthset, recall_at, Lsearch, beam_width,
+581:                              truthset, recall_at, Lsearch, beam_width,
+587:                            truthset, recall_at, Lsearch, beam_width, &dist_cmp,
+
+--- p99 latency print in driver ---
+129:  std::vector<double> latency_stats(query_num, 0);
+151:    latency_stats[i] = diff.count() * 1000;
+205:  std::sort(latency_stats.begin(), latency_stats.end());
+207:            << ((float) std::accumulate(latency_stats.begin(),
+208:                                        latency_stats.end(), 0)) /
+211:            << (float) latency_stats[(_u64) (0.50 * ((double) query_num))]
+213:            << (float) latency_stats[(_u64) (0.90 * ((double) query_num))]
+215:            << (float) latency_stats[(_u64) (0.95 * ((double) query_num))]
+217:            << (float) latency_stats[(_u64) (0.99 * ((double) query_num))]
+219:            << (float) latency_stats[(_u64) (0.999 * ((double) query_num))]
+268:            << "10th percentile deletion time : "
+271:            << "50th percentile deletion time : "
+274:            << "90th percentile deletion time : "
+277:            << "99th percentile deletion time : "
+280:            << "99.9th percentile deletion time : "
+321:            << "10th percentile insertion time : "
+324:            << "50th percentile insertion time : "
+327:            << "90th percentile insertion time : "
+330:            << "99th percentile insertion time : "
+333:            << "99.9th percentile insertion time : "
+
+--- disk_deleted_ids in index_merger ---
+288:        &thread_data, &this->disk_deleted_ids);
+480:        this->disk_deleted_ids.insert(i);
+483:    diskann::cout << "Found " << this->disk_deleted_ids.size()
+585:    while (this->disk_deleted_ids.find((_u32) medoid) !=
+586:           this->disk_deleted_ids.end()) {
+621:    uint64_t backing_buf_size = (uint64_t) this->disk_deleted_ids.size() *
+628:    this->disk_index->scan_deleted_nodes(this->disk_deleted_ids, deleted_nodes,
+641:        auto     iter = this->disk_deleted_ids.find(id);
+642:        if (iter == this->disk_deleted_ids.end()) {
+652:    assert(deleted_nodes.size() == this->disk_deleted_ids.size());
+653:    assert(this->disk_deleted_nhoods.size() == this->disk_deleted_ids.size());
+695:      auto iter = this->disk_deleted_ids.find(nbr);
+696:      if (iter != this->disk_deleted_ids.end()) {
+722:      //      auto iter = this->disk_deleted_ids.find(id_nhood[i]);
+723:      //      assert(iter == this->disk_deleted_ids.end());
+741:      //     auto iter = this->disk_deleted_ids.find(disk_node.nbrs[i]);
+742:      //      assert(iter == this->disk_deleted_ids.end());
+762:    return (this->disk_deleted_ids.find(disk_node.id) !=
+763:            this->disk_deleted_ids.end());
+
+--- R override in ctor (sanity) ---
+114:    _paras_mem.Set<unsigned>("R", parameters.Get<unsigned>("R_mem"));
+121:    _paras_disk.Set<unsigned>("R", parameters.Get<unsigned>("R_disk"));
+161:    _paras_disk.Set<unsigned>("R", _disk_index->max_degree);
