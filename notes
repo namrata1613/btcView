@@ -1,1 +1,5 @@
-1e084ae7b2f30d41c0847c9d21ed4ae923d92204
+research/FreshDiskANN-baseline/src/v2/merge_insert.cpp:221:19: error: ‘T’ was not declared in this scope
+  221 |   int MergeInsert<T, TagT>::insert(const T* point, const TagT& tag) {
+      |                   ^
+compilation terminated due to -Wfatal-errors.
+make[3]: *** [src/CMakeFiles/diskann.dir/build.make:258: src/CMakeFiles/diskann.dir/v2/merge_insert.cpp.o] Error 1
