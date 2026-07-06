@@ -1,14 +1,12 @@
 M8.1 Output - 
 
-peak RSS (VmHWM): 1290816 KB
-memory current time: 253 RSS : 972636 KB
-peak RSS (VmHWM): 1290816 KB
+peak RSS (VmHWM): 1289876 KB
 Merge finished for checkpoint 3== baseline ==
 20000,99.477
 20000,98.542
 40000,98.864
 40000,98.282
-60000,98.568
+60000,98.567
 60000,98
 == filter-tenant ==
 20000,99.477
@@ -17,6 +15,7 @@ Merge finished for checkpoint 3== baseline ==
 40000,98.282
 60000,98.568
 60000,98
+
 
 M8.4 - output :
 
