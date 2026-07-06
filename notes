@@ -1,23 +1,54 @@
-last output - 
-Merge finished for checkpoint 0cumulative_inserts,recall_at_10
-0,99.278
-1000,98.549
-2000,97.47
-3000,96.317
-4000,95.427
-5000,94.659
-6000,93.754
-7000,92.998
-8000,92.36
-9000,91.808
-10000,91.291
-11000,90.73
-12000,90.16
-13000,89.44
-14000,88.798
-15000,88.312
-16000,87.873
-17000,87.434
-18000,87.03
-19000,86.707
-20000,86.431
+Pre multi-partition drain implementation - 
+
+output of M8.1 - anchor
+
+Merge finished for checkpoint 3timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy
+1,1,1,1
+1,1,1,1
+1,1,1,1
+
+both run_baseline.csv and run_filter_tenant.csv have same output - 
+20000,99.478
+20000,98.542
+40000,98.865
+40000,98.282
+60000,98.568
+60000,98
+
+Output of M8.2 - multi-partition smoke with COPRIME moduli 
+
+peak RSS (VmHWM): 1358272 KB
+Merge finished for checkpoint 0peak RSS (VmHWM): 965280 KB
+peak RSS (VmHWM): 965280 KB
+peak RSS (VmHWM): 965280 KB
+peak RSS (VmHWM): 965280 KB
+peak RSS (VmHWM): 965280 KB
+peak RSS (VmHWM): 965280 KB
+[C2] partitions touched (_mem_points_by_key.size) = )6
+peak RSS (VmHWM): 1358272 KB
+peak RSS (VmHWM): 1358272 KB
+peak RSS (VmHWM): 1358272 KB
+timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy
+cumulative_inserts,recall_at_10,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy
+0,33.016,1,1,40960000,0
+1000,32.837,6,1,143360000,167
+2000,32.594,6,1,143360000,334
+3000,32.377,6,1,143360000,500
+4000,32.119,6,1,143360000,667
+5000,31.887,6,1,143360000,834
+6000,31.704,6,1,143360000,1000
+7000,31.508,6,1,143360000,1167
+8000,31.361,6,1,143360000,1334
+9000,31.268,6,1,143360000,1500
+10000,31.147,6,1,143360000,1667
+11000,31.052,6,1,143360000,1834
+12000,30.942,6,1,143360000,2000
+13000,30.768,6,1,143360000,2167
+14000,30.644,6,1,143360000,2334
+15000,30.568,6,1,143360000,2500
+16000,30.507,6,1,143360000,2667
+17000,30.399,6,1,143360000,2834
+18000,30.308,6,1,143360000,3000
+19000,30.241,6,1,143360000,3167
+20000,30.185,6,1,143360000,3334
+
