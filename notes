@@ -19,12 +19,9 @@ Merge finished for checkpoint 3== baseline ==
 
 M8.4 - output :
 
-Metadata: #pts = 3334, #dims = 1...
-Tags loaded.
-Allocating thread scratch space -- 16 MB / thread.
-Found 0 tags to delete from SSD-DiskANN
-== single (L=1) ==
-20000,99.479
+peak RSS (VmHWM): 1403664 KB
+Merge finished for checkpoint 3== single (L=1) ==
+20000,99.477
 20000,98.542
 40000,98.864
 40000,98.282
@@ -32,8 +29,8 @@ Found 0 tags to delete from SSD-DiskANN
 60000,98
 == multi (L=3) ==
 20000,84.888
-20000,84.858
-40000,76.51
-40000,76.443
-60000,70.214
-60000,70.089
+20000,98.542
+40000,88.366
+40000,98.282
+60000,89.422
+60000,98
