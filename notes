@@ -1,4 +1,4 @@
-Phase 2 output  -
+Gate 2 output  -
 Merge finished for checkpoint 3== baseline ==
 20000,99.478
 20000,98.542
@@ -14,3 +14,30 @@ Merge finished for checkpoint 3== baseline ==
 60000,98.568
 60000,98
 [phase2] cache_mode=filter-tenant sched_mode=fifo telemetry_csv=research/work/phase2_c2_agent3/run_filter_tenant.csv io_engine=io_uring
+
+Gate 3 output - 
+Merge finished for checkpoint 0[C2] synthetic partitioning: label = id % 4, tenant = id % 2 (up to 8 partitions)
+[C2] query key source: synthetic label = q % 4, tenant = q % 2
+[C2] partitions touched (_mem_points_by_key.size) = )4
+cumulative_inserts,recall_at_10
+0,24.499
+1000,24.529
+2000,24.573
+3000,24.554
+4000,24.588
+5000,24.597
+6000,24.618
+7000,24.66
+8000,24.648
+9000,24.681
+10000,24.67
+11000,24.669
+12000,24.655
+13000,24.67
+14000,24.633
+15000,24.631
+16000,24.647
+17000,24.63
+18000,24.629
+19000,24.62
+20000,24.664
