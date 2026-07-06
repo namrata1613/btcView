@@ -18,6 +18,8 @@ Merge finished for checkpoint 3== baseline ==
 60000,98.568
 60000,98
 
+M8.4 - output :
+
 Metadata: #pts = 3334, #dims = 1...
 Tags loaded.
 Allocating thread scratch space -- 16 MB / thread.
