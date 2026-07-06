@@ -1,6 +1,19 @@
-make -j2 2>&1 | tail -n 5
-make[2]: *** [src/CMakeFiles/diskann_s.dir/build.make:258: src/CMakeFiles/diskann_s.dir/v2/merge_insert.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:222: src/CMakeFiles/diskann_s.dir/all] Error 2
-make[1]: *** Waiting for unfinished jobs....
-make[1]: *** [CMakeFiles/Makefile2:196: src/CMakeFiles/diskann.dir/all] Error 2
-make: *** [Makefile:91: all] Error 2
+M8.1 Output - 
+
+peak RSS (VmHWM): 1290816 KB
+memory current time: 253 RSS : 972636 KB
+peak RSS (VmHWM): 1290816 KB
+Merge finished for checkpoint 3== baseline ==
+20000,99.477
+20000,98.542
+40000,98.864
+40000,98.282
+60000,98.568
+60000,98
+== filter-tenant ==
+20000,99.477
+20000,98.542
+40000,98.864
+40000,98.282
+60000,98.568
+60000,98
