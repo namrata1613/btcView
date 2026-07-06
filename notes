@@ -115,5 +115,25 @@ cumulative_inserts,recall_at_10,n_partitions_active,n_partitions_merging,mem_ind
 59000,23.247,6,1,143360000,3167
 60000,23.206,6,1,143360000,3334
 
-
+Output for M8.4 - topology parity, disk post filter OFF : 
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611558792940845207, npts: 990396072, dim: 4091571304 disk_nnodes: 127225317846120 disk_ndims: 127225486542696
+Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 1, #dims = 0...
+Load compressed vectors from file: research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+== single (L=1) ==
+20000,99.477
+20000,98.542
+40000,98.865
+40000,98.282
+60000,98.568
+60000,98
+== multi (L=3) ==
+20000,84.888
+40000,71.864
+60000,66.165
 
