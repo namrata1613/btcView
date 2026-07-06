@@ -17,3 +17,22 @@ Merge finished for checkpoint 3== baseline ==
 40000,98.282
 60000,98.568
 60000,98
+
+Metadata: #pts = 3334, #dims = 1...
+Tags loaded.
+Allocating thread scratch space -- 16 MB / thread.
+Found 0 tags to delete from SSD-DiskANN
+== single (L=1) ==
+20000,99.479
+20000,98.542
+40000,98.864
+40000,98.282
+60000,98.568
+60000,98
+== multi (L=3) ==
+20000,84.888
+20000,84.858
+40000,76.51
+40000,76.443
+60000,70.214
+60000,70.089
