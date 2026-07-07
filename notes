@@ -1,22 +1,8 @@
-memory current time: 4603 RSS : 918868 KB
- Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_20000.bin) returned: 0
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-==============================================================================
-search current time: 4612
-  50     1129.76            25.306     25.1657      30.987     33.4351     42.4524     56.2558           0      62.044
- Stat(/home/nams/research/work/phase2_c3_agent3b/defer_chain.csv) returned: 0
-peak RSS (VmHWM): 920848 KB
-Queries processed: 3820000
-Deletions complete!
-memory current time: 4617 RSS : 918608 KB
- Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_20000.bin) returned: 0
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-==============================================================================
-search current time: 4625
-  50     1158.86           24.6861     24.4612     29.8444     32.5258       45.71     67.3357           0      62.044
- Stat(/home/nams/research/work/phase2_c3_agent3b/defer_chain.csv) returned: 0
-peak RSS (VmHWM): 920848 KB
-Queries processed: 3830000
+grep -nE "checkpoint|\[c3-3b] (restored|reloaded)|Need Copy| Batch:" ~/research/work/phase2_c3_agent3b/defer_ckpt0.log | tail -n 20
+ls -la ~/research/work/phase2_c3_agent3b/sched_state_defer* 2>/dev/null
+1330:Merge finished for checkpoint 0
+-rw-r--r-- 1 nams nams 115 Jul  8 02:28 research/work/phase2_c3_agent3b/sched_state_defer
+
 
 
 
