@@ -1,31 +1,47 @@
-      std::future_status merge_status;
-      do {
-        merge_status = merge_future.wait_for(std::chrono::seconds(10));
-        ShowMemoryStatus();
-        sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
-                           Lsearch[0], sync_index, currentFileName, false,
-                           false);
-      } while (merge_status != std::future_status::ready);
-      ShowMemoryStatus();
-      g_is_merge_boundary = 1;  // phase 2 telemetry
-      emit_telemetry_row(sync_index, -1.0f, 0.0f, 0.0f,
-                         false);  // post merge snapshot
-      g_is_merge_boundary = 0;
-      
-      if (g_sched_mode == "priority" &&
-      std::getenv("C3_INPROC_PROBE") != nullptr) {
-      std::cout << "[C3] in-process deferred-served probe (post-drain,"
-                << " pre-exit)" << std::endl;
+Run 1 - anchor still exact Output : 
+peak RSS (VmHWM): 1291160 KB
+memory current time: 252 RSS : 966120 KB
+== fifo ==
+20000,99.477
+20000,-1
+20000,-1
+20000,-1
+20000,-1
+20000,-1
+20000,98.542
+40000,98.864
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,98.282
+60000,98.568
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,98
+== priority ==
+20000,99.477
+20000,-1
+20000,-1
+20000,-1
+20000,-1
+20000,98.542
+40000,98.865
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,98.282
+60000,98.568
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,98
 
-      // Deferred partitions are still staged in the inactive slot here;
-      // search_sync probes BOTH slots (unchanged C2 path) => this recall
-      // reflects deferred contribution. Compare vs the same run with
-      // C3_HIGH_WATER=Merge_Size (no deferral) to see they still serve.
-      sync_search_kernel(query, query_num, query_aligned_dim, recall_at,
-                        lsearch[0], sync_index, currentFileName, false, true);
 
-      }  
-
-      std::cout << "Merge finished for checkpoint " << ckpt;
-
-      exit(0);  // wait for reboot.
