@@ -1,13 +1,46 @@
-Inside update() -> inside if (g_sched_mode == "priority") - 
-        std::vector<diskann::RepairTask> snap = g_sched.snapshot();
-
-        double kmin = std::numeric_limits<double>::infinity();
-        double kmax = -std::numeric_limits<double>::infinity();
-
-        for (auto& t : snap) {
-          double k = g_sched.kappa(t, t_now);
-          if (k < kmin)
-            k = k;
-          if (k > kmax)
-            kmax = k;
-        }
+Run A output - 
+== fifo ==
+20000,99.477
+20000,-1
+20000,-1
+20000,-1
+20000,-1
+20000,-1
+20000,98.542
+40000,98.864
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,98.282
+60000,98.568
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,98
+== priority ==
+20000,99.477
+20000,-1
+20000,-1
+20000,-1
+20000,-1
+20000,98.542
+40000,98.864
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,-1
+40000,98.282
+60000,98.568
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,-1
+60000,98
+== state files (must be EMPTY listing) ==
+no persistence files written (correct)
