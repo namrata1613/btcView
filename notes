@@ -1,9 +1,69 @@
-grep -nE "checkpoint|\[c3-3b] (restored|reloaded)|Need Copy| Batch:" ~/research/work/phase2_c3_agent3b/defer_ckpt0.log | tail -n 20
-ls -la ~/research/work/phase2_c3_agent3b/sched_state_defer* 2>/dev/null
-1330:Merge finished for checkpoint 0
--rw-r--r-- 1 nams nams 115 Jul  8 02:28 research/work/phase2_c3_agent3b/sched_state_defer
-
-
+Merge size: 20000
+Lsearch: 50
+filter-tenant: query-path routing active
+[C3] sched_mode=priority alpha=(1,0,1,0) B=20000 high_water=40000 low_water=0 sched_dr=off sla_default=1
+[phase2] cache_mode=filter-tenant sched_mode=priority telemetry_csv=/home/nams/research/work/phase2_c3_agent3b/defer_chain.csv io_engine=io_uring
+Loading queries
+Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 120000 disk_ndims: 128
+Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin ...
+Metadata: #pts = 120000, #dims = 100...
+Load compressed vectors from file: /home/nams/research/work/sift100k_idx/sift100k_merge_pq_compressed.bin offset: 0 num points: 120000 n_chunks: 100
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 120000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin) returned: -1
+File /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+ Stat(/home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags) returned: 0
+Loading tags from /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags
+Reading bin file /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index.tags ...
+Metadata: #pts = 120000, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : /home/nams/research/work/sift100k_idx/sift100k
+Init mem index with 20000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C2] synthetic partitioning: label = id % 3, tenant = id % 2 (up to 6 partitions)
+[C2] query key source: synthetic label = q % 3, tenant = q % 2
+[C3-3b] restored scheduler queue: 3 pending task(s)
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C3-3b] reloaded deferred partition (2,0) 6666 pts into active slot
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C3-3b] reloaded deferred partition (2,1) 6667 pts into active slot
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C3-3b] reloaded deferred partition (1,1) 6667 pts into active slot
+===== markers =====
+51:[C3-3b] restored scheduler queue: 3 pending task(s)
+54:[C3-3b] reloaded deferred partition (2,0) 6666 pts into active slot
+57:[C3-3b] reloaded deferred partition (2,1) 6667 pts into active slot
+60:[C3-3b] reloaded deferred partition (1,1) 6667 pts into active slot
+61:[C3-3b] total reloaded deferred pts = 20000
 
 
 
