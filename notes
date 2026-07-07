@@ -44,4 +44,27 @@ memory current time: 252 RSS : 966120 KB
 60000,-1
 60000,98
 
+Run 2 - M5.4 partial drain - 
+Merge finished for checkpoint 0== drain decision ==
+[C3] drain t_now=40000 B=20000 pending=6 drained=3 kappa=[inf,0] max_stale_drained=39000 max_stale_deferred=39000
+== post-drain census (selected drained -> 0 pts; deferred retained) ==
+[C3] post-drain partition 2,1 pts=6667 DEFERRED
+[C3] post-drain partition 0,1 pts=0 drained
+[C3] post-drain partition 2,0 pts=6666 DEFERRED
+[C3] post-drain partition 1,0 pts=0 drained
+[C3] post-drain partition 1,1 pts=6667 DEFERRED
+[C3] post-drain partition 0,0 pts=0 drained
+== combined merge size (single merge, size = summed selected occupancy) ==
+Saved combined mem index 0 (20000 pts from 6 partitions)
+== deferred-served in-process recall probe ==
+[C3] in-process deferred-served probe (post-drain, pre-exit)
+current truthfile: /research/work/sift100k_gt_inserts_only/gt_40000.bin
+== telemetry drain row ==
+cum=cumulative_inserts pending=mem_index_bytes drained=probed_partition_occupancy kappa=[sched_pending_tasks,sched_drained_tasks] stale_dr=sched_kappa_min stale_def=sched_kappa_max
+cum=40000 pending=6 drained=3 kappa=[inf,0] stale_dr=39000 stale_def=39000
+cum=40000 pending=6 drained=3 kappa=[inf,0] stale_dr=39000 stale_def=39000
+cum=40000 pending=6 drained=3 kappa=[inf,0] stale_dr=39000 stale_def=39000
+cum=40000 pending=6 drained=3 kappa=[inf,0] stale_dr=39000 stale_def=39000
+cum=40000 pending=6 drained=3 kappa=[inf,0] stale_dr=39000 stale_def=39000
+cum=40000 pending=6 drained=3 kappa=[inf,0] stale_dr=39000 stale_def=39000
 
