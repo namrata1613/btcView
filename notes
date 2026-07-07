@@ -1,36 +1,81 @@
-M8.1 Output - 
+Command 1- Anchor : 
 
-peak RSS (VmHWM): 1289876 KB
-Merge finished for checkpoint 3== baseline ==
-20000,99.477
-20000,98.542
-40000,98.864
-40000,98.282
-60000,98.567
-60000,98
-== filter-tenant ==
-20000,99.477
-20000,98.542
-40000,98.864
-40000,98.282
-60000,98.568
-60000,98
+cd ~/research/FreshDiskANN-baseline/build/tests
 
+BIN=./overall_performance
+DATA=~/research/data/sift1m/sift_base.bin
+IDX=~/research/work/sift100k_idx/sift100k
+QUERY=~/research/data/sift1m/sift_query.bin
+GT=~/research/work/sift100k_gt_inserts_only
+OUT=~/research/work/phase2_c2_agent4
+mkdir -p "$OUT"
 
-M8.4 - output :
+run_sweep () {   # $1=csv path, $2=cache-mode, $3=sched-mode
+    rm -f "${IDX}_shadow1"* "${IDX}_merge"*      # reset derived index state -> both runs start identical
+    rm -f "$1"                                  # fresh CSV (header written once by the binary)
 
-peak RSS (VmHWM): 1403664 KB
-Merge finished for checkpoint 3== single (L=1) ==
-20000,99.477
-20000,98.542
-40000,98.864
-40000,98.282
-60000,98.568
-60000,98
-== multi (L=3) ==
-20000,84.888
-20000,98.542
-40000,88.366
-40000,98.282
-60000,89.422
-60000,98
+    for ckpt in 0 1 2 3; do
+        INSERTS_ONLY=1 TELEMETRY_CSV="$1" \
+        "$BIN" float "$DATA" 100 32 1.2 100000 0 "$IDX" "$QUERY" "$GT" \
+            10 4 100 $ckpt 20000 50 \
+            --cache-mode "$2" --sched-mode "$3" \
+            2>&1 | tee "$OUT/log_${2}_${3}_ckpt${ckpt}.log"
+    done
+}
+
+# Gate Run A: baseline / fifo (must reproduce 98.542 / 98.282 / 98.000)
+run_sweep "$OUT/run_baseline.csv" baseline fifo
+
+# Gate Run B: filter-tenant / fifo (hyphen! single partition => must match A exactly)
+run_sweep "$OUT/run_filter_tenant.csv" filter-tenant fifo
+
+echo "== baseline =="
+awk -F, '$10!=-1 && ($4==20000||$4==40000||$4==60000){print $4","$10}' \
+    "$OUT/run_baseline.csv"
+
+echo "== filter-tenant =="
+awk -F, '$10!=-1 && ($4==20000||$4==40000||$4==60000){print $4","$10}' \
+    "$OUT/run_filter_tenant.csv"
+
+COMMAND 2 - 
+cd ~/research/FreshDiskANN-baseline/build/tests
+
+OUT=~/research/work/phase2_c2_agent4
+mkdir -p "$OUT"
+
+run_chain () {    # $1=csv   $2=L_PRED   $3=T_CNT
+    rm -f "$1"
+
+    rm -f \
+        ~/research/work/sift100k_idx/sift100k_shadow1* \
+        ~/research/work/sift100k_idx/sift100k_merge*
+
+    for ckpt in 0 1 2 3; do
+        C2_L_PRED=$2 \
+        C2_T_CNT=$3 \
+        C2_DISK_POSTFILTER=0 \
+        INSERTS_ONLY=1 \
+        TELEMETRY_CSV="$1" \
+        ./overall_performance float \
+            ~/research/data/sift1m/sift_base.bin \
+            100 32 1.2 100000 0 \
+            ~/research/work/sift100k_idx/sift100k \
+            ~/research/data/sift1m/sift_query.bin \
+            ~/research/work/sift100k_gt_inserts_only \
+            10 4 100 $ckpt 20000 50 \
+            --cache-mode filter-tenant \
+            --sched-mode fifo \
+            2>&1 | tee "$OUT/log_m84_Lp$2_ckpt${ckpt}.log"
+    done
+}
+
+run_chain "$OUT/m84_single.csv" 1 1    # single-partition drain (1 mem file)
+run_chain "$OUT/m84_multi.csv" 3 2     # multi-partition drain (up to 6 mem files)
+
+echo "== single (L=1) =="
+awk -F, '$10!=-1 && ($4==20000||$4==40000||$4==60000){print $4","$10}' \
+    "$OUT/m84_single.csv"
+
+echo "== multi (L=3) =="
+awk -F, '$10!=-1 && ($4==20000||$4==40000||$4==60000){print $4","$10}' \
+    "$OUT/m84_multi.csv"
