@@ -1,29 +1,40 @@
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
-==========================================================================================================
-    50           4         1104.68         3604.79        15537.00           46.17          158.30           99.91
-    75           4          767.06         5198.21        17546.00           68.56          216.78           99.98
-   100           4          579.68         6883.10        21607.00           91.03          289.94           99.99
-
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
-==========================================================================================================
-    50           4         1123.27         3545.13        13670.00           46.25          161.37           99.88
-    75           4          772.28         5162.13        22394.00           69.14          229.24           99.97
-   100           4          604.03         6605.44        20336.00           92.09          274.57           99.99
-
-
-15 k -
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)
-==========================================================================================================
-    50           4         1089.11         3655.37        16639.00           46.09          177.48    75           4          752.75         5294.78        18520.00           68.75          249.34   100           4          576.05         6924.05        24222.00           91.54          323.87
-
-20k -
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
-==========================================================================================================
-    50           4         1109.41         3588.47        15332.00           46.61          184.46           99.81
-    75           4          759.96         5244.86        14963.00           69.35          265.96           99.94
-   100           4          577.38         6908.09        21885.00           92.24          341.92           99.98
-
-30k - 
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)
-==========================================================================================================
-    50           4         1075.62         3700.04        14432.00           46.92          201.18    75           4          732.63         5440.63        20358.00           69.58          289.79   100           4          576.43         6920.43        24489.00           92.38          359.41
+terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
+  what():  filesystem error: cannot copy: No such file or directory [work/2b3_c20000/disk_disk.index] [work/2b3_c20000/disk_shadow1_disk.index]
+Merge size: 20000
+Lsearch: 75
+[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b3_c20000/2b3_c20000.csv io_engine=io_uring
+Loading queries
+Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611560734905280663, npts: 4127022856, dim: 3451939944 disk_nnodes: 125283352996968 disk_ndims: 125283522107240
+Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file work/2b3_c20000/disk_merge_pq_compressed.bin ...
+Metadata: #pts = 1, #dims = 0...
+Load compressed vectors from file: work/2b3_c20000/disk_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+c=1000:
+# source: work/2b3_c1000/2b3_c1000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+awk: fatal: cannot open file `work/2b3_c1000/2b3_c1000.csv' for reading: No such file or directory
+c=2000:
+# source: work/2b3_c2000/2b3_c2000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+awk: fatal: cannot open file `work/2b3_c2000/2b3_c2000.csv' for reading: No such file or directory
+c=5000:
+# source: work/2b3_c5000/2b3_c5000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+awk: fatal: cannot open file `work/2b3_c5000/2b3_c5000.csv' for reading: No such file or directory
+c=10000:
+# source: work/2b3_c10000/2b3_c10000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+awk: fatal: cannot open file `work/2b3_c10000/2b3_c10000.csv' for reading: No such file or directory
+c=20000:
+# source: work/2b3_c20000/2b3_c20000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+awk: fatal: cannot open file `work/2b3_c20000/2b3_c20000.csv' for reading: No such file or directory
