@@ -1,6 +1,3 @@
-ls ~/research/data/sift1m
-sift                        sift_20000_groundtruth.bin  sift_base_10000.bin  sift_base_30000.bin    sift_gt_top1000.bin
-sift.tar.gz                 sift_30000_groundtruth.bin  sift_base_11000.bin  sift_base_40000.bin    sift_gt_top2000.bin
-sift_11000_groundtruth.bin  sift_40000_groundtruth.bin  sift_base_12000.bin  sift_base_60000.bin    sift_query.bin
-sift_12000_groundtruth.bin  sift_60000_groundtruth.bin  sift_base_15000.bin  sift_groundtruth.bin
-sift_15000_groundtruth.bin  sift_base.bin               sift_base_20000.bin  sift_gt30k_top200.bin
+ls ~/research/work/sift10k_idx
+build.log           sift10k_disk.index.tags  sift10k_mem_0.data  sift10k_pq_compressed.bin  sift10k_sample_data.bin
+sift10k_disk.index  sift10k_mem_0            sift10k_mem_0.tags  sift10k_pq_pivots.bin      sift10k_sample_ids.bin
