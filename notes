@@ -278,3 +278,40 @@ PHASE B Output =
 [C2_SEED] seed=3 window_r_start=176000 n=1000 realized_order_fnv1a=0x854a8f5759350277
 [C2_SEED] seed=3 window_r_start=177000 n=1000 realized_order_fnv1a=0x14507bf5a1b51e43
 [C2_SEED] seed=3 window_r_start=178000 n=1000 realized_order_fnv1a=0xc1671e4daf3d143b
+
+RUN C - output 1 ALL checkpoints - 
+
+Metadata: #pts = 146666, #dims = 1...
+PQFlashIndex loaded successfully.
+Merge time : 88257.4 ms
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C3] post-drain partition 1,0 pts=6667 DEFERRED
+[C3] post-drain partition 1,1 pts=0 drained
+[C3] post-drain partition 2,1 pts=13334 DEFERRED
+[C3] post-drain partition 0,1 pts=6667 DEFERRED
+[C3] post-drain partition 2,0 pts=0 drained
+[C3] post-drain partition 0,0 pts=6666 DEFERRED
+0  6666
+memory current time: 426 RSS : 1.25776e+06 KB
+ Stat(/home/nams/research/work/sift100k_gt_inserts_only/gt_80000.bin) returned: 0
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 434
+  50     1355.85           20.5709     19.8104     24.8624     28.2333     46.5447     103.478           0     62.4289
+ Stat(/home/nams/research/work/phase2_c2_agent4/2b_deferral.csv) returned: 0
+peak RSS (VmHWM): 1572584 KB
+memory current time: 434 RSS : 1.2496e+06 KB
+ Stat(/home/nams/research/work/phase2_c2_agent4/2b_deferral.csv) returned: 0
+peak RSS (VmHWM): 1572584 KB
+[C3-3b] saved deferred partition (1,0) 6667 pts -> /tmp/sched_2b.state.staging_1_0.pts
+[C3-3b] saved deferred partition (2,1) 13334 pts -> /tmp/sched_2b.state.staging_2_1.pts
+[C3-3b] saved deferred partition (0,1) 6667 pts -> /tmp/sched_2b.state.staging_0_1.pts
+[C3-3b] saved deferred partition (0,0) 6666 pts -> /tmp/sched_2b.state.staging_0_0.pts
+[C3-3b] persisted scheduler (4 deferred task(s)) + staging before exit
+Merge finished for checkpoint 1== Output ==
+res=40000 pending=0 drained=0 recall=-1
+res=40000 pending=0 drained=0 recall=87.488
+res=80000 pending=0 drained=1 recall=-1
