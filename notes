@@ -1,40 +1,6 @@
-terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
-  what():  filesystem error: cannot copy: No such file or directory [work/2b3_c20000/disk_disk.index] [work/2b3_c20000/disk_shadow1_disk.index]
-Merge size: 20000
-Lsearch: 75
-[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b3_c20000/2b3_c20000.csv io_engine=io_uring
-Loading queries
-Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
-Searching before inserts:
-Need copy: 0, need swap: 1
-Active del 1: 1, _active_index: 1
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611560734905280663, npts: 4127022856, dim: 3451939944 disk_nnodes: 125283352996968 disk_ndims: 125283522107240
-Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file work/2b3_c20000/disk_merge_pq_compressed.bin ...
-Metadata: #pts = 1, #dims = 0...
-Load compressed vectors from file: work/2b3_c20000/disk_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-c=1000:
-# source: work/2b3_c1000/2b3_c1000.csv (engine=io_uring)
-# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
-awk: fatal: cannot open file `work/2b3_c1000/2b3_c1000.csv' for reading: No such file or directory
-c=2000:
-# source: work/2b3_c2000/2b3_c2000.csv (engine=io_uring)
-# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
-awk: fatal: cannot open file `work/2b3_c2000/2b3_c2000.csv' for reading: No such file or directory
-c=5000:
-# source: work/2b3_c5000/2b3_c5000.csv (engine=io_uring)
-# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
-awk: fatal: cannot open file `work/2b3_c5000/2b3_c5000.csv' for reading: No such file or directory
-c=10000:
-# source: work/2b3_c10000/2b3_c10000.csv (engine=io_uring)
-# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
-awk: fatal: cannot open file `work/2b3_c10000/2b3_c10000.csv' for reading: No such file or directory
-c=20000:
-# source: work/2b3_c20000/2b3_c20000.csv (engine=io_uring)
-# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
-awk: fatal: cannot open file `work/2b3_c20000/2b3_c20000.csv' for reading: No such file or directory
+ls ~/research/data/sift1m
+sift                        sift_20000_groundtruth.bin  sift_base_10000.bin  sift_base_30000.bin    sift_gt_top1000.bin
+sift.tar.gz                 sift_30000_groundtruth.bin  sift_base_11000.bin  sift_base_40000.bin    sift_gt_top2000.bin
+sift_11000_groundtruth.bin  sift_40000_groundtruth.bin  sift_base_12000.bin  sift_base_60000.bin    sift_query.bin
+sift_12000_groundtruth.bin  sift_60000_groundtruth.bin  sift_base_15000.bin  sift_groundtruth.bin
+sift_15000_groundtruth.bin  sift_base.bin               sift_base_20000.bin  sift_gt30k_top200.bin
