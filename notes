@@ -1,21 +1,5 @@
-================ Scratch reference N=11000 =================
- [1/3] Building scratch disk index (R=32, L=75, B=1, M=2, T=4)...
- [2/3] Computing fresh ground truth (top-100)...
- [3/3] Searching scratch index...
-Attach  debugger and press a key
-Unknown distance metric: 12. Using default(L2) instead.
-Search parameters: #threads: 4,  beamwidth: 4
-Reading bin file /home/nams/research/data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
- Stat(/home/nams/research/data/sift1m/sift_11000_groundtruth.bin) returned: 0
-Reading truthset file /home/nams/research/data/sift1m/sift_11000_groundtruth.bin...
-Metadata: #pts = 10000, #dims = 100...
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611545288324793847, npts: 2449801216, dim: 3374837031 disk_nnodes: 0 disk_ndims: 140730102594056
-Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file /home/nams/research/work/sift11000_scratch_idx/sift11000_pq_compressed.bin ...
-Metadata: #pts = 2449735872, #dims = 24272...
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
---- N=11000 recall summary ---
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+==========================================================================================================
+    50           4         1074.42         3703.80        19095.00           45.88          189.20           99.89
+    75           4          734.66         5424.59        18968.00           68.57          254.31           99.97
+   100           4          573.91         6950.21        23015.00           91.37          316.32           99.99
