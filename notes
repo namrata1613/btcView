@@ -1,6 +1,25 @@
-ls -la ~/research/work/gt_2b3/gt_1000.bin
-lrwxrwxrwx 1 nams nams 58 Jul 10 22:52 /home/nams/research/work/gt_2b3/gt_1000.bin -> /home/nams/research/data/sift1m/sift_11000_groundtruth.bin
-
-dmesg | tail -30 | grep -iE "killed|oom|out of memory"
-nams@DESKTOP-4790O9T:~/research/FreshDiskANN-baseline$ echo $?
-1
+== c=1000 ==
+# source: work/2b3_c1000/2b3_c1000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+# cap (M5.2): c=1000 N0=10000 => c/(N0+c)=0.09091
+#    g_frac = (R_scratch - R_merge)/100 per merge must be <= 0.09091; report slack.
+== c=2000 ==
+# source: work/2b3_c2000/2b3_c2000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+# cap (M5.2): c=2000 N0=10000 => c/(N0+c)=0.16667
+#    g_frac = (R_scratch - R_merge)/100 per merge must be <= 0.16667; report slack.
+== c=5000 ==
+# source: work/2b3_c5000/2b3_c5000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+# cap (M5.2): c=5000 N0=10000 => c/(N0+c)=0.33333
+#    g_frac = (R_scratch - R_merge)/100 per merge must be <= 0.33333; report slack.
+== c=10000 ==
+# source: work/2b3_c10000/2b3_c10000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+# cap (M5.2): c=10000 N0=10000 => c/(N0+c)=0.50000
+#    g_frac = (R_scratch - R_merge)/100 per merge must be <= 0.50000; report slack.
+== c=20000 ==
+# source: work/2b3_c20000/2b3_c20000.csv (engine=io_uring)
+# cumulative_inserts  recall@10  merge_size  cache_mode  sched_mode  pending  drained
+# cap (M5.2): c=20000 N0=10000 => c/(N0+c)=0.66667
+#    g_frac = (R_scratch - R_merge)/100 per merge must be <= 0.66667; report slack.
