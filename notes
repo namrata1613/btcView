@@ -1,29 +1,56 @@
-ckpt 1000
-timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy,mem_index_bytes,probed_partition_occupancy,sched_pending_tasks,sched_drained_tasks,sched_kappa_min,sched_kappa_max,sched_max_stale_drained,sched_max_stale_deferred
-1783711417,0,-1,0,1000,0,0,0,0,-1,332.326,0,61.4968,baseline,fifo,io_uring,0,1,1,1,1,2048000,0,0,0,0,0,0,0
-1783711458,0,-1,0,1000,0,0,0,0,-1,350.331,0,85.8194,baseline,fifo,io_uring,0,1,1,1,1,2048000,0,0,0,0,0,0,0
-1783711475,0,-1,0,1000,0,0,0,0,-1,91.2673,0,110.395,baseline,fifo,io_uring,0,1,1,1,1,2048000,0,0,0,0,0,0,0
+cd ~/research
+GTDIR=work/gt_2b3
+mkdir -p "$GTDIR"
 
- cat ~/research/work/2b3_c2000/2b3_c2000.csv
-timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy,mem_index_bytes,probed_partition_occupancy,sched_pending_tasks,sched_drained_tasks,sched_kappa_min,sched_kappa_max,sched_max_stale_drained,sched_max_stale_deferred
-1783711576,0,-1,0,2000,0,0,0,0,-1,1469.26,0,61.4968,baseline,fifo,io_uring,0,1,1,1,1,4096000,0,0,0,0,0,0,0
-1783711586,0,-1,0,2000,0,0,0,0,-1,50.2749,0,85.8194,baseline,fifo,io_uring,0,1,1,1,1,4096000,0,0,0,0,0,0,0
-1783711600,0,-1,0,2000,0,0,0,0,-1,74.8883,0,110.395,baseline,fifo,io_uring,0,1,1,1,1,4096000,0,0,0,0,0,0,0
+ln -sf ~/research/data/sift1m/sift_11000_groundtruth.bin "$GTDIR/gt_1000.bin"
+ln -sf ~/research/data/sift1m/sift_12000_groundtruth.bin "$GTDIR/gt_2000.bin"
+ln -sf ~/research/data/sift1m/sift_15000_groundtruth.bin "$GTDIR/gt_5000.bin"
+ln -sf ~/research/data/sift1m/sift_20000_groundtruth.bin "$GTDIR/gt_10000.bin"
+ln -sf ~/research/data/sift1m/sift_30000_groundtruth.bin "$GTDIR/gt_20000.bin"
 
-cat ~/research/work/2b3_c5000/2b3_c5000.csv
-timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy,mem_index_bytes,probed_partition_occupancy,sched_pending_tasks,sched_drained_tasks,sched_kappa_min,sched_kappa_max,sched_max_stale_drained,sched_max_stale_deferred
-1783711695,0,-1,0,5000,0,0,0,0,-1,204.64,0,61.4968,baseline,fifo,io_uring,0,1,1,1,1,10240000,0,0,0,0,0,0,0
-1783711705,0,-1,0,5000,0,0,0,0,-1,48.1176,0,85.8194,baseline,fifo,io_uring,0,1,1,1,1,10240000,0,0,0,0,0,0,0
-1783711718,0,-1,0,5000,0,0,0,0,-1,63.0249,0,110.395,baseline,fifo,io_uring,0,1,1,1,1,10240000,0,0,0,0,0,0,0
+SRC=work/sift100k_idx
+PFX=$(ls "$SRC"/*_disk.index | head -1)
+PFX=${PFX%_disk.index}
+BASE=$(basename "$PFX")
 
- cat ~/research/work/2b3_c10000/2b3_c10000.csv
-timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy,mem_index_bytes,probed_partition_occupancy,sched_pending_tasks,sched_drained_tasks,sched_kappa_min,sched_kappa_max,sched_max_stale_drained,sched_max_stale_deferred
-1783711815,0,-1,0,10000,0,0,0,0,-1,180.924,0,61.4968,baseline,fifo,io_uring,0,1,1,1,1,20480000,0,0,0,0,0,0,0
-1783711825,0,-1,0,10000,0,0,0,0,-1,51.1676,0,85.8194,baseline,fifo,io_uring,0,1,1,1,1,20480000,0,0,0,0,0,0,0
-1783711838,0,-1,0,10000,0,0,0,0,-1,64.84,0,110.395,baseline,fifo,io_uring,0,1,1,1,1,20480000,0,0,0,0,0,0,0
+LDISK=100
+RDISK=32
+ALPHA=1.2
+NODES=0
+BEAM=4
+STEP=100      # your Ask-A values
+BIN=~/research/FreshDiskANN-baseline/build/tests/overall_performance
+DATA=data/sift1m/sift_base.bin
+QUERY=data/sift1m/sift_query.bin
+SAVE=
 
-cat ~/research/work/2b3_c20000/2b3_c20000.csv
-timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy,mem_index_bytes,probed_partition_occupancy,sched_pending_tasks,sched_drained_tasks,sched_kappa_min,sched_kappa_max,sched_max_stale_drained,sched_max_stale_deferred
-1783711940,0,-1,0,20000,0,0,0,0,-1,45.0554,0,61.4968,baseline,fifo,io_uring,0,1,1,1,1,40960000,0,0,0,0,0,0,0
-1783711950,0,-1,0,20000,0,0,0,0,-1,54.7603,0,85.8194,baseline,fifo,io_uring,0,1,1,1,1,40960000,0,0,0,0,0,0,0
-1783711964,0,-1,0,20000,0,0,0,0,-1,65.205,0,110.395,baseline,fifo,io_uring,0,1,1,1,1,40960000,0,0,0,0,0,0,0
+for c in 1000 2000 5000 10000 20000; do
+    W=work/2b3_c${c}
+
+    rm -rf "$W"
+    mkdir -p "$W"
+
+    cp -f ~/research/work/sift100k_idx/sift100k_* \
+      ~/research/work/2b3_c${c}/
+    
+    SAVE=~/research/work/2b3_c${c}/sift100k
+
+    [ -f "${SAVE}_disk.index" ] || {
+        echo "FATAL: ${SAVE}_disk.index missing"
+        exit 1
+    }
+
+    rm -f "${SAVE}_mem"* "${SAVE}_merge"* "${SAVE}_shadow"* 2>/dev/null || true
+
+    for ckpt in 0 1; do
+        INSERTS_ONLY=1 C2_DISK_POSTFILTER=0 TELEMETRY_CSV="$W/2b3_c${c}.csv" \
+        "$BIN" float "$DATA" $LDISK $RDISK $ALPHA \
+            10000 $NODES "$SAVE" "$QUERY" "$GTDIR" 10 $BEAM $STEP $ckpt $c 50 75 100 \
+            2>&1 | tee "work/logs/2b3_c${c}_ckpt${ckpt}.log"
+    done
+done
+
+for c in 1000 2000 5000 10000 20000; do
+    echo "== c=$c =="
+    N0=10000 C=$c ~/research/work/phase2_c2_agent4/scrape_2b.sh work/2b3_c${c}/2b3_c${c}.csv
+done
