@@ -1,35 +1,15 @@
-Output - 
-Merge size: 1000
-Lsearch: 75
-[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b3_c1000/2b3_c1000.csv io_engine=io_uring
-Loading queries
-Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
-Searching before inserts:
-Need copy: 0, need swap: 1
-Active del 1: 1, _active_index: 1
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 8, dim: 1 disk_nnodes: 11000 disk_ndims: 128
-Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 268439552 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file work/2b3_c1000/sift10k_merge_pq_compressed.bin ...
-Metadata: #pts = 11000, #dims = 100...
-Load compressed vectors from file: work/2b3_c1000/sift10k_merge_pq_compressed.bin offset: 0 num points: 11000 n_chunks: 100
-Reading bin file work/2b3_c1000/sift10k_merge_pq_pivots.bin ...
-Metadata: #pts = 5, #dims = 1...
-Offsets: 4096 135176 135696 136216 136628
-Reading bin file work/2b3_c1000/sift10k_merge_pq_pivots.bin ...
-Metadata: #pts = 256, #dims = 128...
-Reading bin file work/2b3_c1000/sift10k_merge_pq_pivots.bin ...
-Metadata: #pts = 128, #dims = 1...
-Reading bin file work/2b3_c1000/sift10k_merge_pq_pivots.bin ...
-Metadata: #pts = 128, #dims = 1...
-Reading bin file work/2b3_c1000/sift10k_merge_pq_pivots.bin ...
-Metadata: #pts = 101, #dims = 1...
-Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
-Finished optimizing for PQ-PQ distance compuation
-Loaded PQ centroids and in-memory compressed vectors. #points: 11000 #dim: 128 #aligned_dim: 128 #chunks: 100
-Setting up thread-specific contexts for nthreads: 256
+actual size      : 12000008
+npts,dim         : 10000 100
+ids-only expect  : 4000008
+ids+dists expect : 8000008
+[New Thread 0x7ffeeb339640 (LWP 87545)]
+[New Thread 0x7ffeeab2f6c0 (LWP 87546)]
+[New Thread 0x7ffeea325740 (LWP 87547)]
+[New Thread 0x7ffee9b1b7c0 (LWP 87548)]
+[New Thread 0x7ffee9311840 (LWP 87549)]
+[New Thread 0x7ffee8b078c0 (LWP 87550)]
+[New Thread 0x7ffee82fd940 (LWP 87551)]
+[New Thread 0x7ffee7af39c0 (LWP 87552)]
  Stat(work/2b3_c1000/sift10k_merge_disk.index_medoids.bin) returned: -1
 File work/2b3_c1000/sift10k_merge_disk.index_medoids.bin does not exist
 Loading centroid data from medoids vector data of 1 medoid(s)
@@ -49,83 +29,16 @@ L2: Using AVX2 distance computation
 [overall_performance.cpp:698:INFO] index npts: 10000 vecs per step: 10 ckpt_i: 100 merge ratio: 0.1 res: 1000
 [overall_performance.cpp:701:INFO] Merge size is set to 1000
 [overall_performance.cpp:210:INFO] Truth file name: work/2b3_gt/gt_1000.bin
-memory current time: 0 RSS : 748020 KB
+memory current time: 0 RSS : 747996 KB
  Stat(work/2b3_gt/gt_1000.bin) returned: 0
 current truthfile: work/2b3_gt/gt_1000.bin
 Reading truthset file work/2b3_gt/gt_1000.bin...
 Metadata: #pts = 10000, #dims = 100...
-timeout: the monitored command dumped core
-== stdout recall table (authoritative R_merge) ==
-== ckpt1 Tier-0b CSV row (batch_idx=-1) ==
-awk: fatal: cannot open file `work/2b3_c1000/2b3_c1000.csv' for reading: No such file or directory
-== returned tag space (should be [0,11000)) ==
-dump not written yet (search still running)
 
-Input script - 
-cd ~/research
-
-DATA=data/sift1m
-WORK=work
-BT=~/research/FreshDiskANN-baseline/build/tests
-GTDIR=$WORK/2b3_gt
-
-G0=$(ls $WORK/sift10k_idx/*_disk.index | head -1)
-G0=${G0%_disk.index}
-PFX=$(basename "$G0")
-
-c=1000
-W=$WORK/2b3_c${c}
-P3=$W/p3
-mkdir -p "$P3"
-
-rm -f $W/2b3_c${c}.csv    # drop the stale -1 rows so the scraper is clean
-
-# ckpt1 only: reloads the existing _merge, measures Tier-0b, then would keep going.
-# 150s is enough for the pre-insert measurement; kill before the wasteful 2nd merge (~15 min later).
-timeout 150 env \
-INSERTS_ONLY=1 \
-C2_DISK_POSTFILTER=0 \
-P3_DUMP=$P3 \
-TELEMETRY_CSV=$W/2b3_c${c}.csv \
-$BT/overall_performance float \
-    $DATA/sift_base.bin \
-    75 32 1.2 \
-    10000 0 \
-    $W/$PFX \
-    $DATA/sift_query.bin \
-    $GTDIR \
-    10 4 1000 1 ${c} 75 \
-    2>&1 | tee $WORK/logs/2b3_dbg2.log
-
-echo "== stdout recall table (authoritative R_merge) =="
-
-grep -E "Recall@10|^\s*75" $WORK/logs/2b3_dbg2.log
-echo "== ckpt1 Tier-0b CSV row (batch_idx=-1) =="
-
-awk -F, 'NR>1 && $2==1 && $3==-1 {print "recall_at_10="$10}' \
-    $W/2b3_c${c}.csv
-echo "== returned tag space (should be [0,11000)) =="
-
-python3 - <<'PY'
-import numpy as np
-import os
-
-f = "work/2b3_c1000/p3/L_75.u32"
-
-if not os.path.exists(f):
-    print("dump not written yet (search still running)")
-    raise SystemExit
-
-a = np.fromfile(f, dtype=np.uint32)
-nq, k = int(a[0]), int(a[1])
-t = a[2:2 + nq * k].reshape(nq, k)
-
-v = t[t != 0xFFFFFFFF]
-
-print("q0 tags:", t[0].tolist())
-print("frac empty(UINT_MAX):", round((t == 0xFFFFFFFF).mean(), 4))
-print(
-    "tag range:",
-    (int(v.min()), int(v.max())) if v.size else None
-)
-PY
+Thread 1 "overall_perform" received signal SIGSEGV, Segmentation fault.
+0x00005555555e8415 in diskann::load_truthset (bin_file="work/2b3_gt/gt_1000.bin", ids=@0x7fffffffca70: 0x7ffeb7d11f40, dists=@0x7fffffffca78: 0x7ffea1400e00, npts=@0x7fffffffca80: 10000, dim=@0x7fffffffca88: 100, tags=tags@entry=0x0) at /home/nams/research/FreshDiskANN-baseline/include/utils.h:422
+422           *tags = new uint32_t[npts * dim];
+#0  0x00005555555e8415 in diskann::load_truthset (bin_file="work/2b3_gt/gt_1000.bin", ids=@0x7fffffffca70: 0x7ffeb7d11f40, dists=@0x7fffffffca78: 0x7ffea1400e00, npts=@0x7fffffffca80: 10000, dim=@0x7fffffffca88: 100, tags=tags@entry=0x0) at /home/nams/research/FreshDiskANN-baseline/include/utils.h:422
+#1  0x00005555555d2d3b in sync_search_kernel<float, unsigned int> (query=0x7fffed0008c0, query_num=10000, query_aligned_dim=128, recall_at=10, L=75, sync_index=..., truthset_file="work/2b3_gt/gt_1000.bin", calRecall=true, merged=<optimized out>) at /home/nams/research/FreshDiskANN-baseline/tests/overall_performance.cpp:256
+#2  0x00005555555d445b in update<float, unsigned int> (data_bin="data/sift1m/sift_base.bin", L_disk=<optimized out>, R_disk=<optimized out>, alpha_disk=<optimized out>, step=1000, save_path="work/2b3_c1000/sift10k", query_file=..., truthset_file="work/2b3_gt", recall_at=10, Lsearch=std::vector of length 1, capacity 1 = {...}, beam_width=<optimized out>, dist_cmp=0x7fffffffda88, ckpt=1, nodes_to_cache=<optimized out>, base_num=<optimized out>) at /usr/include/c++/11/bits/stl_vector.h:1043
+#3  0x00005555555ca7ee in main (argc=17, argv=0x7fffffffdd48) at /home/nams/research/FreshDiskANN-baseline/tests/overall_performance.cpp:1080
