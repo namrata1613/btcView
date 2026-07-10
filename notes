@@ -1,17 +1,452 @@
- ls -la ~/research/work/2b3_c1000/
-total 8500
-drwxr-xr-x  2 nams nams    4096 Jul 10 22:52 .
-drwxr-xr-x 46 nams nams    4096 Jul 10 22:55 ..
--rw-r--r--  1 nams nams 6832128 Jul 10 22:52 sift10k_disk.index
--rw-r--r--  1 nams nams  197988 Jul 10 22:52 sift10k_disk.index.tags
--rw-r--r--  1 nams nams 1000008 Jul 10 22:52 sift10k_pq_compressed.bin
--rw-r--r--  1 nams nams  136628 Jul 10 22:52 sift10k_pq_pivots.bin
--rw-r--r--  1 nams nams  515592 Jul 10 22:52 sift10k_sample_data.bin
--rw-r--r--  1 nams nams    4036 Jul 10 22:52 sift10k_sample_ids.bin
+cat ~/research/work/logs/2b3_c1000_ckpt0.log
+Merge size: 1000
+Lsearch: 50
+Lsearch: 75
+Lsearch: 100
+[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b3_c1000/2b3_c1000.csv io_engine=io_uring
+Loading queries
+Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 1, need swap: 0
+Active del 1: 0, _active_index: 0
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 6, max node len (bytes): 644, max node degree: 32, npts: 9, dim: 1 disk_nnodes: 10000 disk_ndims: 128
+Tags offset: 6832128 PQ Pivots offset: 6832128 PQ Vectors offset: 0
+After single file index check, Tags offset: 6832128 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file work/2b3_c1000/sift10k_shadow1_pq_compressed.bin ...
+Metadata: #pts = 10000, #dims = 100...
+Load compressed vectors from file: work/2b3_c1000/sift10k_shadow1_pq_compressed.bin offset: 0 num points: 10000 n_chunks: 100
+Reading bin file work/2b3_c1000/sift10k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 5, #dims = 1...
+Offsets: 4096 135176 135696 136216 136628
+Reading bin file work/2b3_c1000/sift10k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 256, #dims = 128...
+Reading bin file work/2b3_c1000/sift10k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file work/2b3_c1000/sift10k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 128, #dims = 1...
+Reading bin file work/2b3_c1000/sift10k_shadow1_pq_pivots.bin ...
+Metadata: #pts = 101, #dims = 1...
+Loaded PQ Pivots: #ctrs: 256, #dims: 128, #chunks: 100
+Finished optimizing for PQ-PQ distance compuation
+Loaded PQ centroids and in-memory compressed vectors. #points: 10000 #dim: 128 #aligned_dim: 128 #chunks: 100
+Setting up thread-specific contexts for nthreads: 256
+ Stat(work/2b3_c1000/sift10k_shadow1_disk.index_medoids.bin) returned: -1
+File work/2b3_c1000/sift10k_shadow1_disk.index_medoids.bin does not exist
+Loading centroid data from medoids vector data of 1 medoid(s)
+Loading tags...from work/2b3_c1000/sift10k_shadow1_disk.index.tags
+ Stat(work/2b3_c1000/sift10k_shadow1_disk.index.tags) returned: 0
+Loading tags from work/2b3_c1000/sift10k_shadow1_disk.index.tags
+Reading bin file work/2b3_c1000/sift10k_shadow1_disk.index.tags ...
+Metadata: #pts = 49495, #dims = 1...
+PQFlashIndex loaded successfully.
+TMP_FOLDER inside MergeInsert : work/2b3_c1000/sift10k
+Init mem index with 1000 points
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C2] synthetic partitioning: label = id % 1, tenant = id % 1 (up to 1 partitions)
+[overall_performance.cpp:698:INFO] index npts: 10000 vecs per step: 100 ckpt_i: 0 merge ratio: 0.1 res: 0
+[overall_performance.cpp:701:INFO] Merge size is set to 1000
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_0.bin
+memory current time: 0 RSS : 748000 KB
+ Stat(work/gt_2b3/gt_0.bin) returned: -1
+File work/gt_2b3/gt_0.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 6
+  50     1638.52           16.7586     16.5078     19.8472      22.575     38.5016     57.7234           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: -1
+File work/2b3_c1000/2b3_c1000.csv does not exist
+peak RSS (VmHWM): 785264 KB
+ Stat(work/gt_2b3/gt_0.bin) returned: -1
+File work/gt_2b3/gt_0.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 15
+  75     1191.05           24.1002     23.8877     27.6676     31.0167     40.0642     54.6495           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 785356 KB
+ Stat(work/gt_2b3/gt_0.bin) returned: -1
+File work/gt_2b3/gt_0.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 26
+ 100     906.605           32.5698     31.8875     37.1126     42.8731     54.2933      77.802           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 785900 KB
+Batch: 0 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.084105s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 15 microsec
+50th percentile insertion time : 31 microsec
+90th percentile insertion time : 49 microsec
+99th percentile insertion time : 2427 microsec
+99.9th percentile insertion time : 2427 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 0
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_100.bin
+memory current time: 26 RSS : 785832 KB
+ Stat(work/gt_2b3/gt_100.bin) returned: -1
+File work/gt_2b3/gt_100.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 32
+  50     1654.73           16.6007     16.4786      19.217     22.2737     31.5046     42.8085           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 789864 KB
+ Stat(work/gt_2b3/gt_100.bin) returned: -1
+File work/gt_2b3/gt_100.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 41
+  75      1167.9           24.6694     24.2616     27.8054     31.4455      45.351     72.6624           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 791556 KB
+ Stat(work/gt_2b3/gt_100.bin) returned: -1
+File work/gt_2b3/gt_100.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 51
+ 100     919.763           32.0531     31.8383     35.4476     39.2914     49.3498     64.1343           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 1 Total Batch : 1000
+INSERTS_ONLY mode: skipping deletion kernel
+Begin Insert
+Inserted 100 points in 0.084108s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 56 microsec
+50th percentile insertion time : 73 microsec
+90th percentile insertion time : 116 microsec
+99th percentile insertion time : 431 microsec
+99.9th percentile insertion time : 431 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 100
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_200.bin
+memory current time: 52 RSS : 788592 KB
+ Stat(work/gt_2b3/gt_200.bin) returned: -1
+File work/gt_2b3/gt_200.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 58
+  50     1606.64            17.158     17.1306     20.3607     22.4158     28.6554     39.0184           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_200.bin) returned: -1
+File work/gt_2b3/gt_200.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 67
+  75     1125.83           25.6905     25.4148     29.1868     33.0201     45.5471     53.1324           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_200.bin) returned: -1
+File work/gt_2b3/gt_200.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 78
+ 100     870.994           33.9728     32.9439     39.0686     43.8612     61.7001     111.481           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 2 Total Batch : 1000
+INSERTS_ONLY mode: skipping deletion kernel
+Begin Insert
+Inserted 100 points in 0.08425s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 72 microsec
+50th percentile insertion time : 83 microsec
+90th percentile insertion time : 110 microsec
+99th percentile insertion time : 147 microsec
+99.9th percentile insertion time : 147 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 200
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_300.bin
+memory current time: 78 RSS : 788300 KB
+ Stat(work/gt_2b3/gt_300.bin) returned: -1
+File work/gt_2b3/gt_300.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 84
+  50     1632.72           16.8708      16.791     19.9606      22.096      30.041     40.0295           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_300.bin) returned: -1
+File work/gt_2b3/gt_300.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 93
+  75     1176.26            24.487     24.3788     27.5117      30.344     39.5407     44.9786           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_300.bin) returned: -1
+File work/gt_2b3/gt_300.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 104
+ 100     908.836           32.4709     32.1924     36.4525     39.8764     48.9011       56.34           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 3 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.084425s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 80 microsec
+50th percentile insertion time : 89 microsec
+90th percentile insertion time : 117 microsec
+99th percentile insertion time : 331 microsec
+99.9th percentile insertion time : 331 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 300
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_400.bin
+memory current time: 104 RSS : 787644 KB
+ Stat(work/gt_2b3/gt_400.bin) returned: -1
+File work/gt_2b3/gt_400.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 110
+  50     1662.06           16.5331     16.5291     19.1135      21.472     29.4023     37.1403           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_400.bin) returned: -1
+File work/gt_2b3/gt_400.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 118
+  75     1176.48           24.4747     24.3918     27.6076     30.1825     38.6773     49.1196           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_400.bin) returned: -1
+File work/gt_2b3/gt_400.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 129
+ 100     914.341           32.2563     32.0263     35.2751      39.431     49.9125     62.7508           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 4 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.084084s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 74 microsec
+50th percentile insertion time : 82 microsec
+90th percentile insertion time : 98 microsec
+99th percentile insertion time : 199 microsec
+99.9th percentile insertion time : 199 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 400
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_500.bin
+memory current time: 129 RSS : 788508 KB
+ Stat(work/gt_2b3/gt_500.bin) returned: -1
+File work/gt_2b3/gt_500.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 136
+  50     1653.17           16.6294     16.5987     19.3366     21.6796     29.6308     38.7082           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_500.bin) returned: -1
+File work/gt_2b3/gt_500.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 144
+  75     1172.46           24.5701     24.3942     27.6822     30.7935     40.6479       48.43           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_500.bin) returned: -1
+File work/gt_2b3/gt_500.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 155
+ 100     912.988           32.3072     32.0641     35.6473     39.1845     49.3559     62.0749           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 5 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.084997s
+Mem index insertion time : 85 ms
+10th percentile insertion time : 81 microsec
+50th percentile insertion time : 89 microsec
+90th percentile insertion time : 202 microsec
+99th percentile insertion time : 260 microsec
+99.9th percentile insertion time : 260 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 500
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_600.bin
+memory current time: 155 RSS : 788048 KB
+ Stat(work/gt_2b3/gt_600.bin) returned: -1
+File work/gt_2b3/gt_600.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 161
+  50     1664.88           16.5017     16.5767     19.0449     20.6743     27.0205     39.0381           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_600.bin) returned: -1
+File work/gt_2b3/gt_600.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 170
+  75     1171.69           24.5581     24.4497     27.5853     30.5219     40.4464     56.0037           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_600.bin) returned: -1
+File work/gt_2b3/gt_600.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 181
+ 100     909.987           32.4331     31.9895     36.3228      40.125     51.3197     71.7017           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 6 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.084442s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 82 microsec
+50th percentile insertion time : 92 microsec
+90th percentile insertion time : 111 microsec
+99th percentile insertion time : 133 microsec
+99.9th percentile insertion time : 133 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 600
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_700.bin
+memory current time: 181 RSS : 788128 KB
+ Stat(work/gt_2b3/gt_700.bin) returned: -1
+File work/gt_2b3/gt_700.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 187
+  50     1659.55           16.5549     16.5722     19.1055     20.9591     28.1996     43.6966           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_700.bin) returned: -1
+File work/gt_2b3/gt_700.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 195
+  75     1180.46           24.3773     24.2241     27.5459     30.5174     39.1704     47.1617           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_700.bin) returned: -1
+File work/gt_2b3/gt_700.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 206
+ 100     907.842           32.5099     32.2355     36.4661     40.6301     48.4722     53.5918           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 7 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.08457s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 98 microsec
+50th percentile insertion time : 214 microsec
+90th percentile insertion time : 261 microsec
+99th percentile insertion time : 485 microsec
+99.9th percentile insertion time : 485 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 700
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_800.bin
+memory current time: 206 RSS : 788480 KB
+ Stat(work/gt_2b3/gt_800.bin) returned: -1
+File work/gt_2b3/gt_800.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 212
+  50     1638.61           16.7896     16.7183     19.5631     22.0202     30.0905     37.8538           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_800.bin) returned: -1
+File work/gt_2b3/gt_800.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 221
+  75     1169.52           24.6326     24.5184     27.9064     30.9056     37.6307     47.2012           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_800.bin) returned: -1
+File work/gt_2b3/gt_800.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 232
+ 100     906.021           32.5622     32.2137     36.4099      40.483     49.7275     63.4129           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 8 Total Batch : 1000
+INSERTS_ONLY mode: skipping deletion kernel
+Begin Insert
+Inserted 100 points in 0.08435s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 89 microsec
+50th percentile insertion time : 105 microsec
+90th percentile insertion time : 200 microsec
+99th percentile insertion time : 267 microsec
+99.9th percentile insertion time : 267 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 800
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_900.bin
+memory current time: 232 RSS : 788528 KB
+ Stat(work/gt_2b3/gt_900.bin) returned: -1
+File work/gt_2b3/gt_900.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 238
+  50     1643.51           16.7195      16.683     19.3568     21.4292     31.4205     43.1853           0     58.0601
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_900.bin) returned: -1
+File work/gt_2b3/gt_900.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 247
+  75     1161.39           24.8185     24.6146     28.2038     31.5492     41.4666     51.5506           0     82.4817
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+ Stat(work/gt_2b3/gt_900.bin) returned: -1
+File work/gt_2b3/gt_900.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 258
+ 100     905.321           32.5903     32.2048     36.4504     41.4298     50.3488     59.9318           0      107.09
+ Stat(work/2b3_c1000/2b3_c1000.csv) returned: 0
+peak RSS (VmHWM): 792032 KB
+Batch: 9 Total Batch : 1000
+Begin Insert
+INSERTS_ONLY mode: skipping deletion kernel
+Inserted 100 points in 0.08462s
+Mem index insertion time : 84 ms
+10th percentile insertion time : 89 microsec
+50th percentile insertion time : 100 microsec
+90th percentile insertion time : 128 microsec
+99th percentile insertion time : 329 microsec
+99.9th percentile insertion time : 329 microsec
+Insertions complete!
+Deletions complete!
+Search after update, current vector number: 900
+[overall_performance.cpp:210:INFO] Truth file name: work/gt_2b3/gt_1000.bin
+memory current time: 258 RSS : 787640 KB
+ Stat(work/gt_2b3/gt_1000.bin) returned: 0
+current truthfile: work/gt_2b3/gt_1000.bin
+Reading truthset file work/gt_2b3/gt_1000.bin...
+Metadata: #pts = 10000, #dims = 100...
 
-
-grep -E "Merge done|Merge time|process_merges|Dumping" ~/research/work/logs/2b3_c1000_ckpt0.log | tail -10
-NO OUTPUT
-
-head -c 8 ~/research/work/2b3_c1000/sift10k_merge_pq_compressed.bin | od -An -tu4
-head: cannot open '/home/nams/research/work/2b3_c1000/sift10k_merge_pq_compressed.bin' for reading: No such file or directory
+grep -E "TOTAL_INSERTS|inMemorySize|MergeSize|switch_index|active_index" ~/research/work/logs/2b3_c1000_ckpt0.log | head -30
+Active del 1: 0, _active_index: 0
