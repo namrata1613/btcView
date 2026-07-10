@@ -1,20 +1,19 @@
-terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
-  what():  filesystem error: cannot copy: No such file or directory [work/2b3_c20000/disk_disk.index] [work/2b3_c20000/disk_shadow1_disk.index]
-Merge size: 20000
-Lsearch: 75
-[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b3_c20000/2b3_c20000.csv io_engine=io_uring
-Loading queries
-Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+grep -iE "before inserts" -A3 \
+    ~/research/work/logs/2b3_merge_c1000_ckpt0.log
 Searching before inserts:
-Need copy: 0, need swap: 1
-Active del 1: 1, _active_index: 1
+Need copy: 1, need swap: 0
+Active del 1: 0, _active_index: 0
 L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611560028559579287, npts: 901594568, dim: 1128295528 disk_nnodes: 125989698956392 disk_ndims: 125989867808616
-Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file work/2b3_c20000/disk_merge_pq_compressed.bin ...
-Metadata: #pts = 1, #dims = 0...
-Load compressed vectors from file: work/2b3_c20000/disk_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
+
+ls -l ~/research/work/2b3_gt/
+total 0
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_1000.bin -> /home/nams/research/data/sift1m/sift_11000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_10000.bin -> /home/nams/research/data/sift1m/sift_20000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_11000.bin -> /home/nams/research/data/sift1m/sift_11000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_12000.bin -> /home/nams/research/data/sift1m/sift_12000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_15000.bin -> /home/nams/research/data/sift1m/sift_15000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_2000.bin -> /home/nams/research/data/sift1m/sift_12000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_20000.bin -> /home/nams/research/data/sift1m/sift_30000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_30000.bin -> /home/nams/research/data/sift1m/sift_30000_groundtruth.bin
+lrwxrwxrwx 1 nams nams 58 Jul 11 03:19 gt_5000.bin -> /home/nams/research/data/sift1m/sift_15000_groundtruth.bin
+
