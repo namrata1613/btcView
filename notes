@@ -1,56 +1,20 @@
-cd ~/research
-GTDIR=work/gt_2b3
-mkdir -p "$GTDIR"
-
-ln -sf ~/research/data/sift1m/sift_11000_groundtruth.bin "$GTDIR/gt_1000.bin"
-ln -sf ~/research/data/sift1m/sift_12000_groundtruth.bin "$GTDIR/gt_2000.bin"
-ln -sf ~/research/data/sift1m/sift_15000_groundtruth.bin "$GTDIR/gt_5000.bin"
-ln -sf ~/research/data/sift1m/sift_20000_groundtruth.bin "$GTDIR/gt_10000.bin"
-ln -sf ~/research/data/sift1m/sift_30000_groundtruth.bin "$GTDIR/gt_20000.bin"
-
-SRC=work/sift100k_idx
-PFX=$(ls "$SRC"/*_disk.index | head -1)
-PFX=${PFX%_disk.index}
-BASE=$(basename "$PFX")
-
-LDISK=100
-RDISK=32
-ALPHA=1.2
-NODES=0
-BEAM=4
-STEP=100      # your Ask-A values
-BIN=~/research/FreshDiskANN-baseline/build/tests/overall_performance
-DATA=data/sift1m/sift_base.bin
-QUERY=data/sift1m/sift_query.bin
-SAVE=
-
-for c in 1000 2000 5000 10000 20000; do
-    W=work/2b3_c${c}
-
-    rm -rf "$W"
-    mkdir -p "$W"
-
-    cp -f ~/research/work/sift100k_idx/sift100k_* \
-      ~/research/work/2b3_c${c}/
-    
-    SAVE=~/research/work/2b3_c${c}/sift100k
-
-    [ -f "${SAVE}_disk.index" ] || {
-        echo "FATAL: ${SAVE}_disk.index missing"
-        exit 1
-    }
-
-    rm -f "${SAVE}_mem"* "${SAVE}_merge"* "${SAVE}_shadow"* 2>/dev/null || true
-
-    for ckpt in 0 1; do
-        INSERTS_ONLY=1 C2_DISK_POSTFILTER=0 TELEMETRY_CSV="$W/2b3_c${c}.csv" \
-        "$BIN" float "$DATA" $LDISK $RDISK $ALPHA \
-            10000 $NODES "$SAVE" "$QUERY" "$GTDIR" 10 $BEAM $STEP $ckpt $c 50 75 100 \
-            2>&1 | tee "work/logs/2b3_c${c}_ckpt${ckpt}.log"
-    done
-done
-
-for c in 1000 2000 5000 10000 20000; do
-    echo "== c=$c =="
-    N0=10000 C=$c ~/research/work/phase2_c2_agent4/scrape_2b.sh work/2b3_c${c}/2b3_c${c}.csv
-done
+terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
+  what():  filesystem error: cannot copy: No such file or directory [work/2b3_c20000/disk_disk.index] [work/2b3_c20000/disk_shadow1_disk.index]
+Merge size: 20000
+Lsearch: 75
+[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b3_c20000/2b3_c20000.csv io_engine=io_uring
+Loading queries
+Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611560028559579287, npts: 901594568, dim: 1128295528 disk_nnodes: 125989698956392 disk_ndims: 125989867808616
+Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file work/2b3_c20000/disk_merge_pq_compressed.bin ...
+Metadata: #pts = 1, #dims = 0...
+Load compressed vectors from file: work/2b3_c20000/disk_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
