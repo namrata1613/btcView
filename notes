@@ -1,3 +1,2 @@
-ls ~/research/work/sift10k_idx
-build.log           sift10k_disk.index.tags  sift10k_mem_0.data  sift10k_pq_compressed.bin  sift10k_sample_data.bin
-sift10k_disk.index  sift10k_mem_0            sift10k_mem_0.tags  sift10k_pq_pivots.bin      sift10k_sample_ids.bin
+/home/nams/research/work/check_freshdiskann.sh: line 47: 230645 Segmentation fault      (core dumped) INSERTS_ONLY=1 C2_DISK_POSTFILTER=0 TELEMETRY_CSV="$W/2b3_c${c}.csv" "$BIN" float "$DATA" $LDISK $RDISK $ALPHA 10000 $NODES "$SAVE" "$QUERY" "$GTDIR" 10 $BEAM $STEP $ckpt $c 50 75 100 2>&1
+     230646 Done                    | tee "work/logs/2b3_c${c}_ckpt${ckpt}.log"
