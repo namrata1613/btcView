@@ -1,6 +1,13 @@
-=== R_scratch N=15000 ===
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
-    75           4          673.68         5920.54        21938.00           68.95          257.03           99.97
-=== R_scratch N=30000 ===
-     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
-    75           4          642.38         6208.77        28454.00           69.49          287.75           99.93
+# per-c pairwise b_c (needs g>0 on both bases)
+       c  N0_small   g_small    N0_big     g_big      b_c
+    1000     10000    0.0320    100000   -0.0120   (g<=0)
+    2000     10000    0.0770    100000    0.0190    0.608
+    5000     10000    1.3670    100000    0.0870    1.196
+   10000     10000    4.0600    100000    0.1960    1.316
+   20000     10000    8.8360    100000    0.3600    1.390
+
+# mean b over c>=5000: 1.301 +/- 0.080 (n=3)
+
+# global fit: log10(g) = -2.301 + 1.772*log10(c) - 1.092*log10(N0)
+# theta(c-exp)=1.772  b(N-exp)=1.092  R^2=0.9486
+# verdict: b DIVERGES from 0.5 -> finding, flag theory
