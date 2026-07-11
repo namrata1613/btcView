@@ -1,3 +1,6 @@
-~/research/work/2b3_gt$ ls
-gt_1000.bin   gt_11000.bin  gt_15000.bin  gt_20000.bin  gt_5000.bin
-gt_10000.bin  gt_12000.bin  gt_2000.bin   gt_30000.bin
+=== R_merge (Tier-0b, ckpt1 batch_idx=-1) ===
+c=1000  R_merge=99.948
+c=2000  R_merge=99.893
+c=5000  R_merge=98.603
+c=10000  R_merge=95.88
+c=20000  R_merge=91.094
