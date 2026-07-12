@@ -1,3 +1,4 @@
+Run2 output - 
 === R_scratch live=10500 ===
      L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
     75           4          679.96         5864.98        24617.00           68.18          235.58           99.98
@@ -15,38 +16,65 @@
     75           4          637.74         6254.59        24377.00           72.23          327.06           99.70
 
 
-Deleting memory index file: work/2b6_30000_c7500/scratch/s_mem.index
-Indexing time: 15.17
+RUn 3 output - 
+=== R_scratch 30K c=1500 live=31500 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          746.46         5342.05        24182.00           69.29          263.27           99.92
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 39
+  75     1107.07           26.1093     25.8943     30.0565     32.9267     42.9437     51.5681      99.937     83.9416
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 9
+  75     1108.39           26.1128     25.6163     29.3612     33.5669     48.0028     77.4417      99.904     83.8982
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 38
+  75     1094.85           26.4161     26.0184     30.9054     34.6431     43.3953     50.1021      99.908     83.8982
+
+=== R_scratch 30K c=3000 live=33000 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          751.23         5307.89        26076.00           69.31          272.26           99.92
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 38
+  75     1078.97           26.8631     26.4182     30.6301     34.4459     46.9187     84.4992      99.937     83.9416
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 9
+  75      1096.2           26.4643     26.0273      30.011       34.51     46.0709     63.6266      99.866     84.0421
+
 === R_scratch 30K c=7500 live=37500 ===
      L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
-    75           4          716.47         5566.01        22685.00           69.54          274.58           99.90
-Merge size: 7500
-Lsearch: 75
-[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b6_30000_c7500/m.csv io_engine=io_uring
-Loading queries
-Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
-Searching before inserts:
-Need copy: 1, need swap: 0
-Active del 1: 0, _active_index: 0
-terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
-  what():  filesystem error: cannot copy: No such file or directory [work/2b6_30000_c7500/sift30000_disk.index.tags] [work/2b6_30000_c7500/sift30000_shadow1_disk.index.tags]
-Merge size: 7500
-Lsearch: 75
-[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b6_30000_c7500/m.csv io_engine=io_uring
-Loading queries
-Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
-Searching before inserts:
-Need copy: 0, need swap: 1
-Active del 1: 1, _active_index: 1
-L2: Using AVX2 distance computation
-L2: Using AVX2 distance computation
-Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611552793418889367, npts: 3002980264, dim: 3544214632 disk_nnodes: 133224839801960 disk_ndims: 133225008498536
-Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
-Reading bin file work/2b6_30000_c7500/sift30000_merge_pq_compressed.bin ...
-Metadata: #pts = 1, #dims = 0...
-Load compressed vectors from file: work/2b6_30000_c7500/sift30000_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-timeout: the monitored command dumped core
-awk: fatal: cannot open file `work/2b6_30000_c7500/m.csv' for reading: No such file or directory
+    75           4          740.81         5382.77        23739.00           69.59          279.54           99.90
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 38
+  75     1059.46           27.3977     26.4381     31.6849     37.2693     55.2209     110.061      99.937     83.9416
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 67
+  75     1076.45           26.9317     26.5136     31.1643     35.2415     45.9521     56.9103      99.939     83.9416
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 155
+  75     1055.59           27.4135       26.77     31.9413     35.7552     47.7397     122.155      99.957     83.9416
+
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 9
+  75     1091.39           26.5874     26.3461     30.1988     33.6556     43.9979     51.5263      99.487      84.358
+
+
+Merge finished for checkpoint 1CELL N0=30000 c=1500 live=31500 R_merge=99.904
+Merge finished for checkpoint 1CELL N0=30000 c=3000 live=33000 R_merge=99.866
+Merge finished for checkpoint 1CELL N0=30000 c=7500 live=37500 R_merge=99.487
