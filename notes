@@ -1,3 +1,2 @@
-res=20000 recall@10=89.978 merges=1
-res=40000 recall@10=69.613 merges=2
-res=60000 recall@10=73.168 merges=3
+/home/nams/research/work/2e/run_inserts/ckpt3.log:peak RSS (VmHWM): 857244 KB
+86 /home/nams/research/work/2e/run_inserts/2e_inserts.csv
