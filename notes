@@ -1,15 +1,4 @@
- python3 ~/research/scripts/2e/perlabel_recall_check.py \
-    --p3 ~/research/work/2e/run_inserts/p3_res20000/L_75.u32 \
-    --gt_perlabel ~/research/work/2e/perlabel_gt/gt_20000.bin \
-    --gt_unfiltered ~/research/work/sift100k_gt_inserts_only/gt_20000.bin \
-    --qlabels ~/research/work/2e/2E_query_labels.txt \
-    --label 1 \
-    --k 10
-Traceback (most recent call last):
-  File "/home/nams/research/scripts/2e/perlabel_recall_check.py", line 69, in <module>
-    main()
-  File "/home/nams/research/scripts/2e/perlabel_recall_check.py", line 48, in main
-    ret = read_p3(os.path.expanduser(args.p3))
-  File "/home/nams/research/scripts/2e/perlabel_recall_check.py", line 8, in read_p3
-    with open(path, "rb") as f:
-FileNotFoundError: [Errno 2] No such file or directory: '/home/nams/research/work/2e/run_inserts/p3_res20000/L_75.u32'
+label=1  queries=2500  k=10
+ BEFORE (unfiltered GT): recall@10 = 24.416  (~1/L floor)
+ AFTER  (per-label GT): recall@10 = 86.560
+ lift = 62.144 pp
