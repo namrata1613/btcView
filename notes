@@ -1,6 +1,15 @@
-2b6_10000_c500 R_merge=99.974
-2b6_10000_c2500 R_merge=99.843
-2b6_100000_c25000 R_merge=99.049
-2b6_10000_c1000 R_merge=99.948
-2b6_100000_c5000 R_merge=99.631
-2b6_100000_c10000 R_merge=99.52
+ python3 ~/research/scripts/2e/perlabel_recall_check.py \
+    --p3 ~/research/work/2e/run_inserts/p3_res20000/L_75.u32 \
+    --gt_perlabel ~/research/work/2e/perlabel_gt/gt_20000.bin \
+    --gt_unfiltered ~/research/work/sift100k_gt_inserts_only/gt_20000.bin \
+    --qlabels ~/research/work/2e/2E_query_labels.txt \
+    --label 1 \
+    --k 10
+Traceback (most recent call last):
+  File "/home/nams/research/scripts/2e/perlabel_recall_check.py", line 69, in <module>
+    main()
+  File "/home/nams/research/scripts/2e/perlabel_recall_check.py", line 48, in main
+    ret = read_p3(os.path.expanduser(args.p3))
+  File "/home/nams/research/scripts/2e/perlabel_recall_check.py", line 8, in read_p3
+    with open(path, "rb") as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/nams/research/work/2e/run_inserts/p3_res20000/L_75.u32'
