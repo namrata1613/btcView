@@ -1,5 +1,52 @@
-m  missed batch  V0  pct_batch  g0_pp  gbatch_pp
-  1    5098     301    4797      5.90   4.7970    0.3010
-  4    4439    1014    3425     22.84   3.4250    1.0140
-  8    4034    1529    2505     37.90   2.5050    1.5290
- 12    2763    1386    1377     50.16   1.3770    1.3860
+=== R_scratch live=10500 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          679.96         5864.98        24617.00           68.18          235.58           99.98
+=== R_scratch live=12500 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          665.98         5986.65        26039.00           68.97          257.56           99.97
+=== R_scratch live=105000 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          644.03         6192.92        22813.00           70.47          321.67           99.72
+=== R_scratch live=110000 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          641.59         6216.40        23281.00           71.38          329.71           99.73
+=== R_scratch live=125000 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          637.74         6254.59        24377.00           72.23          327.06           99.70
+
+
+Deleting memory index file: work/2b6_30000_c7500/scratch/s_mem.index
+Indexing time: 15.17
+=== R_scratch 30K c=7500 live=37500 ===
+     L   Beamwidth             QPS    Mean Latency    99.9 Latency        Mean IOs         CPU (s)       Recall@10
+    75           4          716.47         5566.01        22685.00           69.54          274.58           99.90
+Merge size: 7500
+Lsearch: 75
+[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b6_30000_c7500/m.csv io_engine=io_uring
+Loading queries
+Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 1, need swap: 0
+Active del 1: 0, _active_index: 0
+terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
+  what():  filesystem error: cannot copy: No such file or directory [work/2b6_30000_c7500/sift30000_disk.index.tags] [work/2b6_30000_c7500/sift30000_shadow1_disk.index.tags]
+Merge size: 7500
+Lsearch: 75
+[phase2] cache_mode=baseline sched_mode=fifo telemetry_csv=work/2b6_30000_c7500/m.csv io_engine=io_uring
+Loading queries
+Reading bin file data/sift1m/sift_query.bin at offset 0...Metadata: #pts = 10000, #dims = 128, aligned_dim = 128... Allocated 5120000bytes and copied data
+Searching before inserts:
+Need copy: 0, need swap: 1
+Active del 1: 1, _active_index: 1
+L2: Using AVX2 distance computation
+L2: Using AVX2 distance computation
+Disk-Index File Meta-data: # nodes per sector: 0, max node len (bytes): 0, max node degree: 4611552793418889367, npts: 3002980264, dim: 3544214632 disk_nnodes: 133224839801960 disk_ndims: 133225008498536
+Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+Reading bin file work/2b6_30000_c7500/sift30000_merge_pq_compressed.bin ...
+Metadata: #pts = 1, #dims = 0...
+Load compressed vectors from file: work/2b6_30000_c7500/sift30000_merge_pq_compressed.bin offset: 0 num points: 1 n_chunks: 0
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+timeout: the monitored command dumped core
+awk: fatal: cannot open file `work/2b6_30000_c7500/m.csv' for reading: No such file or directory
