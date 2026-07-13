@@ -1,15 +1,10 @@
-ckpt=1 res=20000 mem_points=0 n_part_active=1 recall=99.28
-ckpt=2 res=40000 mem_points=0 n_part_active=1 recall=99.141
-ckpt=3 res=60000 mem_points=0 n_part_active=1 recall=99.013
+-rw-r--r-- 1 nams nams    400008 2026-07-11 23:58:35.908978782 +0530 /home/nams/research/work/sift100k_gt_inserts_only/gt_20000.bin
+-rw-r--r-- 1 nams nams  68272128 2026-06-15 01:07:47.119576124 +0530 /home/nams/research/work/sift100k_idx/sift100k_disk.index
+-rw-r--r-- 1 nams nams 268439552 2026-07-09 17:34:35.394939238 +0530 /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index
+-rw-r--r-- 1 nams nams 268439552 2026-07-09 17:26:46.506938548 +0530 /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index
 
-    ~/research/work/2e_anchor_disabled/ckpt1.log | head
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-  75     1055.38           27.5612     27.0867     31.1127     35.5341     45.3883     87.1622       99.28     86.3195
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-  75     1046.96           27.7578     27.3953     32.1927     35.2247     46.7268     56.5047      99.291     86.3195
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-  75     1041.56           27.9062     27.4271     32.4675     35.7026     47.7036     71.6699      99.298     86.3195
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-  75     1031.48           28.1453     27.5401     32.9527     36.6313     46.9372     98.4151      99.313     86.3195
-  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
-  75     1045.69           27.7306     27.5362     32.2374     35.0498     43.2095     52.5536      99.319     86.3195
+818ca68 (HEAD -> phase2-cache-scheduler, origin/phase2-cache-scheduler) clean prototype-in-the-loop bound check + real CI
+dc37a95 cross-restart durability
+b642ad8 selective subset-drain lever
+0d90fb3 fix multi-partition drain via combined mem-index single merge
+5e8dd33 route queries to their partition in search_sync
