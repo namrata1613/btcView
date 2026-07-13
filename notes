@@ -1,10 +1,21 @@
--rw-r--r-- 1 nams nams    400008 2026-07-11 23:58:35.908978782 +0530 /home/nams/research/work/sift100k_gt_inserts_only/gt_20000.bin
--rw-r--r-- 1 nams nams  68272128 2026-06-15 01:07:47.119576124 +0530 /home/nams/research/work/sift100k_idx/sift100k_disk.index
--rw-r--r-- 1 nams nams 268439552 2026-07-09 17:34:35.394939238 +0530 /home/nams/research/work/sift100k_idx/sift100k_merge_disk.index
--rw-r--r-- 1 nams nams 268439552 2026-07-09 17:26:46.506938548 +0530 /home/nams/research/work/sift100k_idx/sift100k_shadow1_disk.index
-
-818ca68 (HEAD -> phase2-cache-scheduler, origin/phase2-cache-scheduler) clean prototype-in-the-loop bound check + real CI
-dc37a95 cross-restart durability
-b642ad8 selective subset-drain lever
-0d90fb3 fix multi-partition drain via combined mem-index single merge
-5e8dd33 route queries to their partition in search_sync
+===== ANCHOR [disabled] sched=priority sla_file=<none> =====
+--- ceiling banner (confirms load) ---
+--- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
+res=20000 recall@10=99.28 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=40000 recall@10=99.141 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=60000 recall@10=99.013 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+===== ANCHOR [ge_horizon] sched=priority sla_file=/home/nams/research/work/2e_anchor_hz_sla.txt =====
+--- ceiling banner (confirms load) ---
+[C3-ceiling] loaded 1 tenant ceilings from /home/nams/research/work/2e_anchor_hz_sla.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3-ceiling] loaded 1 tenant ceilings from /home/nams/research/work/2e_anchor_hz_sla.txt (enabled=yes)
+--- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
+res=20000 recall@10=99.28 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
+res=40000 recall@10=99.141 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
+res=60000 recall@10=99.013 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
+===== ANCHOR [fifo] sched=fifo sla_file=<none> =====
+--- ceiling banner (confirms load) ---
+--- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
+res=20000 recall@10=99.28 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=40000 recall@10=99.141 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=60000 recall@10=99.013 forced=0 backlog=0 overflow=0 maxstale[] viol[]
