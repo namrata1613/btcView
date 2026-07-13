@@ -1,103 +1,87 @@
-# tenant_id tier ceiling (from 2E_config sha-frozen; logical-time = cumulative inserts)
-0 tight 10000
-1 tight 10000
-2 medium 30000
-3 medium 30000
-4 lax 1000000000
-5 lax 1000000000
---- SLA map ---
-# tenant_id tier ceiling (from 2E_config sha-frozen; logical-time = cumulative inserts)
-0 tight 10000
-1 tight 10000
-2 medium 30000
-3 medium 30000
-4 lax 1000000000
-5 lax 1000000000
---- binary ceiling code present? (expect >0) ---
-2
-===== LEG [enforce] GT=perlabel_gt postfilter=default extra='' =====
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=10000 B=5000 pending=6 drained=2 kappa=[0,0] max_stale_drained=9000 max_stale_deferred=9000
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=20000 B=5000 pending=10 drained=1 kappa=[1,1.34156] max_stale_drained=19999 max_stale_deferred=19999
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=30000 B=5000 pending=13 drained=1 kappa=[0.928616,2] max_stale_drained=29999 max_stale_deferred=29999
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=40000 B=5000 pending=14 drained=1 kappa=[0.937923,2] max_stale_drained=39999 max_stale_deferred=39999
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=50000 B=5000 pending=15 drained=1 kappa=[0.900798,2] max_stale_drained=49999 max_stale_deferred=49999
-/home/nams/research/scripts/2e/run_2e_winrun.sh: line 87: 289498 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE="$WORKROOT/2E_labels.txt" C2_TENANTS_FILE="$WORKROOT/2E_tenants.txt" C2_QUERY_LABELS_FILE="$WORKROOT/2E_query_labels.txt" C2_QUERY_TENANTS_FILE="$WORKROOT/2E_query_tenants.txt" C3_HIGH_WATER=$HW C3_B=$B C3_SLA_FILE="$SLA" SCHED_STATE_FILE="$STATE" TELEMETRY_CSV="$CSV" "${PFENV[@]}" $EXTRA "$BT/overall_performance" float "$DATA/sift_base.bin" 75 32 1.2 "$N0" 0 "$SAVE" "$QUERY" "$GT" 10 4 "$STEP" "$ckpt" "$B" 75 --cache-mode filter-tenant --sched-mode priority > "$W/ckpt${ckpt}.log" 2>&1
-grep: /home/nams/research/work/2e_win_enforce/ckpt5.log: binary file matches
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=70000 B=5000 pending=11 drained=1 kappa=[0.893098,2] max_stale_drained=69999 max_stale_deferred=69999
---- Tier-0b by-tier (res, recall, forced, backlog, maxstale, viol) ---
-res=10000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=0/5000]
-res=20000 recall@10=94.053 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=30000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=40000 recall@10=95.102 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=50000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=60000 recall@10=69.285 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
---- merge-boundary (forced/backlog/overflow) ---
-res=10000 forced=0 backlog=4 overflow=0 maxstale[lax=9000;medium=9000;tight=9000]
-res=10000 forced=0 backlog=0 overflow=0 maxstale[]
-res=20000 forced=0 backlog=9 overflow=0 maxstale[lax=9000;medium=9000;none=19999;tight=9000]
-res=20000 forced=0 backlog=0 overflow=0 maxstale[]
-res=30000 forced=0 backlog=12 overflow=0 maxstale[lax=9000;medium=9000;none=29999;tight=28500]
-res=30000 forced=0 backlog=0 overflow=0 maxstale[]
-res=40000 forced=0 backlog=13 overflow=0 maxstale[lax=9000;medium=9000;none=39999;tight=37516]
-res=40000 forced=0 backlog=0 overflow=0 maxstale[]
-res=50000 forced=0 backlog=14 overflow=0 maxstale[lax=9000;medium=9000;none=49999;tight=45039]
-res=50000 forced=0 backlog=0 overflow=0 maxstale[]
-res=60000 forced=0 backlog=0 overflow=0 maxstale[]
-res=70000 forced=0 backlog=10 overflow=0 maxstale[none=69999;tight=62516]
-CSV: /home/nams/research/work/2e_win_enforce/enforce.csv
-===== LEG [fifo] GT=perlabel_gt postfilter=default extra='C3_CEILING_MEASURE_ONLY=1 C3_ALPHA3=0' =====
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=10000 B=5000 pending=6 drained=2 kappa=[0,0] max_stale_drained=9000 max_stale_deferred=9000
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=20000 B=5000 pending=10 drained=1 kappa=[0,1] max_stale_drained=19999 max_stale_deferred=19999
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=30000 B=5000 pending=13 drained=1 kappa=[0,1] max_stale_drained=29999 max_stale_deferred=29999
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=40000 B=5000 pending=14 drained=1 kappa=[0,1] max_stale_drained=39999 max_stale_deferred=39999
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=50000 B=5000 pending=15 drained=1 kappa=[0,1] max_stale_drained=49999 max_stale_deferred=49999
-/home/nams/research/scripts/2e/run_2e_winrun.sh: line 87: 293627 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE="$WORKROOT/2E_labels.txt" C2_TENANTS_FILE="$WORKROOT/2E_tenants.txt" C2_QUERY_LABELS_FILE="$WORKROOT/2E_query_labels.txt" C2_QUERY_TENANTS_FILE="$WORKROOT/2E_query_tenants.txt" C3_HIGH_WATER=$HW C3_B=$B C3_SLA_FILE="$SLA" SCHED_STATE_FILE="$STATE" TELEMETRY_CSV="$CSV" "${PFENV[@]}" $EXTRA "$BT/overall_performance" float "$DATA/sift_base.bin" 75 32 1.2 "$N0" 0 "$SAVE" "$QUERY" "$GT" 10 4 "$STEP" "$ckpt" "$B" 75 --cache-mode filter-tenant --sched-mode priority > "$W/ckpt${ckpt}.log" 2>&1
-grep: /home/nams/research/work/2e_win_fifo/ckpt5.log: binary file matches
-[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
-[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3] drain t_now=70000 B=5000 pending=11 drained=1 kappa=[0,1] max_stale_drained=69999 max_stale_deferred=69999
---- Tier-0b by-tier (res, recall, forced, backlog, maxstale, viol) ---
-res=10000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=0/5000]
-res=20000 recall@10=94.053 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=30000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=40000 recall@10=95.102 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=50000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=60000 recall@10=69.285 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
---- merge-boundary (forced/backlog/overflow) ---
-res=10000 forced=0 backlog=4 overflow=0 maxstale[lax=9000;medium=9000;tight=9000]
-res=10000 forced=0 backlog=0 overflow=0 maxstale[]
-res=20000 forced=0 backlog=9 overflow=0 maxstale[lax=9000;medium=9000;none=19999;tight=9000]
-res=20000 forced=0 backlog=0 overflow=0 maxstale[]
-res=30000 forced=0 backlog=12 overflow=0 maxstale[lax=9000;medium=9000;none=29999;tight=28519]
-res=30000 forced=0 backlog=0 overflow=0 maxstale[]
-res=40000 forced=0 backlog=13 overflow=0 maxstale[lax=9000;medium=9000;none=39999;tight=37496]
-res=40000 forced=0 backlog=0 overflow=0 maxstale[]
-res=50000 forced=0 backlog=14 overflow=0 maxstale[lax=9000;medium=9000;none=49999;tight=44973]
-res=50000 forced=0 backlog=0 overflow=0 maxstale[]
-res=60000 forced=0 backlog=0 overflow=0 maxstale[]
-res=70000 forced=0 backlog=10 overflow=0 maxstale[none=69999;tight=62496]
-CSV: /home/nams/research/work/2e_win_fifo/fifo.csv
-
-### STEP-0 GATE: fifo-leg viol[tight] MUST be >0 for a valid verdict. ###
+ cat ~/research/work/2e_win_fifo/fifo.csv
+timestamp,ckpt_idx,batch_idx,cumulative_inserts,merge_size,mem_points,deletion_set_total,merges_so_far,last_merge_ms,recall_at_10,p99_latency_ms,disk_deleted_ids,mean_disk_ios,cache_mode,sched_mode,io_engine,is_merge_boundary,l_pred,t_cnt,n_partitions_active,n_partitions_merging,mem_index_bytes,probed_partition_occupancy,mem_index_bytes,probed_partition_occupancy,sched_pending_tasks,sched_drained_tasks,sched_kappa_min,sched_kappa_max,sched_max_stale_drained,sched_max_stale_deferred,forced_drains,deferred_backlog,ceiling_forced_overflow,max_stale_by_tier,sla_violations_by_tier
+1783982835,0,-1,0,5000,0,0,0,0,90.858,53.1001,0,85.8194,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,0,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982846,0,0,1000,5000,1000,0,0,0,-1,66.6323,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,262,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982857,0,1,2000,5000,2000,0,0,0,-1,65.8614,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,505,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982868,0,2,3000,5000,3000,0,0,0,-1,54.124,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,761,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982878,0,3,4000,5000,4000,0,0,0,-1,47.9267,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1030,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982890,0,4,5000,5000,5000,0,0,0,-1,69.0754,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1268,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982902,0,5,6000,5000,6000,0,0,0,-1,106.413,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1504,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982914,0,6,7000,5000,7000,0,0,0,-1,61.2361,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1759,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982925,0,7,8000,5000,8000,0,0,0,-1,57.2701,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2010,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982937,0,8,9000,5000,9000,0,0,0,-1,60.7044,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2275,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982948,0,9,10000,5000,10000,0,0,0,-1,61.9961,0,85.8194,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2516,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783982975,0,9,10000,5000,0,0,0,0,-1,89.8398,0,85.8194,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,1500,6,2,0,0,9000,9000,0,4,0,lax=9000;medium=9000;tight=9000,lax=0/2000;medium=0/3000;tight=0/5000
+1783982986,0,9,10000,5000,0,0,1,27086.3,-1,64.4018,0,85.919,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,1500,6,2,0,0,9000,9000,0,4,0,lax=9000;medium=9000;tight=9000,lax=0/2000;medium=0/3000;tight=0/5000
+1783982986,0,9,10000,5000,0,0,1,27086.3,-1,0,0,0,filter-tenant,priority,io_uring,1,6,6,1,6,35840000,1500,6,2,0,0,9000,9000,0,4,0,lax=9000;medium=9000;tight=9000,lax=0/2000;medium=0/3000;tight=0/5000
+1783982997,1,-1,10000,5000,4988,0,1,0,-1,51.0263,0,85.919,filter-tenant,priority,io_uring,1,6,6,5,1,30720000,1500,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983008,1,10,11000,5000,5988,0,1,0,-1,59.1142,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1651,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983019,1,11,12000,5000,6988,0,1,0,-1,51.8568,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1822,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983030,1,12,13000,5000,7988,0,1,0,-1,45.04,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,1954,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983040,1,13,14000,5000,8988,0,1,0,-1,52.9423,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2101,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983051,1,14,15000,5000,9988,0,1,0,-1,54.6744,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2257,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983063,1,15,16000,5000,10988,0,1,0,-1,59.1065,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2411,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983074,1,16,17000,5000,11988,0,1,0,-1,54.0296,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2571,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983086,1,17,18000,5000,12988,0,1,0,-1,67.5412,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2709,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983097,1,18,19000,5000,13988,0,1,0,-1,50.0872,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,2858,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983111,1,19,20000,5000,14988,0,1,0,94.362,81.4781,0,85.919,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,3000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=0/5000
+1783983138,1,19,20000,5000,0,0,2,12419.1,-1,86.159,0,85.9132,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,3000,10,1,0,1,19999,19999,0,9,0,lax=9000;medium=9000;none=19999;tight=9000,lax=0/2000;medium=0/3000;tight=0/5000
+1783983138,1,19,20000,5000,0,0,2,12419.1,-1,0,0,0,filter-tenant,priority,io_uring,1,6,6,1,6,35840000,3000,10,1,0,1,19999,19999,0,9,0,lax=9000;medium=9000;none=19999;tight=9000,lax=0/2000;medium=0/3000;tight=0/5000
+1783983157,2,-1,20000,5000,14988,0,2,0,94.053,272.912,0,85.9132,filter-tenant,priority,io_uring,1,6,6,6,1,35840000,3000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983173,2,20,21000,5000,15988,0,2,0,-1,93.4157,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,3156,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983190,2,21,22000,5000,16988,0,2,0,-1,314.949,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,3308,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983205,2,22,23000,5000,17988,0,2,0,-1,68.6678,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,3459,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983220,2,23,24000,5000,18988,0,2,0,-1,66.8264,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,3624,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983235,2,24,25000,5000,19988,0,2,0,-1,66.8265,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,3779,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983250,2,25,26000,5000,20988,0,2,0,-1,86.0473,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,4026,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983265,2,26,27000,5000,21988,0,2,0,-1,74.3645,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,4265,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983280,2,27,28000,5000,22988,0,2,0,-1,67.904,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,4532,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983295,2,28,29000,5000,23988,0,2,0,-1,60.0751,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,4765,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983310,2,29,30000,5000,24988,0,2,0,-1,68.2745,0,85.9132,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,5027,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983344,2,29,30000,5000,0,0,2,0,-1,117.222,0,85.9132,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,5027,13,1,0,1,29999,29999,0,12,0,lax=9000;medium=9000;none=29999;tight=28519,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983357,2,29,30000,5000,0,0,3,34843.5,-1,74.9999,0,86.1229,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,5027,13,1,0,1,29999,29999,0,12,0,lax=9000;medium=9000;none=29999;tight=28519,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983357,2,29,30000,5000,0,0,3,34843.5,-1,0,0,0,filter-tenant,priority,io_uring,1,6,6,1,6,35840000,5027,13,1,0,1,29999,29999,0,12,0,lax=9000;medium=9000;none=29999;tight=28519,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983373,3,-1,30000,5000,24988,0,3,0,-1,66.1779,0,86.1229,filter-tenant,priority,io_uring,1,6,6,6,1,35840000,5027,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983384,3,30,31000,5000,25988,0,3,0,-1,64.5593,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,5280,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983396,3,31,32000,5000,26988,0,3,0,-1,60.2176,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,5515,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983407,3,32,33000,5000,27988,0,3,0,-1,55.3082,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,5767,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983418,3,33,34000,5000,28988,0,3,0,-1,60.629,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,6002,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983429,3,34,35000,5000,29988,0,3,0,-1,60.3882,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,6240,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983441,3,35,36000,5000,30988,0,3,0,-1,62.1897,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,6489,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983452,3,36,37000,5000,31988,0,3,0,-1,56.7434,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,6739,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983464,3,37,38000,5000,32988,0,3,0,-1,76.1613,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,7012,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983475,3,38,39000,5000,33988,0,3,0,-1,62.8195,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,7253,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983486,3,39,40000,5000,34988,0,3,0,95.845,50.5011,0,86.1229,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,7504,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983517,3,39,40000,5000,0,0,3,0,-1,106.548,0,86.1229,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,7504,14,1,0,1,39999,39999,0,13,0,lax=9000;medium=9000;none=39999;tight=37496,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983530,3,39,40000,5000,0,0,4,34013.8,-1,53.0005,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,7504,14,1,0,1,39999,39999,0,13,0,lax=9000;medium=9000;none=39999;tight=37496,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983530,3,39,40000,5000,0,0,4,34013.8,-1,0,0,0,filter-tenant,priority,io_uring,1,6,6,1,6,35840000,7504,14,1,0,1,39999,39999,0,13,0,lax=9000;medium=9000;none=39999;tight=37496,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983546,4,-1,40000,5000,34988,0,4,0,95.102,53.7895,0,86.3384,filter-tenant,priority,io_uring,1,6,6,6,1,35840000,7504,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983557,4,40,41000,5000,35988,0,4,0,-1,60.317,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,7744,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983569,4,41,42000,5000,36988,0,4,0,-1,54.3881,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,7995,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983580,4,42,43000,5000,37988,0,4,0,-1,53.1004,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,8265,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983597,4,43,44000,5000,38988,0,4,0,-1,149.373,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,8501,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983611,4,44,45000,5000,39988,0,4,0,-1,97.7199,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,8775,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983625,4,45,46000,5000,40988,0,4,0,-1,94.7914,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,9018,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983638,4,46,47000,5000,41988,0,4,0,-1,76.0543,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,9267,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983650,4,47,48000,5000,42988,0,4,0,-1,65.2625,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,9507,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983662,4,48,49000,5000,43988,0,4,0,-1,65.8483,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,9734,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983675,4,49,50000,5000,44988,0,4,0,-1,72.3607,0,86.3384,filter-tenant,priority,io_uring,0,6,6,6,1,35840000,9997,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983709,4,49,50000,5000,0,0,4,0,-1,151.44,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,9997,15,1,0,1,49999,49999,0,14,0,lax=9000;medium=9000;none=49999;tight=44973,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983732,4,49,50000,5000,0,0,5,43514.5,-1,110.594,0,86.566,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,9997,15,1,0,1,49999,49999,0,14,0,lax=9000;medium=9000;none=49999;tight=44973,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983742,4,49,50000,5000,0,0,5,43514.5,-1,53.3386,0,86.566,filter-tenant,priority,io_uring,0,6,6,1,6,35840000,9997,15,1,0,1,49999,49999,0,14,0,lax=9000;medium=9000;none=49999;tight=44973,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983742,4,49,50000,5000,0,0,5,43514.5,-1,0,0,0,filter-tenant,priority,io_uring,1,6,6,1,6,35840000,9997,15,1,0,1,49999,49999,0,14,0,lax=9000;medium=9000;none=49999;tight=44973,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983762,5,-1,50000,5000,44988,0,5,0,-1,60.3904,0,86.566,filter-tenant,priority,io_uring,1,6,6,6,1,35840000,9997,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983815,6,-1,60000,5000,0,0,6,0,69.285,45.687,0,86.3384,filter-tenant,priority,io_uring,1,6,6,1,1,10240000,0,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983825,6,60,61000,5000,1000,0,6,0,-1,50.4128,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,1000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983836,6,61,62000,5000,2000,0,6,0,-1,51.8421,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,2000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983846,6,62,63000,5000,3000,0,6,0,-1,45.9981,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,3000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983857,6,63,64000,5000,4000,0,6,0,-1,66.1572,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,4000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983868,6,64,65000,5000,5000,0,6,0,-1,43.9595,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,5000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983878,6,65,66000,5000,6000,0,6,0,-1,47.0491,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,6000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983889,6,66,67000,5000,7000,0,6,0,-1,50.8382,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,7000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983899,6,67,68000,5000,8000,0,6,0,-1,63.3596,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,8000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983910,6,68,69000,5000,9000,0,6,0,-1,46.8813,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,9000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983920,6,69,70000,5000,10000,0,6,0,-1,51.1535,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,10000,0,0,0,0,0,0,0,0,0,,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983953,6,69,70000,5000,0,0,6,0,-1,149.039,0,86.3384,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,10000,11,1,0,1,69999,69999,0,10,0,none=69999;tight=62496,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983975,6,69,70000,5000,0,0,7,40654.3,-1,81.2272,0,86.4659,filter-tenant,priority,io_uring,0,6,6,1,1,10240000,10000,11,1,0,1,69999,69999,0,10,0,none=69999;tight=62496,lax=0/2000;medium=0/3000;tight=2500/5000
+1783983975,6,69,70000,5000,0,0,7,40654.3,-1,0,0,0,filter-tenant,priority,io_uring,1,6,6,1,1,10240000,10000,11,1,0,1,69999,69999,0,10,0,none=69999;tight=62496,lax=0/2000;medium=0/3000;tight=2500/5000
