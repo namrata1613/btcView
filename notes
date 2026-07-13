@@ -1,3 +1,31 @@
+output - 
+===== ANCHOR [disabled] sched=priority sla_file=<none> =====
+=== GT dir [/home/nams/research/work/sift100k_gt_anchor_k100] ===
+--- ceiling banner (confirms load) ---
+--- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
+res=20000 recall@10=99.286 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=40000 recall@10=99.145 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=60000 recall@10=99.018 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+===== ANCHOR [ge_horizon] sched=priority sla_file=/home/nams/research/work/2e_anchor_hz_sla.txt =====
+=== GT dir [/home/nams/research/work/sift100k_gt_anchor_k100] ===
+--- ceiling banner (confirms load) ---
+[C3-ceiling] loaded 1 tenant ceilings from /home/nams/research/work/2e_anchor_hz_sla.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3-ceiling] loaded 1 tenant ceilings from /home/nams/research/work/2e_anchor_hz_sla.txt (enabled=yes)
+--- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
+res=20000 recall@10=99.286 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
+res=40000 recall@10=99.145 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
+res=60000 recall@10=99.018 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
+===== ANCHOR [fifo] sched=fifo sla_file=<none> =====
+=== GT dir [/home/nams/research/work/sift100k_gt_anchor_k100] ===
+--- ceiling banner (confirms load) ---
+--- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
+res=20000 recall@10=99.286 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=40000 recall@10=99.145 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+res=60000 recall@10=99.018 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+
+SCript used - 
+
 #!/usr/bin/env bash
 
 # Agent B gate:
@@ -82,7 +110,7 @@ tier0b() {    # $1 = csv ; print res, recall, forced_drains, deferred_backlog, s
 
 if [ "$MODE" = anchor ]; then
 
-    GT=$ROOT/work/sift100k_gt_inserts_only    # unfiltered GT (single label => inert)
+    GT=${ANCHOR_GT:-$ROOT/work/sift100k_gt_inserts_only}    # unfiltered GT (single label => inert)
 
     run_anchor() {    # $1 tag ; $2 sched-mode ; $3 sla_file ("" => disabled)
         local TAG=$1
@@ -97,6 +125,7 @@ if [ "$MODE" = anchor ]; then
         rm -f "$CSV"
 
         echo "===== ANCHOR [$TAG] sched=$SCHED sla_file=${SLA:-<none>} ====="
+        echo "=== GT dir [$GT] ==="
 
         for ckpt in 0 1 2 3; do
             local envs=(
