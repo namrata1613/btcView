@@ -1,24 +1,78 @@
-===== ANCHOR [disabled] sched=priority sla_file=<none> =====
-=== GT dir [/home/nams/research/work/sift100k_gt_anchor_k100] ===
---- ceiling banner (confirms load) ---
---- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
-res=20000 recall@10=99.286 forced=0 backlog=0 overflow=0 maxstale[] viol[]
-res=40000 recall@10=99.145 forced=0 backlog=0 overflow=0 maxstale[] viol[]
-res=60000 recall@10=99.018 forced=0 backlog=0 overflow=0 maxstale[] viol[]
-===== ANCHOR [ge_horizon] sched=priority sla_file=/home/nams/research/work/2e_anchor_hz_sla.txt =====
-=== GT dir [/home/nams/research/work/sift100k_gt_anchor_k100] ===
---- ceiling banner (confirms load) ---
-[C3-ceiling] loaded 1 tenant ceilings from /home/nams/research/work/2e_anchor_hz_sla.txt (enabled=yes)
+wrote /home/nams/research/work/2e/2E_sla_map.txt:
+# tenant_id tier ceiling (from 2E_config sha-frozen; logical-time = cumulative inserts)
+0 tight 10000
+1 tight 10000
+2 medium 30000
+3 medium 30000
+4 lax 1000000000
+5 lax 1000000000
+--- SLA map ---
+# tenant_id tier ceiling (from 2E_config sha-frozen; logical-time = cumulative inserts)
+0 tight 10000
+1 tight 10000
+2 medium 30000
+3 medium 30000
+4 lax 1000000000
+5 lax 1000000000
+--- binary ceiling code present? (expect >0) ---
+2
+===== LEG [enforce] GT=perlabel_gt postfilter=default extra='' =====
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
 [C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
-[C3-ceiling] loaded 1 tenant ceilings from /home/nams/research/work/2e_anchor_hz_sla.txt (enabled=yes)
---- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
-res=20000 recall@10=99.286 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
-res=40000 recall@10=99.145 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
-res=60000 recall@10=99.018 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/10000]
-===== ANCHOR [fifo] sched=fifo sla_file=<none> =====
-=== GT dir [/home/nams/research/work/sift100k_gt_anchor_k100] ===
---- ceiling banner (confirms load) ---
---- Tier-0b (expect 98.542 / 98.282 / 98.000) ---
-res=20000 recall@10=99.286 forced=0 backlog=0 overflow=0 maxstale[] viol[]
-res=40000 recall@10=99.145 forced=0 backlog=0 overflow=0 maxstale[] viol[]
-res=60000 recall@10=99.018 forced=0 backlog=0 overflow=0 maxstale[] viol[]
+[C3] drain t_now=10000 B=5000 pending=6 drained=2 kappa=[0,0] max_stale_drained=9000 max_stale_deferred=9000
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=20000 B=5000 pending=10 drained=1 kappa=[1,1.34156] max_stale_drained=19999 max_stale_deferred=19999
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=30000 B=5000 pending=13 drained=1 kappa=[0.928616,2] max_stale_drained=29999 max_stale_deferred=29999
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=40000 B=5000 pending=14 drained=1 kappa=[0.937923,2] max_stale_drained=39999 max_stale_deferred=39999
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=50000 B=5000 pending=15 drained=1 kappa=[0.900798,2] max_stale_drained=49999 max_stale_deferred=49999
+/home/nams/research/scripts/2e/run_2e_winrun.sh: line 87: 281051 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE="$WORKROOT/2E_labels.txt" C2_TENANTS_FILE="$WORKROOT/2E_tenants.txt" C2_QUERY_LABELS_FILE="$WORKROOT/2E_query_labels.txt" C2_QUERY_TENANTS_FILE="$WORKROOT/2E_query_tenants.txt" C3_HIGH_WATER=$HW C3_B=$B C3_SLA_FILE="$SLA" SCHED_STATE_FILE="$STATE" TELEMETRY_CSV="$CSV" "${PFENV[@]}" $EXTRA "$BT/overall_performance" float "$DATA/sift_base.bin" 75 32 1.2 "$N0" 0 "$SAVE" "$QUERY" "$GT" 10 4 "$STEP" "$ckpt" "$B" 75 --cache-mode filter-tenant --sched-mode priority > "$W/ckpt${ckpt}.log" 2>&1
+grep: /home/nams/research/work/2e_win_enforce/ckpt5.log: binary file matches
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=70000 B=5000 pending=11 drained=1 kappa=[0.893098,2] max_stale_drained=69999 max_stale_deferred=69999
+--- Tier-0b by-tier (res, recall, forced, backlog, maxstale, viol) ---
+res=10000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=0/5000]
+res=20000 recall@10=94.053 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=30000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=40000 recall@10=95.102 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=50000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=60000 recall@10=69.285 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+CSV: /home/nams/research/work/2e_win_enforce/enforce.csv
+===== LEG [fifo] GT=perlabel_gt postfilter=default extra='C3_CEILING_MEASURE_ONLY=1 C3_ALPHA3=0' =====
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=10000 B=5000 pending=6 drained=2 kappa=[0,0] max_stale_drained=9000 max_stale_deferred=9000
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=20000 B=5000 pending=10 drained=1 kappa=[0,1] max_stale_drained=19999 max_stale_deferred=19999
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=30000 B=5000 pending=13 drained=1 kappa=[0,1] max_stale_drained=29999 max_stale_deferred=29999
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=40000 B=5000 pending=14 drained=1 kappa=[0,1] max_stale_drained=39999 max_stale_deferred=39999
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=50000 B=5000 pending=15 drained=1 kappa=[0,1] max_stale_drained=49999 max_stale_deferred=49999
+/home/nams/research/scripts/2e/run_2e_winrun.sh: line 87: 285206 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE="$WORKROOT/2E_labels.txt" C2_TENANTS_FILE="$WORKROOT/2E_tenants.txt" C2_QUERY_LABELS_FILE="$WORKROOT/2E_query_labels.txt" C2_QUERY_TENANTS_FILE="$WORKROOT/2E_query_tenants.txt" C3_HIGH_WATER=$HW C3_B=$B C3_SLA_FILE="$SLA" SCHED_STATE_FILE="$STATE" TELEMETRY_CSV="$CSV" "${PFENV[@]}" $EXTRA "$BT/overall_performance" float "$DATA/sift_base.bin" 75 32 1.2 "$N0" 0 "$SAVE" "$QUERY" "$GT" 10 4 "$STEP" "$ckpt" "$B" 75 --cache-mode filter-tenant --sched-mode priority > "$W/ckpt${ckpt}.log" 2>&1
+grep: /home/nams/research/work/2e_win_fifo/ckpt5.log: binary file matches
+[C3-ceiling] loaded 6 tenant ceilings from /home/nams/research/work/2e/2E_sla_map.txt (enabled=yes)
+[C3-ceiling] SLA-violation def: query(tenant=t) at t_now is a violation iff exists pending partition of t with (t_now - s_w) > ceiling(t); tallied per tier.
+[C3] drain t_now=70000 B=5000 pending=11 drained=1 kappa=[0,1] max_stale_drained=69999 max_stale_deferred=69999
+--- Tier-0b by-tier (res, recall, forced, backlog, maxstale, viol) ---
+res=10000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=0/5000]
+res=20000 recall@10=94.053 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=30000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=40000 recall@10=95.102 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=50000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=60000 recall@10=69.285 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+CSV: /home/nams/research/work/2e_win_fifo/fifo.csv
+
+### STEP-0 GATE: fifo-leg viol[tight] MUST be >0 for a valid verdict. ###
