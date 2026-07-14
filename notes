@@ -6,21 +6,15 @@ grep '\[C3\]\[dbg\]' ~/research/work/2e_win_enforce/ckpt3.log | head -
 [C3][dbg] pending: tenant=1 label=1 occ=7504 s_w=11000 staleness=29000 ceiling=10000
 [C3][dbg] pending: tenant=0 label=0 occ=7484 s_w=11000 staleness=29000 ceiling=10000
 
-grep '\[C3\]\[dbg\]' ~/research/work/2e_win_enforce/ckpt0.log | head -20
-[C3][dbg] pending: tenant=0 label=0 occ=2516 s_w=1000 staleness=9000 ceiling=10000
-[C3][dbg] pending: tenant=4 label=4 occ=988 s_w=1000 staleness=9000 ceiling=1000000000
-[C3][dbg] pending: tenant=1 label=1 occ=2496 s_w=1000 staleness=9000 ceiling=10000
-[C3][dbg] pending: tenant=2 label=2 occ=1500 s_w=1000 staleness=9000 ceiling=30000
-[C3][dbg] pending: tenant=3 label=3 occ=1481 s_w=1000 staleness=9000 ceiling=30000
-[C3][dbg] pending: tenant=5 label=5 occ=1019 s_w=1000 staleness=9000 ceiling=1000000000
+ grep '\[C3\]\[dbg\]' ~/research/work/2e_win_enforce/ckpt*.log \
+ | grep -E 'tenant=[01] ' | awk '$0 ~ /staleness=[0-9]{5,}/' | head
+/home/nams/research/work/2e_win_enforce/ckpt2.log:[C3][dbg] pending: tenant=1 label=1 occ=5027 s_w=11000 staleness=19000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt2.log:[C3][dbg] pending: tenant=0 label=0 occ=4961 s_w=11000 staleness=19000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt3.log:[C3][dbg] pending: tenant=1 label=1 occ=7504 s_w=11000 staleness=29000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt3.log:[C3][dbg] pending: tenant=0 label=0 occ=7484 s_w=11000 staleness=29000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt4.log:[C3][dbg] pending: tenant=1 label=1 occ=9997 s_w=11000 staleness=39000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt5.log:[C3][dbg] pending: tenant=0 label=0 occ=5000 s_w=41000 staleness=19000 ceiling=10000
 
- grep '\[C3\]\[dbg\]' ~/research/work/2e_win_fifo/ckpt0.log | head -20
-[C3][dbg] pending: tenant=0 label=0 occ=2516 s_w=1000 staleness=9000 ceiling=10000
-[C3][dbg] pending: tenant=4 label=4 occ=988 s_w=1000 staleness=9000 ceiling=1000000000
-[C3][dbg] pending: tenant=1 label=1 occ=2496 s_w=1000 staleness=9000 ceiling=10000
-[C3][dbg] pending: tenant=2 label=2 occ=1500 s_w=1000 staleness=9000 ceiling=30000
-[C3][dbg] pending: tenant=3 label=3 occ=1481 s_w=1000 staleness=9000 ceiling=30000
-[C3][dbg] pending: tenant=5 label=5 occ=1019 s_w=1000 staleness=9000 ceiling=1000000000
 
  grep '\[C3\]\[dbg\]' ~/research/work/2e_win_fifo/ckpt3.log | head -20
 [C3][dbg] pending: tenant=5 label=5 occ=989 s_w=31000 staleness=9000 ceiling=1000000000
@@ -29,3 +23,12 @@ grep '\[C3\]\[dbg\]' ~/research/work/2e_win_enforce/ckpt0.log | head -20
 [C3][dbg] pending: tenant=2 label=2 occ=3000 s_w=21000 staleness=19000 ceiling=30000
 [C3][dbg] pending: tenant=1 label=1 occ=7504 s_w=11000 staleness=29000 ceiling=10000
 [C3][dbg] pending: tenant=0 label=0 occ=7484 s_w=11000 staleness=29000 ceiling=10000
+
+grep '\[C3\]\[dbg\]' ~/research/work/2e_win_fifo/ckpt*.log  | grep -E 'tenant=[01] ' | awk '$0 ~ /sta
+leness=[0-9]{5,}/' | head
+/home/nams/research/work/2e_win_fifo/ckpt2.log:[C3][dbg] pending: tenant=1 label=1 occ=5027 s_w=11000 staleness=19000 ceiling=10000
+/home/nams/research/work/2e_win_fifo/ckpt2.log:[C3][dbg] pending: tenant=0 label=0 occ=4961 s_w=11000 staleness=19000 ceiling=10000
+/home/nams/research/work/2e_win_fifo/ckpt3.log:[C3][dbg] pending: tenant=1 label=1 occ=7504 s_w=11000 staleness=29000 ceiling=10000
+/home/nams/research/work/2e_win_fifo/ckpt3.log:[C3][dbg] pending: tenant=0 label=0 occ=7484 s_w=11000 staleness=29000 ceiling=10000
+/home/nams/research/work/2e_win_fifo/ckpt4.log:[C3][dbg] pending: tenant=1 label=1 occ=9997 s_w=11000 staleness=39000 ceiling=10000
+/home/nams/research/work/2e_win_fifo/ckpt5.log:[C3][dbg] pending: tenant=0 label=0 occ=5000 s_w=41000 staleness=19000 ceiling=10000
