@@ -1,8 +1,44 @@
 ===== enforce =====
 -- res=20000 --
-label=0 recall==
-label=1 recall==
-label=2 recall==
-label=3 recall==
-label=4 recall==
-label=5 recall==
+label=0 recall=98.820
+label=1 recall=98.728
+label=2 recall=92.453
+label=3 recall=92.087
+label=4 recall=80.200
+label=5 recall=79.700
+-- res=40000 --
+label=0 recall=98.552
+label=1 recall=98.420
+label=2 recall=93.540
+label=3 recall=92.833
+label=4 recall=75.460
+label=5 recall=75.080
+-- res=60000 --
+label=0 recall=82.388
+label=1 recall=82.388
+label=2 recall=74.200
+label=3 recall=72.493
+label=4 recall=72.370
+label=5 recall=71.900
+===== fifo =====
+-- res=20000 --
+label=0 recall=98.820
+label=1 recall=98.728
+label=2 recall=92.453
+label=3 recall=92.087
+label=4 recall=80.200
+label=5 recall=79.700
+-- res=40000 --
+label=0 recall=98.568
+label=1 recall=98.968
+label=2 recall=94.253
+label=3 recall=93.713
+label=4 recall=78.430
+label=5 recall=77.980
+-- res=60000 --
+label=0 recall=98.700
+label=1 recall=98.436
+label=2 recall=93.560
+label=3 recall=94.587
+label=4 recall=80.660
+label=5 recall=81.620
