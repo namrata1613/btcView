@@ -1,4 +1,4 @@
-for L in enforce fifo; do echo "== $L =="; awk -F, '$1 !~ /^#/ && $1 != "timestamp" && $17 == 1 { print "res=" $4 " forced=" $(NF-4) " overflow=" $(NF-2) " viol[" $NF "]" }' ~/research/work/2e_win_${L}/${L}.csv; done
+ for L in enforce fifo; do echo "== $L =="; awk -F, '$1 !~ /^#/ && $1 != "timestamp" && $17 == 1 { print "res=" $4 " forced=" $(NF-4) " overflow=" $(NF-2) " viol[" $NF "]" }' ~/research/work/2e_win_${L}/${L}.csv; done
 == enforce ==
 res=10000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
 res=10000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
@@ -17,11 +17,18 @@ res=10000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
 res=10000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
 res=20000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
 res=20000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
-res=30000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=5000/5000]
-res=30000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=5000/5000]
-res=40000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=2500/5000]
-res=40000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=2500/5000]
+res=30000 forced=2 overflow=1 viol[lax=0/2000;medium=0/3000;tight=0/5000]
+res=30000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
+res=40000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
+res=40000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
+res=50000 forced=2 overflow=1 viol[lax=0/2000;medium=0/3000;tight=0/5000]
 res=50000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
-res=50000 forced=0 overflow=0 viol[lax=0/2000;medium=0/3000;tight=0/5000]
-res=60000 forced=0 overflow=0 viol[lax=0/2000;medium=1500/3000;tight=2500/5000]
-res=60000 forced=0 overflow=0 viol[lax=0/2000;medium=1500/3000;tight=2500/5000]
+res=60000 forced=0 overflow=0 viol[lax=0/2000;medium=3000/3000;tight=0/5000]
+res=70000 forced=2 overflow=1 viol[lax=0/2000;medium=0/3000;tight=0/5000]
+ grep '\[C3\]\[dbg\]' ~/research/work/2e_win_enforce/ckpt*.log  | grep -E 'tenant=[01] ' | awk '$0 ~ /staleness=[0-9]{5,}/' | head
+/home/nams/research/work/2e_win_enforce/ckpt2.log:[C3][dbg] pending: tenant=1 label=1 occ=5027 s_w=11000 staleness=19000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt2.log:[C3][dbg] pending: tenant=0 label=0 occ=4961 s_w=11000 staleness=19000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt3.log:[C3][dbg] pending: tenant=1 label=1 occ=7504 s_w=11000 staleness=29000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt3.log:[C3][dbg] pending: tenant=0 label=0 occ=7484 s_w=11000 staleness=29000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt4.log:[C3][dbg] pending: tenant=1 label=1 occ=9997 s_w=11000 staleness=39000 ceiling=10000
+/home/nams/research/work/2e_win_enforce/ckpt5.log:[C3][dbg] pending: tenant=0 label=0 occ=5000 s_w=41000 staleness=19000 ceiling=10000
