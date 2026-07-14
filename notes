@@ -1,3 +1,67 @@
-### STEP-0 GATE: fifo-leg viol[tight] MUST be >0 for a valid verdict. ###
+import argparse, os
+import numpy as np
 
-usage: perlabel_recall_check.py [-h] --p3 P3 --gt_perlabel GT_PERLABEL --gt_unfiltered GT_UNFILTERED --qlabels QLABELS --label LABEL [--k K]
+
+def read_p3(path):
+    with open(path, "rb") as f:
+        nq, k = np.fromfile(f, np.uint32, 2)
+        tags = np.fromfile(
+            f, np.uint32, int(nq) * int(k)
+        ).reshape(int(nq), int(k))
+    return tags
+
+
+def read_gt_ids(path):
+    with open(path, "rb") as f:
+        n, k = np.fromfile(f, np.int32, 2)
+        ids = np.fromfile(
+            f, np.uint32, int(n) * int(k)
+        ).reshape(int(n), int(k))
+    return ids
+
+
+def recall_at_k(retrieved, gt_ids, rows, k):
+    """mean recall@k = |retrieved[:k] ∩ gt[:k]| / k over the given rows."""
+    tot = 0.0
+    for q in rows:
+        r = set(int(x) for x in retrieved[q, :k] if x != 0xFFFFFFFF)
+        g = set(int(x) for x in gt_ids[q, :k] if x != 0xFFFFFFFF)
+        if not g:
+            continue
+        tot += len(r & g) / float(min(k, len(g)))
+    return 100.0 * tot / max(1, len(rows))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--p3", required=True)
+    ap.add_argument("--gt_perlabel", required=True)
+    ap.add_argument("--gt_unfiltered", required=True)
+    ap.add_argument("--qlabels", required=True)
+    ap.add_argument("--label", type=int, required=True)
+    ap.add_argument("--k", type=int, default=10)
+
+    args = ap.parse_args()
+
+    ret = read_p3(os.path.expanduser(args.p3))
+    gtp = read_gt_ids(os.path.expanduser(args.gt_perlabel))
+    gtu = read_gt_ids(os.path.expanduser(args.gt_unfiltered))
+
+    ql = np.loadtxt(
+        os.path.expanduser(args.qlabels),
+        dtype=np.int64,
+    )
+
+    rows = np.where(ql == args.label)[0]
+
+    before = recall_at_k(ret, gtu, rows, args.k)
+    after = recall_at_k(ret, gtp, rows, args.k)
+
+    print(f"label={args.label}  queries={len(rows)}  k={args.k}")
+    print(f" BEFORE (unfiltered GT): recall@{args.k} = {before:.3f}  (~1/L floor)")
+    print(f" AFTER  (per-label GT): recall@{args.k} = {after:.3f}")
+    print(f" lift = {after - before:.3f} pp")
+
+
+if __name__ == "__main__":
+    main()
