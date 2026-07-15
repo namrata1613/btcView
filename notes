@@ -1,49 +1,72 @@
---- Tier-0b by-tier (res, recall, forced, backlog, maxstale, viol) ---
-res=10000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=20000 recall@10=92.835 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=30000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=2000/2000]
-res=40000 recall@10=93.241 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=50000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=3000/3000;tight=0/2000]
-res=60000 recall@10=83.146 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
---- merge-boundary (forced/backlog/overflow) ---
-res=10000 forced=0 backlog=2 overflow=0 maxstale[lax=9000;medium=9000;tight=9000]
-res=10000 forced=0 backlog=0 overflow=0 maxstale[]
-res=20000 forced=0 backlog=5 overflow=0 maxstale[lax=19000;medium=9000;tight=9000]
-res=20000 forced=0 backlog=0 overflow=0 maxstale[]
-res=30000 forced=0 backlog=5 overflow=0 maxstale[lax=29000;medium=19000;tight=19000]
-res=30000 forced=0 backlog=0 overflow=0 maxstale[]
-res=40000 forced=0 backlog=4 overflow=0 maxstale[lax=19000;medium=29000;tight=29000]
-res=40000 forced=0 backlog=0 overflow=0 maxstale[]
-res=50000 forced=0 backlog=0 overflow=0 maxstale[]
-res=60000 forced=0 backlog=3 overflow=0 maxstale[lax=39000;medium=49000;tight=9000]
-res=60000 forced=0 backlog=0 overflow=0 maxstale[]
-res=70000 forced=0 backlog=5 overflow=0 maxstale[lax=39000;medium=9000;tight=19000]
+Output 1 = 
+===== enforce =====
+-- res=20000 --
+label=0 recall=75.580
+label=1 recall=77.960
+label=2 recall=93.107
+label=3 recall=93.853
+label=4 recall=98.636
+label=5 recall=99.100
+-- res=40000 --
+label=0 recall=70.180
+label=1 recall=72.120
+label=2 recall=82.593
+label=3 recall=84.393
+label=4 recall=77.472
+label=5 recall=77.576
+-- res=60000 --
+label=0 recall=72.180
+label=1 recall=73.450
+label=2 recall=83.987
+label=3 recall=86.007
+label=4 recall=79.988
+label=5 recall=80.096
+===== fifo =====
+-- res=20000 --
+label=0 recall=75.580
+label=1 recall=77.960
+label=2 recall=93.107
+label=3 recall=93.853
+label=4 recall=98.636
+label=5 recall=99.100
+-- res=40000 --
+label=0 recall=76.580
+label=1 recall=77.960
+label=2 recall=94.433
+label=3 recall=94.933
+label=4 recall=98.912
+label=5 recall=98.600
+-- res=60000 --
+label=0 recall=75.950
+label=1 recall=76.320
+label=2 recall=93.573
+label=3 recall=74.580
+label=4 recall=82.564
+label=5 recall=88.208
 
-for L in enforce fifo; do echo "== $L =="; awk -F, '$1 !~ /^#/ && $1 != "timestamp" && $17 == 1 { print "res=" $4 " forced=" $(NF-4) " overflow=" $(NF-2) " viol[" $NF "]" }' ~/research/work/2e_win_${L}/${L}.csv; done
+Output 2 = 
 == enforce ==
-res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=30000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
-res=40000 forced=2 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=40000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=50000 forced=1 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=50000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=60000 forced=2 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=60000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=70000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=10000 maxstale[lax=9000;medium=9000;tight=9000]
+res=10000 maxstale[]
+res=20000 maxstale[lax=19000;medium=9000;tight=9000]
+res=20000 maxstale[]
+res=30000 maxstale[]
+res=40000 maxstale[lax=39000;medium=29000;tight=29000]
+res=40000 maxstale[]
+res=50000 maxstale[lax=19000;medium=39000;tight=9000]
+res=50000 maxstale[]
+res=60000 maxstale[lax=19000;medium=19000;tight=19000]
+res=60000 maxstale[]
+res=70000 maxstale[lax=29000;medium=19000;tight=9000]
 == fifo ==
-res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=30000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
-res=30000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
-res=40000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=40000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=50000 forced=0 overflow=0 viol[lax=0/5000;medium=3000/3000;tight=0/2000]
-res=60000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=60000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
-res=70000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
-
+res=10000 maxstale[lax=9000;medium=9000;tight=9000]
+res=10000 maxstale[]
+res=20000 maxstale[lax=19000;medium=9000;tight=9000]
+res=20000 maxstale[]
+res=30000 maxstale[lax=29000;medium=19000;tight=19000]
+res=30000 maxstale[]
+res=40000 maxstale[lax=19000;medium=29000;tight=29000]
+res=40000 maxstale[]
+res=50000 maxstale[]
+res=60000 maxstale[lax=39000;medium=49000;tight=9000]
+res=60000 maxstale[]
