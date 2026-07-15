@@ -1,84 +1,49 @@
-=== 2E_config (FROZEN) ===
-{
-  "C2_L_PRED": 6,
-  "C2_T_CNT": 6,
-  "N0": 100000,
-  "T": 6,
-  "base_index_dir": "~/research/work/sift100k_idx",
-  "build": {
-    "L": 75,
-    "R": 32,
-    "alpha": 1.2,
-    "beam": 4,
-    "medoids": 1,
-    "metric": "l2"
-  },
-  "churn_pool": {
-    "label": 0,
-    "tenant": 0
-  },
-  "churn_rate": 0.05,
-  "data_bin": "~/research/data/sift1m/sift_base.bin",
-  "gt_K": 100,
-  "horizon_inserts": 70000,
-  "label_of_tenant": {
-    "0": 0,
-    "1": 1,
-    "2": 2,
-    "3": 3,
-    "4": 4,
-    "5": 5
-  },
-  "lambda": {
-    "0": 0.25,
-    "1": 0.25,
-    "2": 0.15,
-    "3": 0.15,
-    "4": 0.1,
-    "5": 0.1
-  },
-  "merge_size": 20000,
-  "mode": "inserts_only",
-  "observed_insert_mix": {
-    "0": 17500,
-    "1": 17500,
-    "2": 10500,
-    "3": 10500,
-    "4": 7000,
-    "5": 7000
-  },
-  "per_ckpt_window": 20000,
-  "query_bin": "~/research/data/sift1m/sift_query.bin",
-  "query_num": 10000,
-  "recall_at": 10,
-  "schema_version": "2E-1",
-  "seed": 20260712,
-  "sidecar_paths": {
-    "labels": "/home/nams/research/work/2e/2E_labels.txt",
-    "query_labels": "/home/nams/research/work/2e/2E_query_labels.txt",
-    "query_tenants": "/home/nams/research/work/2e/2E_query_tenants.txt",
-    "tenants": "/home/nams/research/work/2e/2E_tenants.txt"
-  },
-  "sla_tier_of_tenant": {
-    "0": "tight",
-    "1": "tight",
-    "2": "medium",
-    "3": "medium",
-    "4": "lax",
-    "5": "lax"
-  },
-  "step": 100,
-  "tier_ceiling": {
-    "lax": 1000000000,
-    "medium": 30000,
-    "tight": 10000
-  },
-  "total_ids_covered": 170000,
-  "vecs_per_step": 1000
-}
-=== sidecars written ===
-  labels: /home/nams/research/work/2e/2E_labels.txt
-  tenants: /home/nams/research/work/2e/2E_tenants.txt
-  query_labels: /home/nams/research/work/2e/2E_query_labels.txt
-  query_tenants: /home/nams/research/work/2e/2E_query_tenants.txt
-config: /home/nams/research/work/2e/2E_config.json
+--- Tier-0b by-tier (res, recall, forced, backlog, maxstale, viol) ---
+res=10000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=20000 recall@10=92.835 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=30000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=2000/2000]
+res=40000 recall@10=93.241 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=50000 recall@10=-1 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=3000/3000;tight=0/2000]
+res=60000 recall@10=83.146 forced=0 backlog=0 overflow=0 maxstale[] viol[lax=0/5000;medium=0/3000;tight=0/2000]
+--- merge-boundary (forced/backlog/overflow) ---
+res=10000 forced=0 backlog=2 overflow=0 maxstale[lax=9000;medium=9000;tight=9000]
+res=10000 forced=0 backlog=0 overflow=0 maxstale[]
+res=20000 forced=0 backlog=5 overflow=0 maxstale[lax=19000;medium=9000;tight=9000]
+res=20000 forced=0 backlog=0 overflow=0 maxstale[]
+res=30000 forced=0 backlog=5 overflow=0 maxstale[lax=29000;medium=19000;tight=19000]
+res=30000 forced=0 backlog=0 overflow=0 maxstale[]
+res=40000 forced=0 backlog=4 overflow=0 maxstale[lax=19000;medium=29000;tight=29000]
+res=40000 forced=0 backlog=0 overflow=0 maxstale[]
+res=50000 forced=0 backlog=0 overflow=0 maxstale[]
+res=60000 forced=0 backlog=3 overflow=0 maxstale[lax=39000;medium=49000;tight=9000]
+res=60000 forced=0 backlog=0 overflow=0 maxstale[]
+res=70000 forced=0 backlog=5 overflow=0 maxstale[lax=39000;medium=9000;tight=19000]
+
+for L in enforce fifo; do echo "== $L =="; awk -F, '$1 !~ /^#/ && $1 != "timestamp" && $17 == 1 { print "res=" $4 " forced=" $(NF-4) " overflow=" $(NF-2) " viol[" $NF "]" }' ~/research/work/2e_win_${L}/${L}.csv; done
+== enforce ==
+res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=30000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
+res=40000 forced=2 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=40000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=50000 forced=1 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=50000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=60000 forced=2 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=60000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=70000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+== fifo ==
+res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=10000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=20000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=30000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
+res=30000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
+res=40000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=40000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=50000 forced=0 overflow=0 viol[lax=0/5000;medium=3000/3000;tight=0/2000]
+res=60000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=60000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=0/2000]
+res=70000 forced=0 overflow=0 viol[lax=0/5000;medium=0/3000;tight=2000/2000]
+
