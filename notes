@@ -1,44 +1,84 @@
-===== enforce =====
--- res=20000 --
-label=0 recall=98.820
-label=1 recall=98.728
-label=2 recall=92.453
-label=3 recall=92.087
-label=4 recall=80.200
-label=5 recall=79.700
--- res=40000 --
-label=0 recall=98.552
-label=1 recall=98.420
-label=2 recall=93.540
-label=3 recall=92.833
-label=4 recall=75.460
-label=5 recall=75.080
--- res=60000 --
-label=0 recall=82.388
-label=1 recall=82.388
-label=2 recall=74.200
-label=3 recall=72.493
-label=4 recall=72.370
-label=5 recall=71.900
-===== fifo =====
--- res=20000 --
-label=0 recall=98.820
-label=1 recall=98.728
-label=2 recall=92.453
-label=3 recall=92.087
-label=4 recall=80.200
-label=5 recall=79.700
--- res=40000 --
-label=0 recall=98.568
-label=1 recall=98.968
-label=2 recall=94.253
-label=3 recall=93.713
-label=4 recall=78.430
-label=5 recall=77.980
--- res=60000 --
-label=0 recall=98.700
-label=1 recall=98.436
-label=2 recall=93.560
-label=3 recall=94.587
-label=4 recall=80.660
-label=5 recall=81.620
+=== 2E_config (FROZEN) ===
+{
+  "C2_L_PRED": 6,
+  "C2_T_CNT": 6,
+  "N0": 100000,
+  "T": 6,
+  "base_index_dir": "~/research/work/sift100k_idx",
+  "build": {
+    "L": 75,
+    "R": 32,
+    "alpha": 1.2,
+    "beam": 4,
+    "medoids": 1,
+    "metric": "l2"
+  },
+  "churn_pool": {
+    "label": 0,
+    "tenant": 0
+  },
+  "churn_rate": 0.05,
+  "data_bin": "~/research/data/sift1m/sift_base.bin",
+  "gt_K": 100,
+  "horizon_inserts": 70000,
+  "label_of_tenant": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5
+  },
+  "lambda": {
+    "0": 0.25,
+    "1": 0.25,
+    "2": 0.15,
+    "3": 0.15,
+    "4": 0.1,
+    "5": 0.1
+  },
+  "merge_size": 20000,
+  "mode": "inserts_only",
+  "observed_insert_mix": {
+    "0": 17500,
+    "1": 17500,
+    "2": 10500,
+    "3": 10500,
+    "4": 7000,
+    "5": 7000
+  },
+  "per_ckpt_window": 20000,
+  "query_bin": "~/research/data/sift1m/sift_query.bin",
+  "query_num": 10000,
+  "recall_at": 10,
+  "schema_version": "2E-1",
+  "seed": 20260712,
+  "sidecar_paths": {
+    "labels": "/home/nams/research/work/2e/2E_labels.txt",
+    "query_labels": "/home/nams/research/work/2e/2E_query_labels.txt",
+    "query_tenants": "/home/nams/research/work/2e/2E_query_tenants.txt",
+    "tenants": "/home/nams/research/work/2e/2E_tenants.txt"
+  },
+  "sla_tier_of_tenant": {
+    "0": "tight",
+    "1": "tight",
+    "2": "medium",
+    "3": "medium",
+    "4": "lax",
+    "5": "lax"
+  },
+  "step": 100,
+  "tier_ceiling": {
+    "lax": 1000000000,
+    "medium": 30000,
+    "tight": 10000
+  },
+  "total_ids_covered": 170000,
+  "vecs_per_step": 1000
+}
+=== sidecars written ===
+  labels: /home/nams/research/work/2e/2E_labels.txt
+  tenants: /home/nams/research/work/2e/2E_tenants.txt
+  query_labels: /home/nams/research/work/2e/2E_query_labels.txt
+  query_tenants: /home/nams/research/work/2e/2E_query_tenants.txt
+config: /home/nams/research/work/2e/2E_config.json
