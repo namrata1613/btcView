@@ -1,10 +1,19 @@
-res=20000 recall=7.763 mem_points=14988 probed_occ=5000 p99=43.6345
-res=40000 recall=7.265 mem_points=10000 probed_occ=2521 p99=43.1058
-res=60000 recall=7.59 mem_points=15968 probed_occ=5000 p99=45.8171
-ck0.log: Merge finished for checkpoint 0
-ck1.log: Merge finished for checkpoint 1
-ck2.log: timeout: the monitored command dumped core
-ck3.log: Merge finished for checkpoint 3
-ck4.log: Merge finished for checkpoint 4
-ck5.log: Merge finished for checkpoint 5
-ck6.log: Merge finished for checkpoint 6
+[E:enforce] base prefix = sift100k extra=''
+/home/nams/research/work/check_freshdiskann.sh: line 22: 152292 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv C3_MERGE_LOG=$MLOG $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
+/home/nams/research/work/check_freshdiskann.sh: line 22: 154592 Bus error               $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv C3_MERGE_LOG=$MLOG $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
+/home/nams/research/work/check_freshdiskann.sh: line 25: /home/nams/research/work/2e_E_/ck5.log: Read-only file system
+/home/nams/research/work/check_freshdiskann.sh: line 25: /home/nams/research/work/2e_E_/ck6.log: Read-only file system
+/home/nams/research/work/check_freshdiskann.sh: line 25: /home/nams/research/work/2e_E_/ck7.log: Read-only file system
+[E:enforce] merges captured:
+/home/nams/research/work/check_freshdiskann.sh: line 5: 155902 Segmentation fault      grep -c '^MERGE' "$MLOG" 2> /dev/null
+[E:fifo] base prefix =  extra='C3_CEILING_MEASURE_ONLY=1 C3_ALPHA3=0'
+/home/nams/research/work/check_freshdiskann.sh: line 5: 155909 Segmentation fault      rm -rf "$W"
+/home/nams/research/work/check_freshdiskann.sh: line 5: 155910 Segmentation fault      mkdir -p "$W"
+/home/nams/research/work/check_freshdiskann.sh: line 5: 155911 Segmentation fault      rm -f "$W/${PFX}"_mem* "$W/${PFX}"_merge* "$W/${PFX}"_shadow* 2> /dev/null
+FATAL: base .tags missing
+===== enforce =====
+/home/nams/research/work/check_freshdiskann.sh: line 43: /usr/bin/cat: Input/output error
+===== fifo =====
+/home/nams/research/work/check_freshdiskann.sh: line 43: /usr/bin/cat: Input/output error
+enforce total merged pts: /home/nams/research/work/check_freshdiskann.sh: line 48: /usr/bin/awk: Input/output error
+fifo total merged pts: /home/nams/research/work/check_freshdiskann.sh: line 48: /usr/bin/awk: Input/output error
