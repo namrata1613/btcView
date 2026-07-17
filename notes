@@ -1,13 +1,46 @@
-[E:enforce] base prefix = sift100k extra=''
-/home/nams/research/work/check_freshdiskann.sh: line 22:  5052 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv C3_MERGE_LOG=$MLOG $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-[E:enforce] merges captured:
-[E:fifo] base prefix = sift100k extra='C3_CEILING_MEASURE_ONLY=1 C3_ALPHA3=0'
-/home/nams/research/work/check_freshdiskann.sh: line 22: 19103 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv C3_MERGE_LOG=$MLOG $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-[E:fifo] merges captured:
-===== enforce =====
-cat: /home/nams/research/work/2e_E_enforce/merge_seq.log: No such file or directory
-===== fifo =====
-cat: /home/nams/research/work/2e_E_fifo/merge_seq.log: No such file or directory
+strings ~/research/FreshDiskANN-baseline/build/tests/overall_performance | grep -c C3_MERGE_LOG
+1
 
-cannot access '/home/nams/research/work/2e_E_enforce': No such file or directory
-cannot access '/home/nams/research/work/2e_E_fifo': No such file or directory
+ls -l ~/research/work/2e_E_enforce/ 2>/dev/null
+tail -30 ~/research/work/2e_E_enforce/ck0.log 2>/dev/null
+NO OUTPUT
+
+grep -n -B2 -A9 C3_MERGE_LOG ~/research/FreshDiskANN-baseline/tests/overall_performance.cpp
+856-          g_sched_deferred_backlog = g_sched.pending_count();
+857-
+858:          if (const char* ml = std::getenv("C3_MERGE_LOG")) {
+859-              std::ofstream mf(ml, std::ios::app);
+860-              mf << "MERGE res=" << res
+861-                << " leg=" << (g_c3_ceiling_enforce ? "enforce" : "fifo")
+862-                << " forced=" << g_sched_forced_drains
+863-                << " n=" << selected.size();
+864-
+865-              for (const auto& t : selected)
+866-                  mf << " " << t.key.label << ":" << t.key.tenant << ":" << t.occupancy;
+867-
+
+
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C3] post-drain partition 4,4 pts=2506 DEFERRED
+[C3] post-drain partition 3,3 pts=0 drained
+[C3] post-drain partition 1,1 pts=0 drained
+[C3] post-drain partition 2,2 pts=0 drained
+[C3] post-drain partition 5,5 pts=2482 DEFERRED
+[C3] post-drain partition 0,0 pts=0 drained
+0  0
+memory current time: 137 RSS : 965948 KB
+ Stat(/home/nams/research/work/2e/perlabel_gt/gt_10000.bin) returned: -1
+File /home/nams/research/work/2e/perlabel_gt/gt_10000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 146
+  75      1093.9           26.4461     26.2556      31.096     33.5427     41.0545      55.324           0      85.919
+ Stat(/home/nams/research/work/2e_iso/iso.csv) returned: 0
+peak RSS (VmHWM): 1245360 KB
+memory current time: 146 RSS : 949304 KB
+ Stat(/home/nams/research/work/2e_iso/iso.csv) returned: 0
+peak RSS (VmHWM): 1245360 KB
+[C3-3b] saved deferred partition (4,4) 2506 pts -> /home/nams/research/work/2e_iso/sched_state.staging_4_4.pts
+[C3-3b] saved deferred partition (5,5) 2482 pts -> /home/nams/research/work/2e_iso/sched_state.staging_5_5.pts
+[C3-3b] persisted scheduler (2 deferred task(s)) + staging before exit
