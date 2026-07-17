@@ -1,52 +1,13 @@
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sdd       1007G   54G  902G   6% /
-[    1.038612] virtio-pci 0e0e:00:00.0: enabling device (0000 -> 0002)
-[    1.048737] virtiofs virtio1: discovered new tag: wslg
-[    1.060344] virtiofs virtio1: Cache len: 0x200000000 @ 0xc00000000
-[    1.208061] scsi 0:0:0:3: Direct-Access     Msft     Virtual Disk     1.0  PQ: 0 ANSI: 5
-[    1.213491] sd 0:0:0:3: Attached scsi generic sg3 type 0
-[    1.213606] sd 0:0:0:3: [sdd] 2147483648 512-byte logical blocks: (1.10 TB/1.00 TiB)
-[    1.214276] sd 0:0:0:3: [sdd] 4096-byte physical blocks
-[    1.214592] sd 0:0:0:3: [sdd] Write Protect is off
-[    1.214805] sd 0:0:0:3: [sdd] Mode Sense: 0f 00 00 00
-[    1.215118] sd 0:0:0:3: [sdd] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
-[    1.241381] sd 0:0:0:3: [sdd] Attached SCSI disk
-[    2.169918] EXT4-fs (sdd): recovery complete
-[    2.171119] EXT4-fs (sdd): mounted filesystem e842b8cf-aeb5-41a8-843c-5f913dadcd17 r/w with ordered data mode. Quota mode: none.
-[    3.646090] misc dxg: dxgk: dxgkio_is_feature_enabled: Ioctl failed: -22
-[    3.650403] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.650836] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.651268] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.651744] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.652244] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -2
-[    3.653512] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.653915] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.654317] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
-[    3.654883] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -2
-[    6.116037] WSL (93) ERROR: CheckConnection: getaddrinfo() failed: -5
-[   48.473071] hv_balloon: Max. dynamic memory size: 3072 MB
-[  258.849181] systemd-journald[39]: Received client request to flush runtime journal.
-[  259.058804] ACPI: AC: AC Adapter [AC1] (on-line)
-[  259.105043] ACPI: battery: Slot [BAT1] (battery present)
-[  259.153357] kvm_intel: Using Hyper-V Enlightened VMCS
-[  262.174980] TCP: eth0: Driver has suspect GRO implementation, TCP performance may be compromised.
-564M    /home/nams/research/work/2e_E_
-654M    /home/nams/research/work/2e_anchor_disabled
-654M    /home/nams/research/work/2e_anchor_fifo
-645M    /home/nams/research/work/2e_anchor_ge_horizon
-4.0K    /home/nams/research/work/2e_anchor_hz_sla.txt
-637M    /home/nams/research/work/2e_d1_baseline
-637M    /home/nams/research/work/2e_d1_filter-tenant
-7.7M    /home/nams/research/work/2e_endstate_gt
-448M    /home/nams/research/work/2e_func
-637M    /home/nams/research/work/2e_win_agg_enforce
-631M    /home/nams/research/work/2e_win_agg_fifo
-156M    /home/nams/research/work/2e_win_enforce
-630M    /home/nams/research/work/2e_win_fifo
-26G     /home/nams/research/work
+[E:enforce] base prefix = sift100k extra=''
+/home/nams/research/work/check_freshdiskann.sh: line 22:  5052 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv C3_MERGE_LOG=$MLOG $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
+[E:enforce] merges captured:
+[E:fifo] base prefix = sift100k extra='C3_CEILING_MEASURE_ONLY=1 C3_ALPHA3=0'
+/home/nams/research/work/check_freshdiskann.sh: line 22: 19103 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv C3_MERGE_LOG=$MLOG $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
+[E:fifo] merges captured:
+===== enforce =====
+cat: /home/nams/research/work/2e_E_enforce/merge_seq.log: No such file or directory
+===== fifo =====
+cat: /home/nams/research/work/2e_E_fifo/merge_seq.log: No such file or directory
 
-21G     /home/nams/research/work
-
--rw-r--r-- 1 nams nams 68272128 Jun 15 01:07 /home/nams/research/work/sift100k_idx/sift100k_disk.index
--rw-r--r-- 1 nams nams   400008 Jun 19 04:02 /home/nams/research/work/sift100k_idx/sift100k_disk.index.tags
-
+cannot access '/home/nams/research/work/2e_E_enforce': No such file or directory
+cannot access '/home/nams/research/work/2e_E_fifo': No such file or directory
