@@ -1,9 +1,86 @@
-Output 4.1 - 
+Output - 
 cp: cannot stat '/home/nams/research/work/sift100k_idx/sift100k_medoids.bin': No such file or directory
-/home/nams/research/work/check_freshdiskann.sh: line 41: 18254 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/stream.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/stream_$ck.log" 2>&1
+/home/nams/research/work/check_freshdiskann.sh: line 41: 60480 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/stream.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/stream_$ck.log" 2>&1
 [enforce] streamed to res=80000; backlog:
 cp: cannot stat '/home/nams/research/work/sift100k_idx/sift100k_medoids.bin': No such file or directory
-/home/nams/research/work/check_freshdiskann.sh: line 41: 32623 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/stream.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/stream_$ck.log" 2>&1
+/home/nams/research/work/check_freshdiskann.sh: line 41: 74739 Segmentation fault      $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/stream.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/stream_$ck.log" 2>&1
 [fifo] streamed to res=80000; backlog:
 
-Output 4.2 - 
+Command ran - 
+BT=~/research/FreshDiskANN-baseline/build/tests
+DATA=~/research/data/sift1m
+WR=~/research/work/2e
+N0=100000
+
+run_stream () {    # $1 = leg tag ; $2 = extra env (fifo baseline only)
+    local LEG=$1 EXTRA=$2
+    local W=~/research/work/2e_win_$LEG
+
+    # fresh pristine seed (mirror seed save: only the 6 base files, clear temp)
+    local G0
+    G0=$(ls ~/research/work/sift100k_idx/*_disk.index | head -1)
+    G0=${G0%_disk.index}
+
+    local PFX
+    PFX=$(basename "$G0")
+
+    rm -rf "$W"
+    mkdir -p "$W"
+
+    for s in \
+        _disk.index \
+        _disk.index.tags \
+        _pq_compressed.bin \
+        _pq_pivots.bin \
+        _medoids.bin \
+        _sample_data.bin
+    do
+        cp -f "${G0}${s}" "$W/${PFX}${s}"
+    done
+
+    rm -f "$W/${PFX}"_mem* "$W/${PFX}"_merge* "$W/${PFX}"_shadow* 2>/dev/null
+
+    local SAVE=$W/$PFX
+    local STATE=$W/sched_state
+    rm -f "$STATE"*
+
+    # stream ckpt 0..7 => consumes all 80000 inserts, ends at res=80000, backlog persisted
+    for ck in 0 1 2 3 4 5 6 7; do
+        local TO=""
+        [ "$ck" -ge 1 ] && TO="timeout 300"
+
+        $TO env \
+            INSERTS_ONLY=1 \
+            C2_L_PRED=6 \
+            C2_T_CNT=6 \
+            C2_LABELS_FILE=$WR/2E_labels.txt \
+            C2_TENANTS_FILE=$WR/2E_tenants.txt \
+            C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt \
+            C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt \
+            C3_HIGH_WATER=10000 \
+            C3_B=5000 \
+            C3_SLA_FILE=$WR/2E_sla_map.txt \
+            SCHED_STATE_FILE=$STATE \
+            TELEMETRY_CSV=$W/stream.csv \
+            $EXTRA \
+            $BT/overall_performance \
+                float \
+                $DATA/sift_base.bin \
+                75 32 1.2 \
+                $N0 0 \
+                $SAVE \
+                $DATA/sift_query.bin \
+                $WR/perlabel_gt \
+                10 4 100 \
+                $ck 5000 75 \
+                --cache-mode filter-tenant \
+                --sched-mode priority \
+                >"$W/stream_$ck.log" 2>&1 || true
+    done
+
+    echo "[$LEG] streamed to res=80000; backlog:"
+    grep -o 'remaining=[0-9]*' "$W/stream_7.log" | tail -1
+}
+
+run_stream enforce ""
+run_stream fifo "C3_CEILING_MEASURE_ONLY=1 C3_ALPHA3=0"
