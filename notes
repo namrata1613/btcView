@@ -1,10 +1,6 @@
-res=20000 batch=19 recall=93.757 mem_points=14988 probed_occ=5000 p99=41.8679
-res=40000 batch=39 recall=78.863 mem_points=10000 probed_occ=2521 p99=70.9106
-res=60000 batch=59 recall=81.068 mem_points=15968 probed_occ=5000 p99=43.516
-
-for f in ~/research/work/2e_d1_filter-tenant/ck*.log; do
-    echo "$(basename "$f"): $(tail -1 "$f")"
-done
+res=20000 recall=7.763 mem_points=14988 probed_occ=5000 p99=43.6345
+res=40000 recall=7.265 mem_points=10000 probed_occ=2521 p99=43.1058
+res=60000 recall=7.59 mem_points=15968 probed_occ=5000 p99=45.8171
 ck0.log: Merge finished for checkpoint 0
 ck1.log: Merge finished for checkpoint 1
 ck2.log: timeout: the monitored command dumped core
