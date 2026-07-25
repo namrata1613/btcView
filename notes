@@ -1,50 +1,28 @@
-df -h ~ /
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sdd       1007G   49G  907G   6% /
-/dev/sdd       1007G   49G  907G   6% /
+               total        used        free      shared  buff/cache   available
+Mem:           2.8Gi       433Mi       353Mi       3.0Mi       2.1Gi       2.3Gi
+Swap:          2.0Gi        11Mi       2.0Gi
 
- dmesg | tail -40
-[ 6419.746969] R13: 0000000000000016 R14: 00007ffd0c5b1230 R15: 00007ffd0c5b1020
-[ 6419.746970] FS:  00007cfacabadfc0 GS:  0000000000000000
-[ 6419.748044] WSL (6505 - CaptureCrash): Capturing crash for pid: 38355, executable: !home!nams!research!FreshDiskANN-baseline!build!tests!overall_performance, signal: 6, port: 50005
-[ 6439.496512] timeout: timeout: potentially unexpected fatal signal 6.
-[ 6439.496519] CPU: 0 UID: 1000 PID: 6247 Comm: timeout Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
-[ 6439.496522] RIP: 0033:0x7cea024969fc
-[ 6439.496526] Code: 41 89 c5 41 f7 dd eb 80 66 0f 1f 44 00 00 b8 ba 00 00 00 0f 05 89 c5 e8 52 56 05 00 44 89 e2 89 ee 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c5 41 f7 dd 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 e8 e9 6d
-[ 6439.496527] RSP: 002b:00007ffe865ef820 EFLAGS: 00000246 ORIG_RAX: 00000000000000ea
-[ 6439.496530] RAX: 0000000000000000 RBX: 00007cea02789740 RCX: 00007cea024969fc
-[ 6439.496531] RDX: 0000000000000006 RSI: 00000000000095d2 RDI: 00000000000095d2
-[ 6439.496533] RBP: 00000000000095d2 R08: 00007ffe865ef840 R09: 0000000000000000
-[ 6439.496534] R10: 0000000000000008 R11: 0000000000000246 R12: 0000000000000006
-[ 6439.496535] R13: 0000000000000016 R14: 000000000000000f R15: 00007cea027d9040
-[ 6439.496536] FS:  00007cea02789740 GS:  0000000000000000
-[ 6439.525344] overall_performance: overall_perform: potentially unexpected fatal signal 6.
-[ 6439.525356] CPU: 1 UID: 1000 PID: 6587 Comm: overall_perform Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
-[ 6439.525361] RIP: 0033:0x7058f84969fc
-[ 6439.525366] Code: 41 89 c5 41 f7 dd eb 80 66 0f 1f 44 00 00 b8 ba 00 00 00 0f 05 89 c5 e8 52 56 05 00 44 89 e2 89 ee 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c5 41 f7 dd 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 e8 e9 6d
-[ 6439.525368] RSP: 002b:00007ffe1ef97fe0 EFLAGS: 00000246 ORIG_RAX: 00000000000000ea
-[ 6439.525371] RAX: 0000000000000000 RBX: 00007059023a9fc0 RCX: 00007058f84969fc
-[ 6439.525372] RDX: 0000000000000006 RSI: 0000000000009725 RDI: 0000000000009725
-[ 6439.525373] RBP: 0000000000009725 R08: 00007ffe1ef980b0 R09: 00007ffe1ef97bf0
-[ 6439.525439] R10: 0000000000000008 R11: 0000000000000246 R12: 0000000000000006
-[ 6439.525440] R13: 0000000000000016 R14: 00007ffe1ef98790 R15: 00007ffe1ef98580
-[ 6439.525441] FS:  00007059023a9fc0 GS:  0000000000000000
-[ 6439.526485] WSL (6844 - CaptureCrash): Capturing crash for pid: 38693, executable: !home!nams!research!FreshDiskANN-baseline!build!tests!overall_performance, signal: 6, port: 50005
-[ 6460.564477] timeout: timeout: potentially unexpected fatal signal 6.
-[ 6460.564485] CPU: 0 UID: 1000 PID: 6586 Comm: timeout Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
-[ 6460.564488] RIP: 0033:0x7fc284a969fc
-[ 6460.564493] Code: 41 89 c5 41 f7 dd eb 80 66 0f 1f 44 00 00 b8 ba 00 00 00 0f 05 89 c5 e8 52 56 05 00 44 89 e2 89 ee 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c5 41 f7 dd 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 e8 e9 6d
-[ 6460.564537] RSP: 002b:00007ffd2586ab70 EFLAGS: 00000246 ORIG_RAX: 00000000000000ea
-[ 6460.564540] RAX: 0000000000000000 RBX: 00007fc284c36740 RCX: 00007fc284a969fc
-[ 6460.564541] RDX: 0000000000000006 RSI: 0000000000009724 RDI: 0000000000009724
-[ 6460.564542] RBP: 0000000000009724 R08: 00007ffd2586ab90 R09: 0000000000000000
-[ 6460.564544] R10: 0000000000000008 R11: 0000000000000246 R12: 0000000000000006
-[ 6460.564545] R13: 0000000000000016 R14: 000000000000000f R15: 00007fc284c86040
-[ 6460.564546] FS:  00007fc284c36740 GS:  0000000000000000
-[ 6729.202053] hv_utils: TimeSync IC version 4.0
-[ 6759.969592] WSL (93) ERROR: CheckConnection: getaddrinfo() failed: -5
-[11543.128253] hv_utils: TimeSync IC version 4.0
-
-ls -ld ~/research/work/2e_E_enforce ~/research/work/2e_iso 2>&1
-ls: cannot access '/home/nams/research/work/2e_E_enforce': No such file or directory
-drwxr-xr-x 2 nams nams 4096 Jul 17 19:03 /home/nams/research/work/2e_iso
+Getting distance function for metric: l2
+L2: Using AVX2 distance computation
+[C3] post-drain partition 3,3 pts=0 drained
+[C3] post-drain partition 4,4 pts=2506 DEFERRED
+[C3] post-drain partition 1,1 pts=0 drained
+[C3] post-drain partition 2,2 pts=0 drained
+[C3] post-drain partition 5,5 pts=2482 DEFERRED
+[C3] post-drain partition 0,0 pts=0 drained
+0  0
+memory current time: 142 RSS : 965260 KB
+ Stat(/home/nams/research/work/2e/perlabel_gt/gt_10000.bin) returned: -1
+File /home/nams/research/work/2e/perlabel_gt/gt_10000.bin does not exist
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+search current time: 151
+  75     1076.74           26.8569     26.4111     31.4027     35.4242     48.2554     70.6358           0      85.919
+ Stat(/home/nams/research/work/2e_iso2/iso.csv) returned: 0
+peak RSS (VmHWM): 1243888 KB
+memory current time: 151 RSS : 953612 KB
+ Stat(/home/nams/research/work/2e_iso2/iso.csv) returned: 0
+peak RSS (VmHWM): 1243888 KB
+[C3-3b] saved deferred partition (4,4) 2506 pts -> /home/nams/research/work/2e_iso2/sched_state.staging_4_4.pts
+[C3-3b] saved deferred partition (5,5) 2482 pts -> /home/nams/research/work/2e_iso2/sched_state.staging_5_5.pts
+[C3-3b] persisted scheduler (2 deferred task(s)) + staging before exit
