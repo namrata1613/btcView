@@ -1,22 +1,50 @@
-/home/nams/research/work/check_freshdiskann.sh: line 22: 33814 Aborted                 (core dumped) $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 34123 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 34433 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 34742 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 35050 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 35358 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 35667 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 36001 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-[E:enforce] merges captured:
-/home/nams/research/work/check_freshdiskann.sh: line 22: 36343 Aborted                 (core dumped) $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 36680 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 37015 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 37349 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 37684 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 38018 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 38354 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-/home/nams/research/work/check_freshdiskann.sh: line 22: 38692 Aborted                 $TO env INSERTS_ONLY=1 C2_L_PRED=6 C2_T_CNT=6 C2_LABELS_FILE=$WR/2E_labels.txt C2_TENANTS_FILE=$WR/2E_tenants.txt C2_QUERY_LABELS_FILE=$WR/2E_query_labels.txt C2_QUERY_TENANTS_FILE=$WR/2E_query_tenants.txt C3_HIGH_WATER=10000 C3_B=5000 C3_SLA_FILE=$WR/2E_sla_map.txt SCHED_STATE_FILE=$STATE TELEMETRY_CSV=$W/e.csv $EXTRA $BT/overall_performance float $DATA/sift_base.bin 75 32 1.2 $N0 0 $SAVE $DATA/sift_query.bin $WR/perlabel_gt 10 4 100 $ck 5000 75 --cache-mode filter-tenant --sched-mode priority > "$W/ck$ck.log" 2>&1
-[E:fifo] merges captured:
-===== enforce =====
-grep: /home/nams/research/work/2e_E_enforce/ck*.log: No such file or directory
-===== fifo =====
-grep: /home/nams/research/work/2e_E_fifo/ck*.log: No such file or directory
+df -h ~ /
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   49G  907G   6% /
+/dev/sdd       1007G   49G  907G   6% /
+
+ dmesg | tail -40
+[ 6419.746969] R13: 0000000000000016 R14: 00007ffd0c5b1230 R15: 00007ffd0c5b1020
+[ 6419.746970] FS:  00007cfacabadfc0 GS:  0000000000000000
+[ 6419.748044] WSL (6505 - CaptureCrash): Capturing crash for pid: 38355, executable: !home!nams!research!FreshDiskANN-baseline!build!tests!overall_performance, signal: 6, port: 50005
+[ 6439.496512] timeout: timeout: potentially unexpected fatal signal 6.
+[ 6439.496519] CPU: 0 UID: 1000 PID: 6247 Comm: timeout Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
+[ 6439.496522] RIP: 0033:0x7cea024969fc
+[ 6439.496526] Code: 41 89 c5 41 f7 dd eb 80 66 0f 1f 44 00 00 b8 ba 00 00 00 0f 05 89 c5 e8 52 56 05 00 44 89 e2 89 ee 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c5 41 f7 dd 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 e8 e9 6d
+[ 6439.496527] RSP: 002b:00007ffe865ef820 EFLAGS: 00000246 ORIG_RAX: 00000000000000ea
+[ 6439.496530] RAX: 0000000000000000 RBX: 00007cea02789740 RCX: 00007cea024969fc
+[ 6439.496531] RDX: 0000000000000006 RSI: 00000000000095d2 RDI: 00000000000095d2
+[ 6439.496533] RBP: 00000000000095d2 R08: 00007ffe865ef840 R09: 0000000000000000
+[ 6439.496534] R10: 0000000000000008 R11: 0000000000000246 R12: 0000000000000006
+[ 6439.496535] R13: 0000000000000016 R14: 000000000000000f R15: 00007cea027d9040
+[ 6439.496536] FS:  00007cea02789740 GS:  0000000000000000
+[ 6439.525344] overall_performance: overall_perform: potentially unexpected fatal signal 6.
+[ 6439.525356] CPU: 1 UID: 1000 PID: 6587 Comm: overall_perform Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
+[ 6439.525361] RIP: 0033:0x7058f84969fc
+[ 6439.525366] Code: 41 89 c5 41 f7 dd eb 80 66 0f 1f 44 00 00 b8 ba 00 00 00 0f 05 89 c5 e8 52 56 05 00 44 89 e2 89 ee 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c5 41 f7 dd 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 e8 e9 6d
+[ 6439.525368] RSP: 002b:00007ffe1ef97fe0 EFLAGS: 00000246 ORIG_RAX: 00000000000000ea
+[ 6439.525371] RAX: 0000000000000000 RBX: 00007059023a9fc0 RCX: 00007058f84969fc
+[ 6439.525372] RDX: 0000000000000006 RSI: 0000000000009725 RDI: 0000000000009725
+[ 6439.525373] RBP: 0000000000009725 R08: 00007ffe1ef980b0 R09: 00007ffe1ef97bf0
+[ 6439.525439] R10: 0000000000000008 R11: 0000000000000246 R12: 0000000000000006
+[ 6439.525440] R13: 0000000000000016 R14: 00007ffe1ef98790 R15: 00007ffe1ef98580
+[ 6439.525441] FS:  00007059023a9fc0 GS:  0000000000000000
+[ 6439.526485] WSL (6844 - CaptureCrash): Capturing crash for pid: 38693, executable: !home!nams!research!FreshDiskANN-baseline!build!tests!overall_performance, signal: 6, port: 50005
+[ 6460.564477] timeout: timeout: potentially unexpected fatal signal 6.
+[ 6460.564485] CPU: 0 UID: 1000 PID: 6586 Comm: timeout Not tainted 6.18.33.1-microsoft-standard-WSL2 #1 PREEMPT(none)
+[ 6460.564488] RIP: 0033:0x7fc284a969fc
+[ 6460.564493] Code: 41 89 c5 41 f7 dd eb 80 66 0f 1f 44 00 00 b8 ba 00 00 00 0f 05 89 c5 e8 52 56 05 00 44 89 e2 89 ee 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c5 41 f7 dd 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 e8 e9 6d
+[ 6460.564537] RSP: 002b:00007ffd2586ab70 EFLAGS: 00000246 ORIG_RAX: 00000000000000ea
+[ 6460.564540] RAX: 0000000000000000 RBX: 00007fc284c36740 RCX: 00007fc284a969fc
+[ 6460.564541] RDX: 0000000000000006 RSI: 0000000000009724 RDI: 0000000000009724
+[ 6460.564542] RBP: 0000000000009724 R08: 00007ffd2586ab90 R09: 0000000000000000
+[ 6460.564544] R10: 0000000000000008 R11: 0000000000000246 R12: 0000000000000006
+[ 6460.564545] R13: 0000000000000016 R14: 000000000000000f R15: 00007fc284c86040
+[ 6460.564546] FS:  00007fc284c36740 GS:  0000000000000000
+[ 6729.202053] hv_utils: TimeSync IC version 4.0
+[ 6759.969592] WSL (93) ERROR: CheckConnection: getaddrinfo() failed: -5
+[11543.128253] hv_utils: TimeSync IC version 4.0
+
+ls -ld ~/research/work/2e_E_enforce ~/research/work/2e_iso 2>&1
+ls: cannot access '/home/nams/research/work/2e_E_enforce': No such file or directory
+drwxr-xr-x 2 nams nams 4096 Jul 17 19:03 /home/nams/research/work/2e_iso
